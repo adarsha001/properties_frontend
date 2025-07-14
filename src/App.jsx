@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiHome, FiMapPin, FiDollarSign, FiLayers } from "react-icons/fi";
+// import ReviewSlider from "../ReviewSlider";
+// import ReviewCarousel from "../ReviewSlider";
+import InfiniteScroller from "../ReviewSlider";
+import ContactSection from "./ContactSection";
+import GuaranteeSection from "./GuaranteeSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,32 +74,7 @@ const App = () => {
       src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80",
       title: "City-View High-Rise"
     }
-      ,{
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    },  {
-      src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-      title: "Modern Whitefield Apartment"
-    }
-  ];
-
-  const imageCards2 = [
-    {
+         ,{
       src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
       title: "Green Gated Community"
     },
@@ -105,36 +85,10 @@ const App = () => {
     {
       src: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1200&q=80",
       title: "Downtown Commercial Block"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80",
-      title: "Spacious Family Homes"
     }
   ];
+
+
 
   const renderImageCards = (cards, ref) => (
     <section
@@ -218,13 +172,20 @@ const App = () => {
         section: section1Ref,
         wrapper: wrapper1Ref
       })}
-      {renderImageCards(imageCards2, {
-        section: section2Ref,
-        wrapper: wrapper2Ref
-      })}
+   
 
       {/* Footer */}
       <div className="h-20" />
+
+ {/* <ReviewCarousel bgChanged={bgChanged} />
+  */}
+
+
+  <GuaranteeSection bgChanged={bgChanged} />
+  <InfiniteScroller bgChanged={bgChanged} />
+
+  <ContactSection bgChanged={bgChanged}/>
+
     </div>
   );
 };
