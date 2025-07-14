@@ -84,7 +84,11 @@ const Animatedslider = ({ scrollToContact, bgChanged }) => {
         }`}
       >
         {/* Image + Description */}
-        <div className="w-full md:w-[65%] flex flex-col items-center justify-center rounded-2xl shadow-2xl bg-white overflow-hidden">
+        <div className={`w-full md:w-[65%] flex flex-col items-center justify-center rounded-2xl shadow-2xl ${
+          bgChanged
+            ? 'bg-gray-800'
+            : 'bg-gray-100'
+        } overflow-hidden`}>
           <img
             ref={imgRef}
             src={imageArray[currentImage]}
