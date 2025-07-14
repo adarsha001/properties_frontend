@@ -96,7 +96,7 @@ const Animatedslider = ({ scrollToContact, bgChanged }) => {
             className="w-full h-[240px] sm:h-[320px] md:h-[400px] object-cover scale-x-125"
             style={{ opacity: 1 }}
           />
-          <p className={`text-center text-sm sm:text-base md:text-lg font-medium p-1 max-w-[95%] sm:max-w-[90%] ${ bgChanged?text-white:text-gray-800} md:max-w-[85%]`}>
+          <p className={`text-center text-sm sm:text-base md:text-lg font-medium p-1 max-w-[95%] sm:max-w-[90%] ${ bgChanged?'text-white':'text-gray-800'} md:max-w-[85%]`}>
             {descriptions[currentImage]}
           </p>
         </div>
