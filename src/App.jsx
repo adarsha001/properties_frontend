@@ -79,7 +79,7 @@ const App = () => {
   const bgColor = bgChanged ? "bg-black" : "bg-white";
 
   return (<>
-       <Marquee/>
+       
     <div className={`${bgColor} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
 
@@ -104,7 +104,8 @@ const App = () => {
         <span className="text-sm mb-1">Contact</span>
         <FiArrowDown size={20} className="animate-bounce" />
       </button>
-
+<Marquee/>
+<div className="h-20"></div>
       {/* Hero Section */}
       <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
 
