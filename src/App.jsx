@@ -105,7 +105,7 @@ const App = () => {
         <FiArrowDown size={20} className="animate-bounce" />
       </button>
 <Marquee/>
-<div className="h-20"></div>
+
       {/* Hero Section */}
       <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
 
