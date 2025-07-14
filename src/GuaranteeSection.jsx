@@ -29,13 +29,17 @@ const guarantees = [
 ];
 
 const GuaranteeSection = ({ bgChanged }) => {
-  const bgColor = bgChanged ? "bg-black" : "bg-white";
+ const bgColor = bgChanged ? "bg-gray-900" : "bg-gray-50";
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const subTextColor = bgChanged ? "text-gray-300" : "text-gray-600";
   const cardBg = bgChanged ? "bg-gray-800" : "bg-gray-100";
 
   return (
-    <section className={`${bgColor} py-20 px-6 transition-colors duration-500`}>
+    <section className={`${
+          bgChanged
+            ? 'bg-gradient-to-tr from-black to-gray-900'
+            : 'bg-gradient-to-tr from-blue-50 to-blue-100'
+        } py-20 px-6 transition-colors duration-500`}>
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className={`text-3xl font-bold ${textColor}`}>
           Our Promise to You

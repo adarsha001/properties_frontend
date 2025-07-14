@@ -2,7 +2,7 @@ import React from "react";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
 const ContactSection = ({ bgChanged }) => {
-  const bgColor = bgChanged ? "bg-black" : "bg-gray-100";
+  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gray-100";
   const cardColor = bgChanged ? "bg-gray-800" : "bg-white";
   const titleColor = bgChanged ? "text-white" : "text-gray-800";
   const textColor = bgChanged ? "text-gray-300" : "text-gray-600";

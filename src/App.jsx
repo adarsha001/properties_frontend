@@ -3,10 +3,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ ScrollTo plugin
 import { FiMoon, FiSun, FiArrowDown } from "react-icons/fi";
-import InfiniteScroller from "../ReviewSlider";
+import InfiniteScroller from "./ReviewSlider";
 import ContactSection from "./ContactSection";
 import GuaranteeSection from "./GuaranteeSection";
 import Animatedslider from "./Animatedslider";
+import AboutUs from "./AboutUs";
+import Marquee from "./Marquee";
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -76,9 +78,11 @@ const App = () => {
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const bgColor = bgChanged ? "bg-black" : "bg-white";
 
-  return (
+  return (<>
+       <Marquee/>
     <div className={`${bgColor} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
+
       <button
         onClick={() => setBgChanged(!bgChanged)}
         className={`fixed z-50 bottom-6 right-6 p-3 rounded-full shadow-lg transition-all duration-300 ${
@@ -104,16 +108,19 @@ const App = () => {
       {/* Hero Section */}
       <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
 
-      <div className="h-20" />
+      
 
       <GuaranteeSection bgChanged={bgChanged} />
+      <AboutUs bgChanged={bgChanged} />
       <InfiniteScroller bgChanged={bgChanged} />
+   
 
       {/* Contact Section */}
       <div ref={contactRef}>
         <ContactSection bgChanged={bgChanged} />
       </div>
     </div>
+  </>
   );
 };
 
