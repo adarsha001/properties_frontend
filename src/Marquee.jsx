@@ -34,26 +34,30 @@ const Marquee = () => {
   };
 
   return (
-    <div className="w-full fixed top-0 bg-gray-900 py-4 z-50 px-4 border-t border-slate-500 text-white">
-      <div
-        ref={marqueeRef}
-        className="whitespace-nowrap flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-base sm:text-lg font-medium"
-      >
-        {/* Phone Numbers */}
-        <div className="flex gap-4 flex-wrap">
-          {contactInfo.phones.map((phone, index) => (
-            <span key={index}>📞 {phone}</span>
-          ))}
+    <nav className="w-full fixed top-0 bg-gray-900 z-50 px-4 border-b border-slate-600 text-white">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between py-3">
+        {/* Left Side: Marquee Info */}
+        <div className="overflow-x-hidden w-full">
+          <div
+            ref={marqueeRef}
+            className="flex gap-6 min-w-max whitespace-nowrap text-sm sm:text-base font-medium"
+          >
+            {contactInfo.phones.map((phone, index) => (
+              <span key={index} className="flex items-center gap-1 shrink-0">
+                📞 {phone}
+              </span>
+            ))}
+            <span className="flex items-center gap-1 shrink-0">
+              📧 {contactInfo.email}
+            </span>
+          </div>
         </div>
 
-        {/* Email */}
-        <span>📧 {contactInfo.email}</span>
-
-        {/* Copy Dropdown */}
-        <div className="relative">
+        {/* Right Side: Copy Dropdown */}
+        <div className="relative ml-4 shrink-0">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-yellow-500 transition"
+            className="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-yellow-500 transition text-sm sm:text-base"
           >
             📋 Copy
           </button>
@@ -78,15 +82,14 @@ const Marquee = () => {
             </div>
           )}
 
-          {/* Feedback */}
           {copiedText && (
-            <span className="absolute top-[-1.5rem] right-0 text-sm text-green-400 font-medium">
+            <span className="absolute top-[-1.5rem] right-0 text-xs text-green-400 font-medium">
               Copied!
             </span>
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
