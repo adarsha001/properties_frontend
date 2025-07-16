@@ -21,7 +21,7 @@ const AdminPanel = () => {
   const fetchSubmissions = () => {
     const token = localStorage.getItem("adminToken");
     axios
-      .get("http://localhost:5000/api/chat", {
+      .get("https://properties-backend-ok36.onrender.com/api/chat", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setSubmissions(res.data))
@@ -41,7 +41,7 @@ const AdminPanel = () => {
     const token = localStorage.getItem("adminToken");
     axios
       .put(
-        `http://localhost:5000/api/chat/${id}`,
+        `https://properties-backend-ok36.onrender.com/api/chat/${id}`,
         { contacted: !currentStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       )
