@@ -1,8 +1,11 @@
+// App.jsx
 import React, { useEffect, useRef, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ ScrollTo plugin
-import { FiMoon, FiSun, FiArrowDown } from "react-icons/fi";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { FiMoon, FiSun } from "react-icons/fi";
+
 import InfiniteScroller from "./ReviewSlider";
 import ContactSection from "./ContactSection";
 import GuaranteeSection from "./GuaranteeSection";
@@ -10,12 +13,13 @@ import Animatedslider from "./Animatedslider";
 import AboutUs from "./AboutUs";
 import Marquee from "./Marquee";
 import ChatBot from "./Chatbox";
-// import Chatbox from "./Chatbox";
+import AdminPanel from "./AdminPanel"; // ✅ Create this
+import AdminLogin from "./AdminLogin"; // ✅ Optional login screen
+import NotFoundPage from "./NotFoundPage";
 
-// Register plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-const App = () => {
+const MainSite = () => {
   const [bgChanged, setBgChanged] = useState(false);
   const contactRef = useRef(null);
   const section1Ref = useRef(null);
@@ -73,47 +77,51 @@ const App = () => {
 
     return () => {
       ctx.revert();
-      window.removeEventListener("resize", () => {});
     };
   }, []);
 
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const bgColor = bgChanged ? "bg-black" : "bg-white";
 
-  return (<>
-       
+  return (
     <div className={`${bgColor} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
-
- 
-      {/* Scroll to Contact Button */}
       <button
-         onClick={() => setBgChanged(!bgChanged)}
+        onClick={() => setBgChanged(!bgChanged)}
         className={`fixed z-50 bottom-6 left-6 p-3 rounded-full shadow-lg transition-all duration-300 flex flex-col items-center ${
           bgChanged ? "bg-white text-black" : "bg-black text-white"
         }`}
-        aria-label="Scroll to contact"
+        aria-label="Toggle Theme"
       >
         {bgChanged ? <FiSun size={24} /> : <FiMoon size={24} />}
       </button>
-<Marquee/>
-<div className="h-7"></div>
-      {/* Hero Section */}
+
+      <Marquee />
+      <div className="h-7"></div>
       <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
-
-      <ChatBot/>
-
+      <ChatBot />
       <GuaranteeSection bgChanged={bgChanged} />
       <AboutUs bgChanged={bgChanged} />
       <InfiniteScroller bgChanged={bgChanged} />
-   {/* <Chatbox/> */}
-{/*  */}
-      {/* Contact Section */}
       <div ref={contactRef}>
         <ContactSection bgChanged={bgChanged} />
       </div>
     </div>
-  </>
+  );
+};
+
+// 👇 Main entry for routing
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        Optional: <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
+    </BrowserRouter>
   );
 };
 

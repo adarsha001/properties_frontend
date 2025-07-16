@@ -30,3 +30,34 @@ body {
 .copied-feedback {
   animation: flash 0.5s;
 }
+
+.not-found-container {
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+}
+
+.astronaut {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-5deg);
+  }
+}
+
+.planet {
+  animation: planet-float 15s ease-in-out infinite;
+}
+
+@keyframes planet-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}

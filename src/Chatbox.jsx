@@ -116,7 +116,7 @@ const Chatbox = () => {
 
     try {
       setIsTyping(true);
-      await axios.post("https://your-backend-url/api/chat", formData);
+      await axios.post("http://localhost:5000/api/chat", formData);
       
       simulateTyping(() => {
         setMessages((prev) => [
