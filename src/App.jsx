@@ -9,6 +9,7 @@ import GuaranteeSection from "./GuaranteeSection";
 import Animatedslider from "./Animatedslider";
 import AboutUs from "./AboutUs";
 import Marquee from "./Marquee";
+import ChatBot from "./Chatbox";
 // import Chatbox from "./Chatbox";
 
 // Register plugins
@@ -100,7 +101,7 @@ const App = () => {
       {/* Hero Section */}
       <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
 
-      
+      <ChatBot/>
 
       <GuaranteeSection bgChanged={bgChanged} />
       <AboutUs bgChanged={bgChanged} />
