@@ -33,17 +33,17 @@ const Chatbox = () => {
       options: ["Buy Property", "Sell Property", "Develop Site"],
     },
     {
-      text: "💰 What's your budget range?",
+      text: "💰 What's your range?",
       field: "budget",
       options: ["< ₹20L", "₹20-50L", "₹50-1Cr", "> ₹1Cr"],
     },
     {
-      text: "🏗️ What kind of property are you looking for?",
+      text: "🏗️ What kind of property ?",
       field: "propertyType",
       options: ["Plot", "Villa", "Apartment", "Commercial Space"],
     },
     {
-      text: "📍 Preferred location?",
+      text: "📍 location?",
       field: "location",
       options: ["Avalahalli", "Whitefield", "KR Puram", "Hoskote", "Other"],
     },
