@@ -20,3 +20,13 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@keyframes flash {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(0, 255, 0, 0.1); }
+  100% { background-color: transparent; }
+}
+
+.copied-feedback {
+  animation: flash 0.5s;
+}

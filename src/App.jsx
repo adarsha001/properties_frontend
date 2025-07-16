@@ -9,6 +9,7 @@ import GuaranteeSection from "./GuaranteeSection";
 import Animatedslider from "./Animatedslider";
 import AboutUs from "./AboutUs";
 import Marquee from "./Marquee";
+// import Chatbox from "./Chatbox";
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -83,26 +84,16 @@ const App = () => {
     <div className={`${bgColor} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
 
-      <button
-        onClick={() => setBgChanged(!bgChanged)}
-        className={`fixed z-50 bottom-6 right-6 p-3 rounded-full shadow-lg transition-all duration-300 ${
-          bgChanged ? "bg-white text-black" : "bg-black text-white"
-        }`}
-        aria-label="Toggle color scheme"
-      >
-        {bgChanged ? <FiSun size={24} /> : <FiMoon size={24} />}
-      </button>
-
+ 
       {/* Scroll to Contact Button */}
       <button
-        onClick={scrollToContact}
+         onClick={() => setBgChanged(!bgChanged)}
         className={`fixed z-50 bottom-6 left-6 p-3 rounded-full shadow-lg transition-all duration-300 flex flex-col items-center ${
-          bgChanged ? "text-white" : "text-black"
+          bgChanged ? "bg-white text-black" : "bg-black text-white"
         }`}
         aria-label="Scroll to contact"
       >
-        <span className="text-sm mb-1">Contact</span>
-        <FiArrowDown size={20} className="animate-bounce" />
+        {bgChanged ? <FiSun size={24} /> : <FiMoon size={24} />}
       </button>
 <Marquee/>
 <div className="h-7"></div>
@@ -114,8 +105,8 @@ const App = () => {
       <GuaranteeSection bgChanged={bgChanged} />
       <AboutUs bgChanged={bgChanged} />
       <InfiniteScroller bgChanged={bgChanged} />
-   
-
+   {/* <Chatbox/> */}
+{/*  */}
       {/* Contact Section */}
       <div ref={contactRef}>
         <ContactSection bgChanged={bgChanged} />
