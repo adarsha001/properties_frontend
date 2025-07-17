@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import axios from "axios";
 
 const ContactSection = ({ bgChanged }) => {
   const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gray-100";
@@ -8,45 +9,77 @@ const ContactSection = ({ bgChanged }) => {
   const textColor = bgChanged ? "text-gray-300" : "text-gray-600";
   const labelColor = bgChanged ? "text-gray-200" : "text-gray-700";
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("https://properties-backend-ok36.onrender.com/api/contact", formData);
+      alert("Message sent successfully!");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <section className={`${bgColor} py-16 px-4 transition-colors duration-500`} id="contact">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Contact Form */}
         <div>
-          <h2 className={`text-3xl font-bold mb-4 ${titleColor}`}>
-            Get In Touch
-          </h2>
+          <h2 className={`text-3xl font-bold mb-4 ${titleColor}`}>Get In Touch</h2>
           <p className={`mb-8 text-lg ${textColor}`}>
             We'd love to hear from you. Whether you're buying, selling, or just exploring — our team is here to help!
           </p>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className={`block mb-1 ${labelColor}`}>Name</label>
               <input
+                name="name"
                 type="text"
+                value={formData.name}
+                onChange={handleChange}
                 className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 ${
                   bgChanged ? "bg-gray-800 text-white" : "bg-white text-gray-900"
                 }`}
                 placeholder="Your Name"
+                required
               />
             </div>
 
             <div>
               <label className={`block mb-1 ${labelColor}`}>Email</label>
               <input
+                name="email"
                 type="email"
+                value={formData.email}
+                onChange={handleChange}
                 className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 ${
                   bgChanged ? "bg-gray-800 text-white" : "bg-white text-gray-900"
                 }`}
                 placeholder="you@example.com"
+                required
               />
             </div>
 
             <div>
               <label className={`block mb-1 ${labelColor}`}>Phone</label>
               <input
+                name="phone"
                 type="tel"
+                value={formData.phone}
+                onChange={handleChange}
                 className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 ${
                   bgChanged ? "bg-gray-800 text-white" : "bg-white text-gray-900"
                 }`}
@@ -57,11 +90,15 @@ const ContactSection = ({ bgChanged }) => {
             <div>
               <label className={`block mb-1 ${labelColor}`}>Message</label>
               <textarea
+                name="message"
                 rows="4"
+                value={formData.message}
+                onChange={handleChange}
                 className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 ${
                   bgChanged ? "bg-gray-800 text-white" : "bg-white text-gray-900"
                 }`}
                 placeholder="How can we assist you?"
+                required
               ></textarea>
             </div>
 
