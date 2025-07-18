@@ -29,11 +29,13 @@ const guarantees = [
 ];
 
 const GuaranteeSection = ({ bgChanged }) => {
+
+  // darkmodemode 
  const bgColor = bgChanged ? "bg-gray-900" : "bg-gray-50";
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const subTextColor = bgChanged ? "text-gray-300" : "text-gray-600";
   const cardBg = bgChanged ? "bg-gray-800" : "bg-gray-100";
-
+// 
   return (
     <section className={`${
           bgChanged
