@@ -65,7 +65,7 @@ const ContactSection = ({ bgChanged }) => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 ${
+                className={`w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 ${
                   bgChanged ? "bg-gray-800 text-white" : "bg-white text-gray-900"
                 }`}
                 placeholder="you@example.com"
