@@ -106,6 +106,9 @@ const MainSite = () => {
       <div ref={contactRef}>
         <ContactSection bgChanged={bgChanged} />
       </div>
+<footer className="text-center text-sm py-4 opacity-70">
+  <p className={`${textColor}`}>© {new Date().getFullYear()} Created by Adarsha</p>
+</footer>
     </div>
   );
 };
