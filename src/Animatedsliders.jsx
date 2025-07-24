@@ -5,7 +5,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import image1 from './assets/WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg';
 import image2 from './assets/WhatsApp Image 2025-07-24 at 8.38.50 PM.jpeg';
 import image3 from './assets/WhatsApp Image 2025-07-24 at 9.06.41 PM.jpeg';
-import image4 from './assets/WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg';
+import image4 from './assets/WhatsApp Image 2025-07-24 at 9.14.59 PM.jpeg';
 
 const Animatedsliders = () => {
  const slides = [
