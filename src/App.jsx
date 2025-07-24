@@ -27,6 +27,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const MainSite = () => {
   const [bgChanged, setBgChanged] = useState(false);
   const contactRef = useRef(null);
+    const aboutUsRef = useRef(null);
   const section1Ref = useRef(null);
   const wrapper1Ref = useRef(null);
   const section2Ref = useRef(null);
@@ -44,6 +45,19 @@ const MainSite = () => {
       });
     }
   };
+ const scrollToAboutUs = () => { // Add this function
+    if (aboutUsRef.current) {
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: {
+          y: aboutUsRef.current,
+          offsetY: 80,
+        },
+        ease: "power2.inOut",
+      });
+    }
+  };
+
 
   useEffect(() => {
     const sections = [
@@ -103,22 +117,25 @@ const MainSite = () => {
 
       <Marquee />
 
-      <Navbar/>
+    
+ <Navbar scrollToContact={scrollToContact} scrollToAboutUs={scrollToAboutUs} /> 
       <div className="h-32"></div>
+      
 <Animatedsliders/>
 
-      {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} /> */}
+      {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
       <ChatBot />
       {/* <PropertyDetails/> */}
       <RealEstateDetails/>
       <PropertyMap/>
       <GuaranteeSection bgChanged={bgChanged} />
-      <AboutUs bgChanged={bgChanged} />
-      <InfiniteScroller bgChanged={bgChanged} />
-
-      <div ref={contactRef}>
-        <ContactSection bgChanged={bgChanged} />
+       <div ref={aboutUsRef} id="about"> {/* Update this line */}
+        <AboutUs bgChanged={bgChanged} />
       </div>
+<InfiniteScroller bgChanged={bgChanged} id="home" />
+<div ref={contactRef} id="contact">
+  <ContactSection bgChanged={bgChanged} />
+</div>
 <footer className="text-center text-sm py-4 opacity-70">
   <p className={`${textColor}`}>© {new Date().getFullYear()} Created by Adarsha</p>
 </footer>
