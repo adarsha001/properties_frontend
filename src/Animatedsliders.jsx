@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+// Import your images
+import image1 from './assets/316.png';
+import image2 from './assets/2014612456_1_1_180904_122005-w1920-h1279.jpg';
+import image3 from './assets/shops.jpg';
+import image4 from './assets/whatsapp.jpeg';
 
 const Animatedsliders = () => {
   const slides = [
     {
-      url: '/assets/316.png',
+      url: image1,  // Use the imported image
       title: 'Find Your Dream Home',
       description: 'Browse listings of luxury apartments and family homes in top locations.',
       buttonText: 'Explore Now',
     },
     {
-      url: '/assets/2014612456_1_1_180904_122005-w1920-h1279.jpg',
+      url: image2,
       title: 'Invest Smartly',
       description: 'Discover premium commercial and residential investment opportunities.',
       buttonText: 'Start Investing',
     },
     {
-      url: '/assets/shops.jpg',
+      url: image3,
       title: 'Modern Living Spaces',
       description: 'Experience contemporary living in our newly built smart homes.',
       buttonText: 'View Listings',
     },
     {
-      url: '/assets/whatsapp.jpeg',
+      url: image4,
       title: 'Modern Apartments',
       description: 'Live in comfort and style with our curated apartment listings.',
       buttonText: 'Browse Apartments',
