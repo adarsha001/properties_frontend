@@ -19,6 +19,7 @@ import NotFoundPage from "./NotFoundPage";
 import Navbar from "./Navbar";
 import Animatedsliders from "./Animatedsliders";
 import PropertyMap from "./PropertyMap";
+import RealEstateDetails from "./RealEstateDetails";
 // import PropertyDetails from "./PropertyDetails";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -103,16 +104,18 @@ const MainSite = () => {
       <Marquee />
 
       <Navbar/>
-      <div className="h-7"></div>
+      <div className="h-32"></div>
 <Animatedsliders/>
 
       {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} /> */}
       <ChatBot />
       {/* <PropertyDetails/> */}
+      <RealEstateDetails/>
       <PropertyMap/>
       <GuaranteeSection bgChanged={bgChanged} />
       <AboutUs bgChanged={bgChanged} />
       <InfiniteScroller bgChanged={bgChanged} />
+
       <div ref={contactRef}>
         <ContactSection bgChanged={bgChanged} />
       </div>

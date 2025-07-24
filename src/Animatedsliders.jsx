@@ -55,7 +55,7 @@ const Animatedsliders = () => {
   };
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden group pt-16">
+    <div className="relative w-full pt-60 h-[400px]  md:h-[500px] lg:h-[600px] overflow-hidden group ">
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out"
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
