@@ -102,7 +102,7 @@ const PropertyMap = () => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={propertyLocation}
-        zoom={13}
+        zoom={17}
         onLoad={onLoadMap}
       >
         {/* Main Property Marker */}

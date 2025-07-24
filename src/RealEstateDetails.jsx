@@ -31,7 +31,7 @@ const RealEstateDetails = () => {
         ref={contentRef}
         className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:shadow-3xl duration-300"
       >
-        {/* Header with image - Adjusted for mobile */}
+        {/* Header with image */}
         <div className="relative">
           <img
             src="../../WhatsApp Image 2025-07-23 at 11.55.00 AM.jpeg"
@@ -41,10 +41,10 @@ const RealEstateDetails = () => {
         </div>
 
         <div className="p-4 sm:p-8 space-y-6">
-          {/* Title Section - 2 columns on mobile */}
+          {/* Title Section - Always 2 columns */}
           <div className="bg-teal-50 p-4 sm:p-5 rounded-lg border-l-4 border-teal-500">
             <h2 className="text-xl sm:text-2xl font-bold text-teal-700 mb-3">TITLE DETAILS</h2>
-            <ul className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
+            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
               <li className="flex items-start text-sm sm:text-base">
                 <span className="text-teal-600 mr-2">📍</span>
                 <span>Individual E-Khata</span>
@@ -72,10 +72,10 @@ const RealEstateDetails = () => {
             </ul>
           </div>
 
-          {/* Amenities Section - 2 columns on mobile */}
+          {/* Amenities Section - Always 2 columns */}
           <div className="bg-blue-50 p-4 sm:p-5 rounded-lg border-l-4 border-blue-500">
             <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mb-3">PREMIUM AMENITIES</h2>
-            <ul className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
+            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
               <li className="flex items-start text-sm sm:text-base">
                 <span className="text-blue-600 mr-2">✔️</span>
                 <span>TAR Road</span>
@@ -100,17 +100,17 @@ const RealEstateDetails = () => {
                 <span className="text-blue-600 mr-2">✔️</span>
                 <span>Compound Wall</span>
               </li>
-              <li className="flex items-start text-sm sm:text-base col-span-2 sm:col-span-1">
+              <li className="flex items-start text-sm sm:text-base">
                 <span className="text-blue-600 mr-2">✔️</span>
                 <span>Tree Plantation</span>
               </li>
             </ul>
           </div>
 
-          {/* Location Highlights - 2 columns on mobile */}
+          {/* Location Highlights - Always 2 columns */}
           <div className="bg-purple-50 p-4 sm:p-5 rounded-lg border-l-4 border-purple-500">
             <h2 className="text-xl sm:text-2xl font-bold text-purple-700 mb-3">LOCATION HIGHLIGHTS</h2>
-            <ul className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
+            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
               <li className="flex items-start text-sm sm:text-base">
                 <span className="text-purple-600 mr-2">🚘</span>
                 <span>Next to Airport parallel road</span>
@@ -143,7 +143,7 @@ const RealEstateDetails = () => {
                 <span className="text-purple-600 mr-2">🚘</span>
                 <span>45 mins from Airport</span>
               </li>
-              <li className="flex items-start text-sm sm:text-base col-span-2">
+              <li className="flex items-start text-sm sm:text-base">
                 <span className="text-purple-600 mr-2">🚘</span>
                 <span>10 mins from Schools/Hospitals</span>
               </li>
