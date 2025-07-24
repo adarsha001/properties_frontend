@@ -5,8 +5,8 @@ const Marquee = () => {
   const marqueeContainerRef = useRef(null);
 
   const contactInfo = {
-    phones: ["+91 98765 43210", "+91 98765 43211", "+91 98765 43212"],
-    email: "garudanproperties@gmail.com",
+    phones: ["+91 8951706247",  "+91 8971498538"],
+    email: "spproperties.2021@gmail.com",
   };
 
   // Marquee animation

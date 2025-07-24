@@ -144,7 +144,7 @@ const Chatbox = () => {
         onClick={() => setOpen(!open)}
       >
         <img src="/aigirl.png" alt="siya" className="w-8 h-8 mr-2 rounded-full" />
-        Chat with Siya
+        Chat with priya
       </button>
 
       {open && (
@@ -154,8 +154,8 @@ const Chatbox = () => {
             <div className="flex items-center gap-3">
               <img src="/aigirl.png" alt="siya" className="w-8 h-8 rounded-full border-2 border-white" />
               <div>
-                <span className="font-semibold">Siya</span>
-                <p className="text-xs opacity-80">Garudan Properties Assistant</p>
+                <span className="font-semibold">priya</span>
+                <p className="text-xs opacity-80">SP Properties Assistant</p>
               </div>
             </div>
             <button onClick={() => setOpen(false)} className="p-1 rounded-full hover:bg-white/10">

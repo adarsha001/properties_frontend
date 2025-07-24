@@ -9,13 +9,17 @@ import { FiMoon, FiSun } from "react-icons/fi";
 import InfiniteScroller from "./ReviewSlider";
 import ContactSection from "./ContactSection";
 import GuaranteeSection from "./GuaranteeSection";
-import Animatedslider from "./Animatedslider";
+// import Animatedslider from "./Animatedslider";
 import AboutUs from "./AboutUs";
 import Marquee from "./Marquee";
 import ChatBot from "./Chatbox";
 import AdminPanel from "./AdminPanel"; // ✅ Create this
 import AdminLogin from "./AdminLogin"; // ✅ Optional login screen
 import NotFoundPage from "./NotFoundPage";
+import Navbar from "./Navbar";
+import Animatedsliders from "./Animatedsliders";
+import PropertyMap from "./PropertyMap";
+// import PropertyDetails from "./PropertyDetails";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -97,9 +101,15 @@ const MainSite = () => {
       </button>
 
       <Marquee />
+
+      <Navbar/>
       <div className="h-7"></div>
-      <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
+<Animatedsliders/>
+
+      {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} /> */}
       <ChatBot />
+      {/* <PropertyDetails/> */}
+      <PropertyMap/>
       <GuaranteeSection bgChanged={bgChanged} />
       <AboutUs bgChanged={bgChanged} />
       <InfiniteScroller bgChanged={bgChanged} />

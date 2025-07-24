@@ -117,7 +117,7 @@ const ContactSection = ({ bgChanged }) => {
             <FiPhone className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Phone</p>
-              <p className={`${textColor}`}>+91 89041 09093</p>
+              <p className={`${textColor}`}>+91 8971498538</p>
             </div>
           </div>
 
@@ -125,7 +125,8 @@ const ContactSection = ({ bgChanged }) => {
             <FiMail className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Email</p>
-              <p className={`${textColor}`}>garudanproperties@gmail.com</p>
+              <p className={`${textColor}`}>spproperties.2021@gmail.com
+</p>
             </div>
           </div>
 
@@ -133,7 +134,7 @@ const ContactSection = ({ bgChanged }) => {
             <FiMapPin className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Address</p>
-              <p className={`${textColor}`}>Whitefield, Bangalore - 560066</p>
+              <p className={`${textColor}`}>sy no 37/5, SP Properties, behind Northern Academy, Cheemasandra, Bidarahalli, Bengaluru, Karnataka 560049</p>
             </div>
           </div>
 
@@ -141,7 +142,7 @@ const ContactSection = ({ bgChanged }) => {
           <div className="rounded-lg overflow-hidden">
             <iframe
               title="location-map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.8586947981366!2d77.75100531482327!3d12.984197890850957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1216fb4b6ad9%3A0x68f3c985bb0f8ac0!2sWhitefield%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1688361745476!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d485.83593091940867!2d77.71790544093675!3d13.055555974029778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1100351a4def%3A0x948a23360fb3edaa!2sSP%20PROPERTIES!5e0!3m2!1sen!2sin!4v1753344807842!5m2!1sen!2sin"
               width="100%"
               height="200"
               allowFullScreen=""

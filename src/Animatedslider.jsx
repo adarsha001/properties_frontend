@@ -109,7 +109,7 @@ const Animatedslider = ({ scrollToContact, bgChanged }) => {
               bgChanged ? 'text-white' : 'text-gray-800'
             } text-2xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-wide`}
           >
-            Garudan Properties
+            SP PROPERTIES
             <br />
             <span
               className={`${

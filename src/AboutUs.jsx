@@ -82,7 +82,7 @@ const AboutUs = ({ bgChanged }) => {
           ref={headingRef}
           className={`text-4xl font-bold text-center mb-12 ${textColor}`}
         >
-          About <span className={highlightColor}>Garudan Properties</span>
+          About <span className={highlightColor}>SP PROPERTIES</span>
         </h2>
 
         {/* Company Intro */}
@@ -91,7 +91,7 @@ const AboutUs = ({ bgChanged }) => {
           className={`mb-12 text-lg ${textColor} leading-relaxed`}
         >
           <p className="mb-6">
-            At <strong className={highlightColor}>Garudan Properties</strong>, we pride ourselves on delivering excellence in real estate with integrity, innovation, and unmatched expertise. With a strong commitment to quality and customer satisfaction, we have carved a niche as a trusted name in the industry.
+            At <strong className={highlightColor}>SP PROPERTIES</strong>, we pride ourselves on delivering excellence in real estate with integrity, innovation, and unmatched expertise. With a strong commitment to quality and customer satisfaction, we have carved a niche as a trusted name in the industry.
           </p>
         </div>
 
@@ -101,10 +101,10 @@ const AboutUs = ({ bgChanged }) => {
           className={`${cardBg} p-8 rounded-lg shadow-lg mb-8 border-l-4 ${borderColor} transition-colors duration-700`}
         >
           <h3 className={`text-2xl font-semibold mb-4 ${textColor}`}>
-            Meet Our Expert – <span className={highlightColor}>Ravi Teja</span>
+            Meet Our Expert – <span className={highlightColor}>MR.PRAVEEN</span>
           </h3>
           <p className={`${textColor} mb-4`}>
-            With <strong>2 years of dedicated experience</strong> in the real estate sector, <strong>Ravi Teja</strong> has been an invaluable asset to Garudan Properties. His keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
+            With <strong>7 years of dedicated experience</strong> in the real estate sector, <strong>PRAVEEN</strong> has been an invaluable asset to Garudan Properties. His keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
           </p>
         </div>
 
