@@ -24,7 +24,11 @@ const RealEstateDetails = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-7 px-4 sm:px-6 lg:px-8">
+     
+     <h1 className="text-3xl sm:text-4xl font-bold text-black flex justify-center items-center pb-6 drop-shadow-lg">
+              Presents E-Khata Gated Community Layout
+            </h1>
       <div 
         ref={contentRef}
         className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:shadow-3xl duration-300"
@@ -32,14 +36,12 @@ const RealEstateDetails = () => {
         {/* Header with image */}
         <div className="relative">
           <img
-            src="../../garudan.jpeg"
+            src="../../WhatsApp Image 2025-07-23 at 11.55.00 AM.jpeg"
             alt="E-Khata Layout"
             className="w-full h-screen  object-fill"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-            <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">
-              Presents E-Khata Gated Community Layout
-            </h1>
+            
           </div>
         </div>
 
