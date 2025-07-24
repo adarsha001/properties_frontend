@@ -16,6 +16,9 @@ const RealEstateDetails = () => {
   return (
     <div ref={sectionRef} className=" bg-gray-100 min-h-screen text-gray-800 pb-40">
       <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+         <h1 className="text-3xl font-bold text-teal-700">
+            Presents E-Khata Gated Community Layout
+          </h1>
      <img
   src="../../garudan.jpeg"
   alt="E-Khata Layout"
@@ -23,9 +26,7 @@ const RealEstateDetails = () => {
 />
 
         <div className="p-8 space-y-6">
-          <h1 className="text-3xl font-bold text-teal-700">
-            Presents E-Khata Gated Community Layout
-          </h1>
+        
 
           <div>
             <h2 className="text-xl font-semibold text-gray-700 mb-2">TITLE</h2>
