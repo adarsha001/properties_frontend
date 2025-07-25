@@ -72,7 +72,7 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
         <div className="flex items-center space-x-2">
           <Link to="/" className="hover:underline">
             <img 
-              src="../../file_00000000e990622f9652adf74ae50a89.png" 
+              src="../../file_000000000af061f79f4fd1c4d7592afd.png" 
               alt="Voice Survey Logo" 
               className="w-32 h-20" 
               onClick={scrollToTop}

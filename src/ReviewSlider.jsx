@@ -4,39 +4,33 @@ import "./scrollAnimation.css";
 
 const reviewCards = [
   {
-    name: "Sarah Johnson",
+    name: "deena prabha",
     role: "Home Buyer",
-    image: "https://i.pravatar.cc/150?img=47",
-    review: "Found my dream home in just two weeks! The team was incredibly responsive.",
+    image: "../../WhatsApp Image 2025-07-25 at 3.17.43 PM.jpeg",
+    review: "SP properties was absolutely wonderful at finding property that met all of our requirements. They took the time to thoroughly explain the property details before we decided to move forward with it I wouldnt hesitate to recommend SP properties .",
     rating: 5,
   },
   {
-    name: "Michael Chen",
+    name: "Navya Nagappa",
     role: "Investor",
-    image: "https://i.pravatar.cc/150?img=52",
-    review: "Exceptional market knowledge. Helped me identify properties with great ROI.",
-    rating: 4,
+    image: "../../WhatsApp Image 2025-07-25 at 3.35.24 PM.jpeg",
+    review: "Outstanding communication,Had a great experience with SP Properties,I have to say that I am thoroughly  happy with the speed, reliability,  and about dedication of the team to provide an excellent service and to get our  properties  fully tenanted  in a very short time...I wish you all the best SP Properties,,Keep it up...good luck",
+    rating: 5,
   },
   {
-    name: "The Williams Family",
+    name: "Mohith m",
     role: "Sellers",
-    image: "https://i.pravatar.cc/150?img=56",
-    review: "Sold our property above asking price. The staging advice made a big impact!",
+    image: "../../WhatsApp Image 2025-07-25 at 3.41.05 PM.jpeg",
+    review: "If you're seeking a trusted and results-driven real estate consultant, look no further than . Their expertise and passion for delivering exceptional service make them unparalleled in the industry.",
     rating: 5,
   },
+  
   {
-    name: "David Rodriguez",
-    role: "First-time Buyer",
-    image: "https://i.pravatar.cc/150?img=60",
-    review: "Patient and helpful team. Guided me every step of the way.",
-    rating: 5,
-  },
-  {
-    name: "Lisa Park",
+    name: "Deekshith dinu",
     role: "Relocation Client",
-    image: "https://i.pravatar.cc/150?img=65",
-    review: "Virtual tours made our cross-country move smooth. Highly recommend!",
-    rating: 4,
+    image: "../../WhatsApp Image 2025-07-25 at 3.33.54 PM.jpeg",
+    review: "Impressed by The SS Propertys commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free",
+    rating: 5,
   },
 ];
 

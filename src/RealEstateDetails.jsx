@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const RealEstateDetails = () => {
+const RealEstateDetails = ({ bgChanged }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -21,160 +21,106 @@ const RealEstateDetails = () => {
     });
   }, []);
 
+  // Dark mode classes
+  const darkBg =   bgChanged
+            ? 'bg-gradient-to-tr from-black to-gray-900'
+            : 'bg-gradient-to-tr from-blue-50 to-blue-100'
+  const darkText = bgChanged ? "text-gray-100" : "text-black";
+  const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
+  const darkBorder = bgChanged ? "" : "";
+
   return (
-    <div ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-7 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl sm:text-4xl font-bold text-black text-center pb-6 drop-shadow-lg">
+    <div 
+      ref={sectionRef} 
+      className={`${darkBg} min-h-screen p-4 py-7 px-4 sm:px-6 lg:px-8`}
+    >
+      <h1 className={`text-3xl sm:text-4xl font-bold ${darkText} text-center pb-6 drop-shadow-lg`}>
         Presents E-Khata Gated Community Layout
       </h1>
       
       <div 
         ref={contentRef}
-        className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:shadow-3xl duration-300"
+        className={`max-w-5xl mx-auto ${darkCardBg} shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:shadow-3xl duration-300 ${darkBorder}`}
       >
         {/* Header with image */}
         <div className="relative">
           <img
-            src="../../WhatsApp Image 2025-07-23 at 11.55.00 AM.jpeg"
+            src="../../WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg"
             alt="E-Khata Layout"
-            className="w-full h-auto md:h-screen object-cover"
+            className="w-full h-auto md:h-screen object-fill"
           />
         </div>
 
-        <div className="p-4 sm:p-8 space-y-6">
-          {/* Title Section - Always 2 columns */}
-          <div className="bg-teal-50 p-4 sm:p-5 rounded-lg border-l-4 border-teal-500">
-            <h2 className="text-xl sm:text-2xl font-bold text-teal-700 mb-3">TITLE DETAILS</h2>
-            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>Individual E-Khata</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>D.C Converted</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>Panchayat Approved Layout</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>Building Approval – G+3</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>NOC from HPA</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-teal-600 mr-2">📍</span>
-                <span>LIC/HDFC Loan Available</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Amenities Section - Always 2 columns */}
-          <div className="bg-blue-50 p-4 sm:p-5 rounded-lg border-l-4 border-blue-500">
-            <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mb-3">PREMIUM AMENITIES</h2>
-            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>TAR Road</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Under Ground Drainage</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Rain Water Drainage</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Electricity & Street Lights</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Water Connection</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Compound Wall</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-blue-600 mr-2">✔️</span>
-                <span>Tree Plantation</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Location Highlights - Always 2 columns */}
-          <div className="bg-purple-50 p-4 sm:p-5 rounded-lg border-l-4 border-purple-500">
-            <h2 className="text-xl sm:text-2xl font-bold text-purple-700 mb-3">LOCATION HIGHLIGHTS</h2>
-            <ul className="grid grid-cols-2 gap-2 sm:gap-3">
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>Next to Airport parallel road</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>25 mins from Metro</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>25 mins from Railway</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>15 mins from Old Madras Road</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>5 mins from Airport Road</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>40 mins from ITPL</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>25 mins from KR Puram</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>45 mins from Airport</span>
-              </li>
-              <li className="flex items-start text-sm sm:text-base">
-                <span className="text-purple-600 mr-2">🚘</span>
-                <span>10 mins from Schools/Hospitals</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Description */}
-          <div className="bg-gray-50 p-4 sm:p-5 rounded-lg border-l-4 border-gray-400">
-            <p className="text-gray-700 leading-relaxed text-justify text-sm sm:text-base">
-              <span className="font-semibold text-gray-800">Residential Layout near Avalahalli</span> offers the comfort of construction at very affordable prices. 
-              Surrounded by well-developed residential houses, this prime location provides excellent convenience and future appreciation potential.
-              
-              <br /><br />
-              
-              <span className="font-semibold text-gray-800">Key nearby landmarks include:</span> Metro station, KR Puram, ITPL/Whitefield, Brigade Signature Tower, NH-75, 
-              Old Madras Road, Hypermarket, ORION Mall, Nandi Grant/Lemon Leaf Restaurants, East Point College of Engineering & Hospital, 
-              Airport Road, New Baldwin International School, Vibgyor School, and Narayana E-Techno School.
-            </p>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="bg-gradient-to-r from-teal-500 to-teal-600 p-4 sm:p-5 rounded-lg text-center shadow-md">
-            <div className="text-lg sm:text-xl font-bold text-white mb-2">
-              Interested in this property?
+        <div className="p-4 grid grid-cols-2 gap-3 sm:gap-4 sm:p-6">
+          {/* Column 1 */}
+          <div className="space-y-3 sm:space-y-4">
+            {/* Title Section */}
+            <div className={`${bgChanged ? 'bg-gray-800' : 'bg-teal-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-teal-500'}`}>
+              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-teal-300' : 'text-teal-700'} mb-1 sm:mb-2`}>TITLE DETAILS</h2>
+              <ul className="grid grid-cols-1 gap-1">
+                {[
+                  "Individual E-Khata",
+                  "D.C Converted",
+                  "Panchayat Approved Layout",
+                  "Building Approval – G+3",
+                  "NOC from HPA",
+                  "LIC/HDFC Loan Available"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start text-xs sm:text-sm">
+                    <span className={`${bgChanged ? 'text-teal-400' : 'text-teal-600'} mr-1`}>📍</span>
+                    <span className={bgChanged ? 'text-gray-200' : ''}>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <a 
-              href="tel:9535755382" 
-              className="inline-block bg-white text-teal-600 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 text-sm sm:text-base"
-            >
-              📞 Call Now: 9535755382
-            </a>
+          </div>
+
+          {/* Column 2 */}
+          <div className="space-y-3 sm:space-y-4">
+            {/* Amenities Section */}
+            <div className={`${bgChanged ? 'bg-gray-700' : 'bg-blue-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-blue-500'}`}>
+              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-blue-300' : 'text-blue-700'} mb-1 sm:mb-2`}>PREMIUM AMENITIES</h2>
+              <ul className="grid grid-cols-1 gap-1">
+                {[
+                  "Electricity & Street Lights",
+                  "Water Connection",
+                  "Compound Wall",
+                  "Tree Plantation",
+                  "TAR Road",
+                  "Under Ground Drainage"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start text-xs sm:text-sm">
+                    <span className={`${bgChanged ? 'text-blue-400' : 'text-blue-600'} mr-1`}>✔️</span>
+                    <span className={bgChanged ? 'text-gray-200' : ''}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Full-width items */}
+          <div className="col-span-2 space-y-3 sm:space-y-4">
+            {/* Description */}
+            <div className={`${bgChanged ? 'bg-gray-700' : 'bg-gray-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-gray-400'}`}>
+              <p className={`text-xs sm:text-sm leading-relaxed text-justify ${bgChanged ? 'text-gray-300' : 'text-gray-700'}`}>
+                <span className={`font-semibold ${bgChanged ? 'text-gray-100' : 'text-gray-800'}`}>
+                  Residential Layout near Avalahalli offers the perfect blend of affordability and modern living,
+                </span> with ready-to-build plots at exceptionally competitive prices. Nestled in a rapidly developing neighborhood, this well-planned community is surrounded by established residential enclaves, ensuring immediate convenience while promising strong future appreciation.
+              </p>
+            </div>
+
+            {/* Contact CTA */}
+            <div className={`bg-gradient-to-r ${bgChanged ? 'from-teal-700 to-teal-800' : 'from-teal-500 to-teal-600'} p-3 rounded-lg text-center shadow-md`}>
+              <div className="text-sm sm:text-base font-bold text-white mb-1 sm:mb-2">
+                Interested in this property?
+              </div>
+              <a 
+                href="tel:9535755382" 
+                className="inline-block bg-white text-teal-600 font-bold py-1 px-3 sm:py-2 sm:px-4 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 text-xs sm:text-sm"
+              >
+                📞 Call Now: 9535755382
+              </a>
+            </div>
           </div>
         </div>
       </div>

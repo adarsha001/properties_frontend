@@ -124,10 +124,10 @@ const MainSite = () => {
 <Animatedsliders/>
 
       {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
-      <ChatBot />
       {/* <PropertyDetails/> */}
-      <RealEstateDetails/>
-      <PropertyMap/>
+      <ChatBot />
+     <RealEstateDetails bgChanged={bgChanged} />
+    <PropertyMap bgChanged={bgChanged} />
       <GuaranteeSection bgChanged={bgChanged} />
        <div ref={aboutUsRef} id="about"> {/* Update this line */}
         <AboutUs bgChanged={bgChanged} />

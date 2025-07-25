@@ -101,10 +101,10 @@ const AboutUs = ({ bgChanged }) => {
           className={`${cardBg} p-8 rounded-lg shadow-lg mb-8 border-l-4 ${borderColor} transition-colors duration-700`}
         >
           <h3 className={`text-2xl font-semibold mb-4 ${textColor}`}>
-            Meet Our Expert – <span className={highlightColor}>MR.PRAVEEN</span>
+            Meet Our Experts – <span className={highlightColor}>MR.PRAVEEN and MR SUBHASH </span>
           </h3>
           <p className={`${textColor} mb-4`}>
-            With <strong>7 years of dedicated experience</strong> in the real estate sector, <strong>PRAVEEN</strong> has been an invaluable asset to Garudan Properties. His keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
+            With <strong>7 years of dedicated experience</strong> in the real estate sector, <strong>PRAVEEN and SUBHASH</strong> has been an invaluable asset to SP Properties. His keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
           </p>
         </div>
 

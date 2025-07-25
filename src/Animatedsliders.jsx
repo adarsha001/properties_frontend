@@ -29,7 +29,7 @@ const Animatedsliders = () => {
     },
     {
       url: image4,
-      title: 'Modern Apartments',
+      title: 'Secure land, secure future ',
       description: 'Live in comfort and style with our curated apartment listings.',
       buttonText: 'Browse Apartments',
     },
