@@ -45,7 +45,7 @@ const Animatedsliders = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
+<div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden ">
       {/* MAIN IMAGE CONTAINER - SIMPLIFIED */}
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (

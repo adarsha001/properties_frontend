@@ -4,12 +4,12 @@ import axios from "axios";
 import { FiX, FiSend, FiCalendar, FiClock, FiUser, FiPhone } from "react-icons/fi";
 
 const Chatbox = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [step, setStep] = useState(0);
   const [messages, setMessages] = useState([
     {
       from: "siya",
-      text: "👋 Hi! I'm Siya, your virtual assistant from Garudan Properties. I'm here to help you explore the best plots and properties across Bangalore. 🏡",
+      text: "👋 Hi! I'm priya, your virtual assistant from Garudan Properties. I'm here to help you explore the best plots and properties across Bangalore. 🏡",
     },
   ]);
   const [formData, setFormData] = useState({
@@ -140,7 +140,7 @@ const Chatbox = () => {
   return (
     <>
       <button
-        className="fixed bottom-5 right-5 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-300"
+        className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white px-6 py-3 rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-300"
         onClick={() => setOpen(!open)}
       >
         <img src="/aigirl.png" alt="siya" className="w-8 h-8 mr-2 rounded-full" />
@@ -150,7 +150,7 @@ const Chatbox = () => {
       {open && (
         <div className="fixed bottom-20 right-5 bg-white rounded-lg shadow-xl w-full max-w-md h-[80vh] flex flex-col overflow-hidden z-50 border border-gray-200">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-green-600 to-green-700 text-white">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-gray-600 to-black text-white">
             <div className="flex items-center gap-3">
               <img src="/aigirl.png" alt="siya" className="w-8 h-8 rounded-full border-2 border-white" />
               <div>

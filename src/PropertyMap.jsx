@@ -37,7 +37,7 @@ const PropertyMap = ({ bgChanged }) => {
   const searchBoxRef = useRef(null);
 
   // Dark mode classes
-  const darkBg = bgChanged ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-blue-50 to-blue-100';
+  const darkBg = bgChanged ? 'bg-gradient-to-br from-black to-gray-900 ' : 'bg-gradient-to-br from-blue-50 to-blue-100';
   const darkText = bgChanged ? 'text-gray-100' : 'text-gray-800';
   const darkBorder = bgChanged ? 'border-gray-700' : 'border-gray-300';
   const darkCardBg = bgChanged ? 'bg-gray-800' : 'bg-purple-50';
@@ -97,7 +97,7 @@ const PropertyMap = ({ bgChanged }) => {
 
   return (
     <div className={`${darkBg} ${darkText} p-12` }>
-      <div className="p-4">
+      <div className="pt-20">
         <StandaloneSearchBox 
           onLoad={ref => (searchBoxRef.current = ref)} 
           onPlacesChanged={handleSearch}

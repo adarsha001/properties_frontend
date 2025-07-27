@@ -20,6 +20,7 @@ import Navbar from "./Navbar";
 import Animatedsliders from "./Animatedsliders";
 import PropertyMap from "./PropertyMap";
 import RealEstateDetails from "./RealEstateDetails";
+import Footer from "./Footer";
 // import PropertyDetails from "./PropertyDetails";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -101,9 +102,14 @@ const MainSite = () => {
 
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const bgColor = bgChanged ? "bg-black" : "bg-white";
-
+  const darkBg =   bgChanged
+            ? 'bg-gradient-to-tr from-black to-gray-900'
+            : 'bg-gradient-to-tr from-blue-50 to-blue-100'
+  const darkText = bgChanged ? "text-gray-100" : "text-black";
+  const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
+  const darkBorder = bgChanged ? "" : "";
   return (
-    <div className={`${bgColor} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
+    <div className={`${darkBg} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
       <button
         onClick={() => setBgChanged(!bgChanged)}
@@ -119,14 +125,11 @@ const MainSite = () => {
 
     
  <Navbar scrollToContact={scrollToContact} scrollToAboutUs={scrollToAboutUs} /> 
-      <div className="h-32"></div>
+      {/* <div className="h-32"></div> */}
       
 <Animatedsliders/>
-
-      {/* <Animatedslider scrollToContact={scrollToContact} bgChanged={bgChanged} />
-      {/* <PropertyDetails/> */}
+<RealEstateDetails bgChanged={bgChanged} />
       <ChatBot />
-     <RealEstateDetails bgChanged={bgChanged} />
     <PropertyMap bgChanged={bgChanged} />
       <GuaranteeSection bgChanged={bgChanged} />
        <div ref={aboutUsRef} id="about"> {/* Update this line */}
@@ -136,9 +139,12 @@ const MainSite = () => {
 <div ref={contactRef} id="contact">
   <ContactSection bgChanged={bgChanged} />
 </div>
-<footer className="text-center text-sm py-4 opacity-70">
-  <p className={`${textColor}`}>© {new Date().getFullYear()} Created by Adarsha</p>
-</footer>
+   <Footer
+        darkBg={darkBg}
+        darkText={darkText}
+        darkCardBg={darkCardBg}
+        darkBorder={darkBorder}
+      />
     </div>
   );
 };

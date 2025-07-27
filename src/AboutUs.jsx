@@ -15,7 +15,7 @@ const AboutUs = ({ bgChanged }) => {
 
   // Dynamic colors based on theme
   const textColor = bgChanged ? "text-white" : "text-gray-800";
-  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gray-50";
+  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
   const highlightColor = "text-cyan-700"; // Keep orange as accent color
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const borderColor = bgChanged ? "border-orange-400" : "border-orange-500";
