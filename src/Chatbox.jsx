@@ -9,7 +9,7 @@ const Chatbox = () => {
   const [messages, setMessages] = useState([
     {
       from: "siya",
-      text: "👋 Hi! I'm priya, your virtual assistant from Garudan Properties. I'm here to help you explore the best plots and properties across Bangalore. 🏡",
+      text: "👋 Hi! I'm priya, your virtual assistant from SP Properties. I'm here to help you explore the best plots and properties across Bangalore. 🏡",
     },
   ]);
   const [formData, setFormData] = useState({
