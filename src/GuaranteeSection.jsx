@@ -47,7 +47,7 @@ const GuaranteeSection = ({ bgChanged }) => {
           Our Promise to You
         </h2>
         <p className={`mt-4 ${subTextColor} text-lg`}>
-          At Garudan Properties, we’re not just selling homes — we’re helping you build your future. Here’s our guarantee:
+          At SP Properties, we’re not just selling homes — we’re helping you build your future. Here’s our guarantee:
         </p>
       </div>
 

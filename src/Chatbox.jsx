@@ -124,7 +124,7 @@ const Chatbox = () => {
           { from: "user", text: `${formData.name} - ${formData.phone}` },
           {
             from: "siya",
-            text: "✅ Thank you! Our agent will contact you shortly. We appreciate your interest in Garudan Properties!",
+            text: "✅ Thank you! Our agent will contact you shortly. We appreciate your interest in SP Properties!",
           },
         ]);
         setStep(questions.length + 2);
@@ -319,7 +319,7 @@ const Chatbox = () => {
 
           {/* Footer */}
           <div className="text-center text-xs py-2 border-t bg-gray-50 text-gray-500">
-            ⚡ Powered by Garudan Properties
+            ⚡ Powered by Sp Properties
           </div>
         </div>
       )}
