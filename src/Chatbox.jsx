@@ -152,7 +152,7 @@ const Chatbox = () => {
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-gray-600 to-black text-white">
             <div className="flex items-center gap-3">
-              <img src="/aigirl.png" alt="siya" className="w-8 h-8 rounded-full border-2 border-white" />
+              <img src="/istockphoto-2074604864-612x612.jpg" alt="siya" className="w-8 h-8 rounded-full border-2 border-white" />
               <div>
                 <span className="font-semibold">priya</span>
                 <p className="text-xs opacity-80">SP Properties Assistant</p>
