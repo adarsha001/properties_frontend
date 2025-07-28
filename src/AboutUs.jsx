@@ -111,7 +111,7 @@ const AboutUs = ({ bgChanged }) => {
         {/* Stats Animation */}
         <div
           ref={statsRef}
-          className={`${highlightColor.replace('text', 'bg')} ${textColor}  text-center py-6 px-4 rounded-lg max-w-md mx-auto`}
+          className={`${highlightColor.replace('text', 'bg')} text-white text-center py-6 px-4 rounded-lg max-w-md mx-auto`}
         >
           <p className="text-3xl font-bold mb-2">15+</p>
           <p className="text-lg">Projects Successfully Completed</p>
