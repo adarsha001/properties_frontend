@@ -12,7 +12,7 @@ const Animatedsliders = () => {
     {
       url: image1,
       title: 'Find Your Dream Home',
-      description: 'Browse listings of luxury apartments and family homes in top locations.',
+      description: 'Browse listings of luxury family homes in top locations.',
       buttonText: 'Explore Now',
     },
     {

@@ -143,7 +143,7 @@ const Chatbox = () => {
         className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white px-6 py-3 rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-300"
         onClick={() => setOpen(!open)}
       >
-        <img src="/aigirl.png" alt="siya" className="w-8 h-8 mr-2 rounded-full" />
+        <img src="/istockphoto-2074604864-612x612.jpg" alt="siya" className="w-8 h-8 mr-2 rounded-full" />
         Chat with priya
       </button>
 

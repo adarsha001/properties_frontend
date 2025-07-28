@@ -25,7 +25,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   const darkBg =   bgChanged
             ? 'bg-gradient-to-tr from-black to-gray-900'
             : 'bg-gradient-to-tr from-blue-50 to-blue-100'
-  const darkText = bgChanged ? "text-gray-100" : "text-black";
+  const darkText = bgChanged ? "bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent" : "bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent";
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const darkBorder = bgChanged ? "" : "";
 
@@ -34,7 +34,7 @@ const RealEstateDetails = ({ bgChanged }) => {
       ref={sectionRef} 
       className={`${darkBg} min-h-screen  py-7 px-4 sm:px-6 lg:px-8`}
     >
-      <h1 className={`text-3xl sm:text-4xl font-bold ${darkText} text-center pb-6 drop-shadow-lg`}>
+      <h1 className={`text-3xl sm:text-4xl font-bold ${darkText } text-center pb-6 drop-shadow-lg`}>
         Presents E-Khata Gated Community Layout
       </h1>
       
@@ -55,8 +55,8 @@ const RealEstateDetails = ({ bgChanged }) => {
           {/* Column 1 */}
           <div className="space-y-3 sm:space-y-4">
             {/* Title Section */}
-            <div className={`${bgChanged ? 'bg-gray-800' : 'bg-teal-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-teal-500'}`}>
-              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-teal-300' : 'text-teal-700'} mb-1 sm:mb-2`}>TITLE DETAILS</h2>
+            <div className={`${bgChanged ? 'bg-gray-800' : 'bg-teal-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-gray-600'}`}>
+              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-teal-300' : 'bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent'} mb-1 sm:mb-2`}>TITLE DETAILS</h2>
               <ul className="grid grid-cols-1 gap-1">
                 {[
                   "Individual E-Khata",
@@ -78,8 +78,8 @@ const RealEstateDetails = ({ bgChanged }) => {
           {/* Column 2 */}
           <div className="space-y-3 sm:space-y-4">
             {/* Amenities Section */}
-            <div className={`${bgChanged ? 'bg-gray-800' : 'bg-blue-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-blue-500'}`}>
-              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-blue-300' : 'text-blue-700'} mb-1 sm:mb-2`}>PREMIUM AMENITIES</h2>
+            <div className={`${bgChanged ? 'bg-gray-800' : 'bg-blue-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-gray-600'}`}>
+              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'bg-gradient-to-r from-gray-100 via-gray-900 to-gray-900 bg-clip-text text-transparent ' : 'bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent'} mb-1 sm:mb-2`}>PREMIUM AMENITIES</h2>
               <ul className="grid grid-cols-1 gap-1">
                 {[
                   "Electricity & Street Lights",
@@ -110,15 +110,15 @@ const RealEstateDetails = ({ bgChanged }) => {
             </div>
 
             {/* Contact CTA */}
-            <div className={`bg-gradient-to-r ${bgChanged ? 'from-teal-700 to-teal-800' : 'from-teal-500 to-teal-600'} p-3 rounded-lg text-center shadow-md`}>
+            <div className={`bg-gradient-to-r ${bgChanged ? 'from-teal-700 to-teal-800' : 'from-gray-900 to-gray-600'} p-3 rounded-lg text-center shadow-md`}>
               <div className="text-sm sm:text-base font-bold text-white mb-1 sm:mb-2">
                 Interested in this property?
               </div>
               <a 
                 href="tel:9535755382" 
-                className="inline-block bg-white text-teal-600 font-bold py-1 px-3 sm:py-2 sm:px-4 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 text-xs sm:text-sm"
+                className="inline-block bg-white text-gray-600 font-bold py-1 px-3 sm:py-2 sm:px-4 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 text-xs sm:text-sm"
               >
-                📞 Call Now: 9535755382
+                📞 Call Now:8951706247
               </a>
             </div>
           </div>
