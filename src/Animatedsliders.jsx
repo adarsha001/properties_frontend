@@ -12,7 +12,7 @@ const Animatedsliders = () => {
     {
       url: image1,
       title: 'Find Your Dream Home',
-      description: 'Browse listings of luxury family homes in top locations.',
+      description: 'Browse listings of luxury apartments and family homes in top locations.',
       buttonText: 'Explore Now',
     },
     {
@@ -31,7 +31,7 @@ const Animatedsliders = () => {
       url: image4,
       title: 'Secure land, secure future ',
       description: 'Live in comfort and style with our curated apartment listings.',
-      buttonText: 'Browse Apartments',
+      buttonText: 'Browse plots',
     },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,7 +67,7 @@ const Animatedsliders = () => {
             {slides[currentIndex].title}
           </h2>
           <p className="text-lg md:text-xl mb-6">{slides[currentIndex].description}</p>
-          <button className="px-6 py-3 bg-teal-500 hover:bg-teal-600 rounded-lg transition-colors">
+          <button className="px-6 py-3 bg-gray-600 to-black hover:bg-gray-900 rounded-lg transition-colors">
             {slides[currentIndex].buttonText}
           </button>
         </div>
