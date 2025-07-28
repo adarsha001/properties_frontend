@@ -16,7 +16,7 @@ const AboutUs = ({ bgChanged }) => {
   // Dynamic colors based on theme
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
-  const highlightColor = "bg-gradient-to-l from-gray-700 via-gray-600 to-gray-700 bg-clip-text text-transparen"; // Keep orange as accent color
+  const highlightColor = "bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparen"; // Keep orange as accent color
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const borderColor = bgChanged ? "border-orange-400" : "border-orange-500";
 
