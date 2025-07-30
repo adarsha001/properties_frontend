@@ -25,7 +25,7 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
               <FaPhoneAlt className="mr-2 text-teal-400" /> +91 98765 43210
             </li>
             <li className="flex items-center">
-              <MdEmail className="mr-2 text-teal-400" /> info@spproperties.com
+              <MdEmail className="mr-2 text-teal-400" /> spproperties.2021@gmail.com
             </li>
             <li className="flex items-center">
               <FiMapPin className="mr-2 text-teal-400" /> Bangalore, India
