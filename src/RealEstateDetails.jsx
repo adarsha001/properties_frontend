@@ -25,7 +25,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   const darkBg =   bgChanged
             ? 'bg-gradient-to-tr from-black to-gray-900'
             : 'bg-gradient-to-tr from-blue-50 to-blue-100'
-  const darkText = bgChanged ? "bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent" : "bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent";
+  const darkText = bgChanged ? "bg-gradient-to-r from-gray-500 via-gray-400 to-gray-200 bg-clip-text text-transparent" : "bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent";
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const darkBorder = bgChanged ? "" : "";
 
