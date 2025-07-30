@@ -11,36 +11,49 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   const mobileMenuRef = useRef(null);
   const animationRef = useRef(null);
 
+  // Add links to the ref array
+  const addToLinksRef = (el) => {
+    if (el && !linksRef.current.includes(el)) {
+      linksRef.current.push(el);
+    }
+  };
+
   // Desktop nav animation
   useEffect(() => {
-    animationRef.current = gsap.timeline()
-      .to(navRef.current, {
-        y: -1,
-        opacity: 1,
-        duration: 0.3,
-        ease: "power3.out"
-      })
-      .fromTo(logoRef.current,
-        { x: -20, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.3 },
-        "-=0.1"
-      )
-      .fromTo(linksRef.current,
-        { y: 10, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.15
-        },
-        "-=0.3"
-      );
-    return () => animationRef.current?.kill();
+    // Only animate if all refs are available
+    if (navRef.current && logoRef.current && linksRef.current.length > 0) {
+      animationRef.current = gsap.timeline()
+        .fromTo(navRef.current,
+          { y: -20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }
+        )
+        .fromTo(logoRef.current,
+          { x: -20, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.3 },
+          "-=0.1"
+        )
+        .fromTo(linksRef.current,
+          { y: 10, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.15
+          },
+          "-=0.3"
+        );
+    }
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
+    };
   }, []);
 
   // Mobile menu animation
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && mobileMenuRef.current) {
       gsap.fromTo(mobileMenuRef.current,
         { y: -20, opacity: 0 },
         {
@@ -67,28 +80,28 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   };
 
   return (
-<nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40 ">
-  <div 
-    ref={navRef} 
-    className="max-w-7xl mx-auto px-4 md:py-12 py-6 mt-5 flex justify-between items-center h-20" // 👈 Adjusted height
-  >
-    <div className="flex items-center space-x-2">
-      <Link to="/" className="hover:underline">
-        <img 
-          src="../../file_000000000af061f79f4fd1c4d7592afd.png" 
-          alt="SP Properties Logo" 
-          className="w-32 h-20" 
-          onClick={scrollToTop}
-        />
-      </Link>
-    </div>
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40">
+      <div 
+        ref={navRef} 
+        className="max-w-7xl mx-auto px-4 md:py-12 py-6 mt-5 flex justify-between  items-center h-20"
+      >
+        <div className="flex items-center space-x-2">
+          <Link to="/" className="hover:underline" ref={logoRef}>
+            <img 
+              src="../../file_000000000af061f79f4fd1c4d7592afd.png" 
+              alt="SP Properties Logo" 
+              className="w-32 h-20" 
+              onClick={scrollToTop}
+            />
+          </Link>
+        </div>
 
-    {/* Desktop Links */}
-    <div className="hidden md:flex space-x-6">
-      <div className="hidden md:flex space-x-6">
+        {/* Desktop Links */}
+        <div className="hidden md:flex space-x-6">
           <button 
             onClick={scrollToTop} 
             className="hover:text-teal-400"
+            ref={addToLinksRef}
           >
             Home
           </button>
@@ -98,6 +111,7 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
               setIsOpen(false);
             }} 
             className="hover:text-teal-400"
+            ref={addToLinksRef}
           >
             About
           </button>
@@ -107,54 +121,53 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
               setIsOpen(false);
             }} 
             className="hover:text-teal-400"
+            ref={addToLinksRef}
           >
             Contact
           </button>
         </div>
-    </div>
 
-    {/* Mobile Menu Button */}
-    <div className="md:hidden">
-      <button onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-    </div>
-  </div>
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
 
-  {/* ✅ Mobile Menu */}
-  {isOpen && (
-    <div
-      ref={mobileMenuRef}
-      className="absolute top-full left-0 w-full bg-white shadow-md md:hidden space-y-2 px-4 py-3"
-    >
-      <button 
-        onClick={scrollToTop} 
-        className="block text-gray-700 hover:text-teal-500 w-full text-left"
-      >
-        Home
-      </button>
-      <button 
-        onClick={() => {
-          scrollToAboutUs();
-          setIsOpen(false);
-        }} 
-        className="block text-gray-700 hover:text-teal-500 w-full text-left"
-      >
-        About
-      </button>
-      <button 
-        onClick={() => {
-          scrollToContact();
-          setIsOpen(false);
-        }} 
-        className="block text-gray-700 hover:text-teal-500 w-full text-left"
-      >
-        Contact
-      </button>
-    </div>
-  )}
-</nav>
-
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div
+          ref={mobileMenuRef}
+          className="absolute top-full left-0 w-full bg-white shadow-md md:hidden space-y-2 px-4 py-3"
+        >
+          <button 
+            onClick={scrollToTop} 
+            className="block text-gray-700 hover:text-teal-500 w-full text-left"
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => {
+              scrollToAboutUs();
+              setIsOpen(false);
+            }} 
+            className="block text-gray-700 hover:text-teal-500 w-full text-left"
+          >
+            About
+          </button>
+          <button 
+            onClick={() => {
+              scrollToContact();
+              setIsOpen(false);
+            }} 
+            className="block text-gray-700 hover:text-teal-500 w-full text-left"
+          >
+            Contact
+          </button>
+        </div>
+      )}
+    </nav>
   );
 };
 
