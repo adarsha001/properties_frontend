@@ -35,12 +35,13 @@ const Chatbox = () => {
     {
       text: "💰 What's your range?",
       field: "budget",
-      options: ["< ₹20L", "₹20-50L", "₹50-1Cr", "> ₹1Cr"],
+    options: ["Below ₹50L", "₹50L – ₹1Cr", "₹1Cr – ₹1.5Cr", "Above ₹1.5Cr"]
+
     },
     {
       text: "🏗️ What kind of property ?",
       field: "propertyType",
-      options: ["Plot", "Villa", "Apartment", "Commercial Space"],
+      options: ["Plot", "Villa", "Commercial Space"],
     },
     {
       text: "📍 location?",
