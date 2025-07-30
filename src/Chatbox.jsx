@@ -4,7 +4,7 @@ import axios from "axios";
 import { FiX, FiSend, FiCalendar, FiClock, FiUser, FiPhone } from "react-icons/fi";
 
 const Chatbox = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [messages, setMessages] = useState([
     {
@@ -64,11 +64,9 @@ const Chatbox = () => {
   };
 
   const simulateTyping = (callback) => {
-    setIsTyping(true);
-    setTimeout(() => {
-      callback();
+  
       setIsTyping(false);
-    }, 1000);
+   
   };
 
   const handleOption = (value) => {
