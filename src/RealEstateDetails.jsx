@@ -56,15 +56,15 @@ const RealEstateDetails = ({ bgChanged }) => {
           <div className="space-y-3 sm:space-y-4">
             {/* Title Section */}
             <div className={`${bgChanged ? 'bg-gray-800' : 'bg-teal-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-gray-600'}`}>
-              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'text-teal-300' : 'bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent'} mb-1 sm:mb-2`}>TITLE DETAILS</h2>
+              <h2 className={`text-sm sm:text-base font-bold ${bgChanged ? 'bg-gradient-to-r from-gray-100 via-gray-900 to-gray-900 bg-clip-text text-transparent' : 'bg-gradient-to-r from-gray-500 via-gray-900 to-gray-900 bg-clip-text text-transparent'} mb-1 sm:mb-2`}>TITLE DETAILS</h2>
               <ul className="grid grid-cols-1 gap-1">
                 {[
                   "Individual E-Khata",
                   "D.C Converted",
                   "Panchayat Approved Layout",
-                  "Building Approval – G+3",
+                  "Building Approval G+3",
                   "NOC from HPA",
-                  "LIC/HDFC Loan Available"
+                  "Loan Available"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start text-xs sm:text-sm">
                     <span className={`${bgChanged ? 'text-teal-400' : 'text-teal-600'} mr-1`}>📍</span>
@@ -86,7 +86,7 @@ const RealEstateDetails = ({ bgChanged }) => {
                   "Water Connection",
                   "Compound Wall",
                   "Tree Plantation",
-                  "TAR Road",
+                  "TAR/CC Road",
                   "Under Ground Drainage"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start text-xs sm:text-sm">
@@ -104,7 +104,7 @@ const RealEstateDetails = ({ bgChanged }) => {
             <div className={`${bgChanged ? 'bg-gray-800' : 'bg-gray-50'} p-3 rounded-lg border-l-4 ${bgChanged ? 'border-gray-600' : 'border-gray-400'}`}>
               <p className={`text-xs sm:text-sm leading-relaxed text-justify ${bgChanged ? 'text-gray-300' : 'text-gray-700'}`}>
                 <span className={`font-semibold ${bgChanged ? 'text-gray-100' : 'text-gray-800'}`}>
-                  Residential Layout near Avalahalli offers the perfect blend of affordability and modern living,
+                  Residential Layout near K.R puram offers the perfect blend of affordability and modern living,
                 </span> with ready-to-build plots at exceptionally competitive prices. Nestled in a rapidly developing neighborhood, this well-planned community is surrounded by established residential enclaves, ensuring immediate convenience while promising strong future appreciation.
               </p>
             </div>
@@ -115,7 +115,7 @@ const RealEstateDetails = ({ bgChanged }) => {
                 Interested in this property?
               </div>
               <a 
-                href="tel:9535755382" 
+                href="tel:8951706247" 
                 className="inline-block bg-white text-gray-600 font-bold py-1 px-3 sm:py-2 sm:px-4 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 text-xs sm:text-sm"
               >
                 📞 Call Now:8951706247

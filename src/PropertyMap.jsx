@@ -41,8 +41,8 @@ const PropertyMap = ({ bgChanged }) => {
   const darkText = bgChanged ? 'text-gray-100' : 'text-gray-800';
   const darkBorder = bgChanged ? 'border-gray-700' : 'border-gray-300';
   const darkCardBg = bgChanged ? 'bg-gray-800' : 'bg-purple-50';
-  const darkCardBorder = bgChanged ? 'border-purple-700' : 'border-purple-500';
-  const darkHighlightText = bgChanged ? 'text-teal-300' : 'text-teal-700';
+  const darkCardBorder = bgChanged ? 'border-gray-700' : 'border-gray-500';
+  const darkHighlightText = bgChanged ? 'bg-gradient-to-r from-gray-100 via-gray-900 to-gray-900 bg-clip-text text-transparent' : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
 
   const onLoadMap = useCallback((mapInstance) => {
     setMap(mapInstance);
@@ -199,11 +199,13 @@ const PropertyMap = ({ bgChanged }) => {
         <h2 className={`text-lg font-bold ${darkHighlightText} mb-3`}>Time-to-Place</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {[
-            { icon: '🚘', text: '15 mins from Old Madras Road' },
+            { icon: '🚘', text: '2 mins from Old Madras Road' },
             { icon: '🚘', text: '5 mins from Airport Road' },
-            { icon: '🚘', text: '40 mins from ITPL' },
+            { icon: '🚘', text: '10 min from brigade signature towers' },
+            { icon: '🚘', text: '30 mins from ITPL' },
             { icon: '🚘', text: '25 mins from KR Puram' },
-            { icon: '🚘', text: '45 mins from Airport' },
+            { icon: '🚘', text: '30 mins from manyatha tech park' },
+            { icon: '🚘', text: '40 mins from Airport' },
             { icon: '🚘', text: '10 mins from Schools/Hospitals' }
           ].map((item, index) => (
             <li key={index} className="flex items-start">
