@@ -64,9 +64,11 @@ const Chatbox = () => {
   };
 
   const simulateTyping = (callback) => {
-  
+    setIsTyping(true);
+    setTimeout(() => {
+      callback();
       setIsTyping(false);
-   
+    },200);
   };
 
   const handleOption = (value) => {
