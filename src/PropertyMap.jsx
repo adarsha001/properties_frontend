@@ -1,200 +1,31 @@
-import React, { useState, useCallback, useRef } from 'react';
-import {
-  GoogleMap,
-  Marker,
-  InfoWindow,
-  useJsApiLoader,
-  StandaloneSearchBox
-} from '@react-google-maps/api';
-
-const containerStyle = {
-  width: '100%',
-  height: '90vh'
-};
-
-const propertyLocation = {
-  lat: 13.0554006,
-  lng: 77.7183994
-};
-
-const places = [
-  { name: 'Manipal Hospital', lat: 13.0541408, lng: 77.7176502, icon: '🏥' },
-  { name: 'Delhi Public School', lat: 13.0503197, lng: 77.7146563, icon: '🎓' },
-  { name: 'Udupi Restaurant', lat: 13.0528715, lng: 77.7190537, icon: '🍽️' },
-  { name: 'Gym', lat: 13.0550796, lng: 77.7177279, icon: '💪' }
-];
+import React from 'react';
 
 const PropertyMap = ({ bgChanged }) => {
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyB5phvaZM_0OCNCM_cRiCFUHPYiKg0jEG8',
-    libraries: ['places']
-  });
-
-  const [map, setMap] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const [distanceData, setDistanceData] = useState({});
-  const [searchMarker, setSearchMarker] = useState(null);
-  const searchBoxRef = useRef(null);
-
-  // Dark mode classes
-  const darkBg = bgChanged ? 'bg-gradient-to-br from-black to-gray-900 ' : 'bg-gradient-to-br from-blue-50 to-blue-100';
+  // Styling for light/dark themes
+  const darkBg = bgChanged ? 'bg-gradient-to-br from-black to-gray-900' : 'bg-gradient-to-br from-blue-50 to-blue-100';
   const darkText = bgChanged ? 'text-gray-100' : 'text-gray-800';
-  const darkBorder = bgChanged ? 'border-gray-700' : 'border-gray-300';
   const darkCardBg = bgChanged ? 'bg-gray-800' : 'bg-purple-50';
   const darkCardBorder = bgChanged ? 'border-gray-700' : 'border-gray-500';
-  const darkHighlightText = bgChanged ? 'bg-gradient-to-r from-gray-100 via-gray-900 to-gray-900 bg-clip-text text-transparent' : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
-
-  const onLoadMap = useCallback((mapInstance) => {
-    setMap(mapInstance);
-  }, []);
-
-  const calculateDistances = useCallback(() => {
-    if (!window.google) return;
-
-    const service = new window.google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [propertyLocation],
-        destinations: places.map(p => ({ lat: p.lat, lng: p.lng })),
-        travelMode: 'DRIVING'
-      },
-      (response, status) => {
-        if (status === 'OK') {
-          const elements = response.rows[0].elements;
-          const updated = {};
-          places.forEach((place, idx) => {
-            updated[place.name] = elements[idx];
-          });
-          setDistanceData(updated);
-        }
-      }
-    );
-  }, []);
-
-  React.useEffect(() => {
-    if (isLoaded) calculateDistances();
-  }, [isLoaded, calculateDistances]);
-
-  const handleSearch = () => {
-    const places = searchBoxRef.current.getPlaces();
-    if (places.length === 0) return;
-    const place = places[0];
-    const location = place.geometry.location;
-    const newLoc = {
-      lat: location.lat(),
-      lng: location.lng()
-    };
-    setSearchMarker({ name: place.name, position: newLoc });
-    map.panTo(newLoc);
-    map.setZoom(14);
-  };
-
-  if (!isLoaded) return (
-    <div className={`p-4 ${darkBg} ${darkText} min-h-[90vh] flex items-center justify-center`}>
-      <p>Loading map...</p>
-    </div>
-  );
+  const darkHighlightText = bgChanged
+    ? 'bg-gradient-to-r from-gray-100 via-gray-900 to-gray-900 bg-clip-text text-transparent'
+    : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
 
   return (
-    <div className={`${darkBg} ${darkText} p-12` }>
-      <div className="pt-20">
-        <StandaloneSearchBox 
-          onLoad={ref => (searchBoxRef.current = ref)} 
-          onPlacesChanged={handleSearch}
-        >
-          <input
-            type="text"
-            placeholder="Search for any location..."
-            className={`w-full p-3 rounded-md border ${darkBorder} ${bgChanged ? 'bg-gray-700 text-white' : 'bg-white'} mb-4`}
-          />
-        </StandaloneSearchBox>
+    <div className={`${darkBg} ${darkText} p-12`}>
+      <div className="pt-20 w-full flex justify-center">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d658.9128515519533!2d77.72361453769636!3d13.04369393594722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1753883696394!5m2!1sen!2sin"
+          width="100%"
+          height="450"
+          allowFullScreen=""
+          loading="lazy"
+          style={{ border: 0, borderRadius: '0.5rem' }}
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
 
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={propertyLocation}
-        zoom={17}
-        onLoad={onLoadMap}
-        options={{
-          styles: bgChanged ? [
-            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            {
-              featureType: "administrative.locality",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }]
-            },
-            {
-              featureType: "poi",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [{ color: "#38414e" }]
-            }
-          ] : []
-        }}
-      >
-        {/* Main Property Marker */}
-        <Marker
-          position={propertyLocation}
-          title="Your Property"
-          icon={{
-            url: bgChanged 
-              ? 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-              : 'https://maps.gstatic.com/mapfiles/ms2/micons/homegardenbusiness.png',
-            scaledSize: new window.google.maps.Size(50, 50),
-          }}
-        />
+      <div className="h-8"></div>
 
-        {/* Markers for Nearby Places */}
-        {places.map((place, idx) => (
-          <Marker
-            key={idx}
-            position={{ lat: place.lat, lng: place.lng }}
-            label={place.icon}
-            onClick={() => setSelectedPlace(place)}
-          />
-        ))}
-
-        {/* Search result marker */}
-        {searchMarker && (
-          <Marker
-            position={searchMarker.position}
-            label="📍"
-            onClick={() => setSelectedPlace(searchMarker)}
-          />
-        )}
-
-        {/* Info Windows */}
-        {selectedPlace && (
-          <InfoWindow
-            position={selectedPlace.position || {
-              lat: selectedPlace.lat,
-              lng: selectedPlace.lng
-            }}
-            onCloseClick={() => setSelectedPlace(null)}
-          >
-            <div className={`p-2 ${bgChanged ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
-              <h4 className="font-bold">{selectedPlace.name}</h4>
-              {distanceData[selectedPlace.name] ? (
-                <p>
-                  Distance: {distanceData[selectedPlace.name].distance.text}<br />
-                  Duration: {distanceData[selectedPlace.name].duration.text}
-                </p>
-              ) : (
-                <p>{searchMarker ? 'Searched location' : 'Loading...'}</p>
-              )}
-            </div>
-          </InfoWindow>
-        )}
-      </GoogleMap>
-
-      <div className='h-8'></div>
-      
       <div className={`${darkCardBg} p-6 rounded-lg border-l-4 ${darkCardBorder} mx-4 mb-8`}>
         <h2 className={`text-lg font-bold ${darkHighlightText} mb-3`}>Time-to-Place</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
