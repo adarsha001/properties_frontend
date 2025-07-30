@@ -104,7 +104,7 @@ const AboutUs = ({ bgChanged }) => {
             Meet Our Experts – <span className={highlightColor}>MR.PRAVEEN and MR SUBHASH </span>
           </h3>
           <p className={`${textColor} mb-4`}>
-            With <strong>7 years of dedicated experience</strong> in the real estate sector, <strong>PRAVEEN and SUBHASH</strong> has been an invaluable asset to SP Properties. His keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
+            With <strong>7 years of dedicated experience</strong> in the real estate sector, <strong>PRAVEEN and SUBHASH</strong> has been an invaluable asset to SP Properties. There keen eye for detail, deep market understanding, and relentless dedication have enabled him to deliver outstanding results.
           </p>
         </div>
 
