@@ -21,6 +21,7 @@ import Animatedsliders from "./Animatedsliders";
 import PropertyMap from "./PropertyMap";
 import RealEstateDetails from "./RealEstateDetails";
 import Footer from "./Footer";
+import UserPromptModal from "./UserPromptModal";
 // import PropertyDetails from "./PropertyDetails";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -126,7 +127,7 @@ const MainSite = () => {
     
  <Navbar scrollToContact={scrollToContact} scrollToAboutUs={scrollToAboutUs} /> 
       {/* <div className="h-32"></div> */}
-      
+      <UserPromptModal/>
 <Animatedsliders/>
 <RealEstateDetails bgChanged={bgChanged} />
       <ChatBot />
