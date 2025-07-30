@@ -25,7 +25,7 @@ const UserPromptModal = ({ propertyId }) => {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center">
+    <div className="fixed inset-0 z-50  bg-opacity-40 backdrop-blur-sm flex items-center justify-center">
       <div className="relative bg-white rounded-lg shadow-xl p-6 w-[90%] max-w-sm">
         <button
           onClick={() => setShow(false)}
