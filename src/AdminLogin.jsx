@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "./api"; // Adjust the path as needed
 
 const AdminLogin = () => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("garudan@123");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // prevent page reload
+    e.preventDefault();
     try {
-      const res = await axios.post("https://properties-backend-ok36.onrender.com/api/admin/login", { password });
+      const res = await axios.post(API.adminLogin, { password });
       localStorage.setItem("adminToken", res.data.token);
-      // Optional: trigger parent state
-      navigate("/admin"); // ✅ redirect to admin panel
+      navigate("/admin");
     } catch {
       alert("Invalid password");
     }
