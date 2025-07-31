@@ -1,5 +1,5 @@
 // src/api.js
-const BASE_URL = "http://localhost:5000/api" ||"https://properties-backend-ok36.onrender.com";
+const BASE_URL = "http://localhost:5000/api" ||"https://properties-backend-ok36.onrender.com/api";
 
 const API = {
   adminLogin: `${BASE_URL}/admin/login`,
