@@ -2,7 +2,7 @@ const BASE_URL = "https://sppropertiesbengaluru.com/api";
 
 const API = {
   // Authentication
-  adminLogin: `${BASE_URL}/admin/login`,
+   adminLogin: `${BASE_URL}/admin/login`,
 
   // Chat Submissions
   chatSubmissions: `${BASE_URL}/chat`,
