@@ -16,6 +16,17 @@ const ChatSubmissionsTable = ({
     description: "",
     followUpDate: ""
   });
+  const [isAddingNewRow, setIsAddingNewRow] = useState(false);
+const [newRowData, setNewRowData] = useState({
+  name: '',
+  phone: '',
+  intent: '',
+  budget: '',
+  propertyType: '',
+  location: '',
+  scheduleDate: '',
+  scheduleTime: ''
+});
   const [expandedChatId, setExpandedChatId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({
@@ -30,6 +41,10 @@ const ChatSubmissionsTable = ({
 
   // Get unique locations for filter dropdown
   const uniqueLocations = [...new Set(submissions.map(item => item.location))];
+const handleNewRowInputChange = (e) => {
+  const { name, value } = e.target;
+  setNewRowData(prev => ({ ...prev, [name]: value }));
+};
 
   const fetchCallDetails = (submissionId) => {
     axios
@@ -43,36 +58,42 @@ const ChatSubmissionsTable = ({
       });
   };
 
-  const submitCallDetail = () => {
-    if (!callDetailForm.description || !callDetailForm.followUpDate) {
-      alert("Please fill all fields");
-      return;
-    } 
+const submitCallDetail = () => {
+  // Validate all required fields
+  if (!callDetailForm.description || !callDetailForm.followUpDate || !callDetailForm.buyingStatus) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    axios
-      .post(
-        API.chatCallDetails(selectedSubmission._id),
-        {
-          chat: selectedSubmission._id,
-          ...callDetailForm
-        },
-        getAuthHeader()
-      )
-      .then(() => {
-        fetchCallDetails(selectedSubmission._id);
-        fetchSubmissions();
-        setCallDetailForm({
-          buyingStatus: "mid",
-          description: "",
-          followUpDate: ""
-        });
-      })
-      .catch((err) => {
-        console.error("Error adding call detail:", err);
-        alert("Error adding call detail: " + (err.response?.data?.message || err.message));
-      });
+  // Prepare payload with all required fields
+  const payload = {
+    contact: selectedSubmission._id, // Add the required contact field
+    chat: selectedSubmission._id,   // Keep existing chat reference
+    buyingStatus: callDetailForm.buyingStatus,
+    description: callDetailForm.description,
+    followUpDate: new Date(callDetailForm.followUpDate).toISOString()
   };
 
+  axios
+    .post(
+      API.chatCallDetails(selectedSubmission._id),
+      payload,
+      getAuthHeader()
+    )
+    .then(() => {
+      fetchCallDetails(selectedSubmission._id);
+      fetchSubmissions();
+      setCallDetailForm({
+        buyingStatus: "mid",
+        description: "",
+        followUpDate: ""
+      });
+    })
+    .catch((err) => {
+      console.error("Full error response:", err.response?.data);
+      alert("Error adding call detail: " + (err.response?.data?.message || err.message));
+    });
+};
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       alert("Copied to clipboard");
@@ -206,6 +227,391 @@ const ChatSubmissionsTable = ({
       ? <FiArrowUp className="inline ml-1" /> 
       : <FiArrowDown className="inline ml-1" />;
   };
+  const handleAddNewRow = async () => {
+  // Validate required fields
+  if (!newRowData.name || !newRowData.phone || !newRowData.intent || 
+      !newRowData.budget || !newRowData.propertyType || !newRowData.location) {
+    alert("Please fill all required fields (marked with *)");
+    return;
+  }
+
+  try {
+    const response = await axios.post(API.chatSubmissions, {
+      ...newRowData,
+      // Format date/time if needed
+      scheduleDate: newRowData.scheduleDate || undefined,
+      scheduleTime: newRowData.scheduleTime || undefined
+    }, getAuthHeader());
+
+    if (response.data) {
+      fetchSubmissions();
+      setIsAddingNewRow(false);
+      setNewRowData({
+        name: '',
+        phone: '',
+        intent: '',
+        budget: '',
+        propertyType: '',
+        location: '',
+        scheduleDate: '',
+        scheduleTime: '',
+        contacted: false
+      });
+    }
+  } catch (err) {
+    console.error("Error adding new submission:", err);
+    alert("Error adding new submission: " + (err.response?.data?.message || err.message));
+  }
+};
+const renderAddNewFormmobile = () => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Add New Submission</h3>
+        <button 
+          onClick={() => setIsAddingNewRow(false)}
+          className="text-gray-500 text-2xl"
+        >
+          &times;
+        </button>
+      </div>
+      
+      <div className="space-y-4">
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Name*</label>
+          <input
+            type="text"
+            name="name"
+            value={newRowData.name}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+            placeholder="Enter full name"
+          />
+        </div>
+
+        {/* Phone */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Phone*</label>
+          <input
+            type="tel"
+            name="phone"
+            value={newRowData.phone}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+            placeholder="Enter phone number"
+            inputMode="tel"
+          />
+        </div>
+
+        {/* Intent */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Intent*</label>
+          <select
+            name="intent"
+            value={newRowData.intent}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+          >
+            <option value="">Select intent</option>
+            <option value="Buy">Buy</option>
+            <option value="Rent">Rent</option>
+            <option value="Invest">Invest</option>
+            <option value="Consult">Consult</option>
+          </select>
+        </div>
+
+        {/* Budget */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Budget*</label>
+          <input
+            type="text"
+            name="budget"
+            value={newRowData.budget}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+            placeholder="Enter budget amount"
+            inputMode="decimal"
+          />
+        </div>
+
+        {/* Property Type */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Property Type*</label>
+          <select
+            name="propertyType"
+            value={newRowData.propertyType}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+          >
+            <option value="">Select type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Plot">Plot</option>
+            <option value="Commercial">Commercial</option>
+          </select>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Location*</label>
+          <input
+            type="text"
+            name="location"
+            value={newRowData.location}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm"
+            required
+            placeholder="Enter location"
+          />
+        </div>
+
+        {/* Schedule Date & Time */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Schedule Date</label>
+            <input
+              type="date"
+              name="scheduleDate"
+              value={newRowData.scheduleDate}
+              onChange={handleNewRowInputChange}
+              className="w-full border rounded p-2 text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Schedule Time</label>
+            <input
+              type="time"
+              name="scheduleTime"
+              value={newRowData.scheduleTime}
+              onChange={handleNewRowInputChange}
+              className="w-full border rounded p-2 text-sm"
+            />
+          </div>
+        </div>
+
+        {/* Contacted Status */}
+        <div className="flex items-center pt-2">
+          <input
+            type="checkbox"
+            id="contacted"
+            name="contacted"
+            checked={newRowData.contacted}
+            onChange={(e) => setNewRowData({...newRowData, contacted: e.target.checked})}
+            className="mr-2 h-4 w-4"
+          />
+          <label htmlFor="contacted" className="text-sm font-medium">
+            Mark as contacted
+          </label>
+        </div>
+      </div>
+
+      <div className="flex justify-end gap-2 mt-6 sticky bottom-0 bg-white py-2">
+        <button
+          onClick={() => setIsAddingNewRow(false)}
+          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleAddNewRow}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+          disabled={
+            !newRowData.name || 
+            !newRowData.phone || 
+            !newRowData.intent || 
+            !newRowData.budget || 
+            !newRowData.propertyType || 
+            !newRowData.location
+          }
+        >
+          Save Submission
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const renderAddNewForm = () => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Add New Submission</h3>
+        <button 
+          onClick={() => setIsAddingNewRow(false)}
+          className="text-gray-500 hover:text-gray-700 text-2xl"
+          aria-label="Close form"
+        >
+          &times;
+        </button>
+      </div>
+      
+      <div className="space-y-4">
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Name*</label>
+          <input
+            type="text"
+            name="name"
+            value={newRowData.name}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+            placeholder="Enter full name"
+          />
+        </div>
+
+        {/* Phone */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Phone*</label>
+          <input
+            type="tel"
+            name="phone"
+            value={newRowData.phone}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+            placeholder="Enter phone number"
+            inputMode="tel"
+          />
+        </div>
+
+        {/* Intent */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Intent*</label>
+          <select
+            name="intent"
+            value={newRowData.intent}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+          >
+            <option value="">Select intent</option>
+            <option value="Buy">Buy</option>
+            <option value="Rent">Rent</option>
+            <option value="Invest">Invest</option>
+            <option value="Consult">Consult</option>
+          </select>
+        </div>
+
+        {/* Budget */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Budget*</label>
+          <input
+            type="text"
+            name="budget"
+            value={newRowData.budget}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+            placeholder="Enter budget amount"
+            inputMode="decimal"
+          />
+        </div>
+
+        {/* Property Type */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Property Type*</label>
+          <select
+            name="propertyType"
+            value={newRowData.propertyType}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+          >
+            <option value="">Select type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Plot">Plot</option>
+            <option value="Commercial">Commercial</option>
+          </select>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Location*</label>
+          <input
+            type="text"
+            name="location"
+            value={newRowData.location}
+            onChange={handleNewRowInputChange}
+            className="w-full border rounded p-2 text-sm md:text-base"
+            required
+            placeholder="Enter location"
+          />
+        </div>
+
+        {/* Schedule Date & Time - Stacked on mobile, side-by-side on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Schedule Date</label>
+            <input
+              type="date"
+              name="scheduleDate"
+              value={newRowData.scheduleDate}
+              onChange={handleNewRowInputChange}
+              className="w-full border rounded p-2 text-sm md:text-base"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Schedule Time</label>
+            <input
+              type="time"
+              name="scheduleTime"
+              value={newRowData.scheduleTime}
+              onChange={handleNewRowInputChange}
+              className="w-full border rounded p-2 text-sm md:text-base"
+            />
+          </div>
+        </div>
+
+        {/* Contacted Status */}
+        <div className="flex items-center pt-2">
+          <input
+            type="checkbox"
+            id="contacted"
+            name="contacted"
+            checked={newRowData.contacted}
+            onChange={(e) => setNewRowData({...newRowData, contacted: e.target.checked})}
+            className="mr-2 h-4 w-4"
+          />
+          <label htmlFor="contacted" className="text-sm font-medium">
+            Mark as contacted
+          </label>
+        </div>
+      </div>
+
+      {/* Sticky buttons at bottom for mobile */}
+      <div className="flex justify-end gap-2 mt-6 sticky bottom-0 bg-white py-2">
+        <button
+          onClick={() => setIsAddingNewRow(false)}
+          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm md:text-base"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleAddNewRow}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm md:text-base"
+          disabled={
+            !newRowData.name || 
+            !newRowData.phone || 
+            !newRowData.intent || 
+            !newRowData.budget || 
+            !newRowData.propertyType || 
+            !newRowData.location
+          }
+        >
+          Save Submission
+        </button>
+      </div>
+    </div>
+  </div>
+);
 
   const renderControls = () => (
     <div className="mb-4 p-4 bg-gray-50 rounded-lg">
@@ -268,15 +674,27 @@ const ChatSubmissionsTable = ({
           </select>
         </div>
       </div>
+      <div className="flex justify-end mt-4">
+  <button
+    onClick={() => setIsAddingNewRow(true)}
+    className="flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+  >
+    <FiPlus className="mr-2" /> Add New Submission
+  </button>
+</div>
     </div>
   );
+
 
   const isMobile = window.innerWidth < 640;
 
   if (isMobile) {
+    
     return (
+      
       <div className="space-y-4">
         {renderControls()}
+        {isAddingNewRow && renderAddNewForm()}
         {sortedSubmissions.map((entry, i) => (
           <div key={i} className={`border${
                   entry.contacted ? "border-green-600 " : "bg-gray-200"
@@ -377,6 +795,8 @@ const ChatSubmissionsTable = ({
 
   return (
     <>
+
+  {isAddingNewRow && renderAddNewForm()}
       {renderControls()}
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-300 text-xs sm:text-sm">
