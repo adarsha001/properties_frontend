@@ -1,4 +1,5 @@
 const BASE_URL = "https://sppropertiesbengaluru.com/api";
+// const BASE_URL = "http://localhost:5000/api";
 
 const API = {
   // Authentication
