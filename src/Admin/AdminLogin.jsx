@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import API from "./api"; // Adjust the path as needed
+import API from "../api"; // Adjust the path as needed
 
 const AdminLogin = () => {
   const [password, setPassword] = useState("garudan@123");

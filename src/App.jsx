@@ -13,8 +13,8 @@ import GuaranteeSection from "./GuaranteeSection";
 import AboutUs from "./AboutUs";
 import Marquee from "./Marquee";
 import ChatBot from "./Chatbox";
-import AdminPanel from "./AdminPanel"; // ✅ Create this
-import AdminLogin from "./AdminLogin"; // ✅ Optional login screen
+import AdminPanel from "./Admin/AdminPanel"; // ✅ Create this
+import AdminLogin from "./Admin/AdminLogin"; // ✅ Optional login screen
 import NotFoundPage from "./NotFoundPage";
 import Navbar from "./Navbar";
 import Animatedsliders from "./Animatedsliders";
