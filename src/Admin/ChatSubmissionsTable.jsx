@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API from '../api';
 import { 
   FiCopy, FiCheckCircle, FiTrash2, FiLogOut, FiPlus, 
-  FiEdit, FiSearch, FiFilter, FiArrowUp, FiArrowDown, FiPhone 
+  FiEdit, FiSearch, FiFilter, FiArrowUp, FiArrowDown, FiPhone,
+  FiMic, FiMicOff
 } from "react-icons/fi";
 
 const ChatSubmissionsTable = ({ 
@@ -41,6 +42,65 @@ const ChatSubmissionsTable = ({
     contacted: null,
     location: null
   });
+  const [isListening, setIsListening] = useState(false);
+  const [recognition, setRecognition] = useState(null);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognizer = new SpeechRecognition();
+        recognizer.continuous = true;
+        recognizer.interimResults = true;
+        recognizer.lang = 'en-US';
+
+        recognizer.onresult = (event) => {
+          const transcript = Array.from(event.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+          
+          setCallDetailForm(prev => ({
+            ...prev,
+            description: prev.description + ' ' + transcript
+          }));
+        };
+
+        recognizer.onerror = (event) => {
+          console.error('Speech recognition error', event.error);
+          setIsListening(false);
+        };
+
+        recognizer.onend = () => {
+          if (isListening) {
+            recognizer.start();
+          }
+        };
+
+        setRecognition(recognizer);
+      } else {
+        console.warn('Speech Recognition API not supported in this browser');
+      }
+    }
+
+    return () => {
+      if (recognition) {
+        recognition.stop();
+      }
+    };
+  }, []);
+
+  // Handle start/stop listening
+  const toggleListening = () => {
+    if (isListening) {
+      recognition.stop();
+      setIsListening(false);
+    } else {
+      recognition.start();
+      setIsListening(true);
+    }
+  };
 
   // Get unique locations for filter dropdown
   const uniqueLocations = [...new Set(submissions.map(item => item.location))];
@@ -55,7 +115,6 @@ const ChatSubmissionsTable = ({
       .get(`${API.callDetails}/submission/${submissionId}`, getAuthHeader())
       .then((res) => {
         setCallDetails(Array.isArray(res.data) ? res.data : []);
-        console.log(res.data)
       })
       .catch((err) => {
         console.error("Error fetching call details:", err);
@@ -127,14 +186,11 @@ const ChatSubmissionsTable = ({
       });
   };
 
- const handleAddCallDetail = (submission) => {
-  console.log("Before state update - submission:", submission);
-  setSelectedSubmission(submission);
-  console.log("After setting submission");
-  fetchCallDetails(submission._id);
-  setIsModalOpen(true);
-  console.log("After setting modal open");
-};
+  const handleAddCallDetail = (submission) => {
+    setSelectedSubmission(submission);
+    fetchCallDetails(submission._id);
+    setIsModalOpen(true);
+  };
 
   const deleteCallDetail = (id) => {
     if (!id) {
@@ -148,7 +204,6 @@ const ChatSubmissionsTable = ({
       .then(() => {
         if (selectedSubmission) {
           fetchCallDetails(selectedSubmission._id);
-          console.log( "hello",selectedSubmission._id)
         }
         fetchSubmissions();
       })
@@ -506,74 +561,122 @@ const ChatSubmissionsTable = ({
   const isMobile = window.innerWidth < 640;
 
   if (isMobile) {
-  return (
-    <div className="space-y-4">
-      {renderControls()}
-      {isAddingNewRow && renderAddNewForm()}
-      
-      {/* Add this modal rendering inside the mobile view */}
-      {isModalOpen && selectedSubmission && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-4 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            {/* Modal content - same as desktop but adjusted for mobile */}
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">
-                Call Details for {selectedSubmission.name}
-              </h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
-              >
-                &times;
-              </button>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Status</label>
-                <select
-                  value={callDetailForm.buyingStatus}
-                  onChange={(e) => setCallDetailForm({...callDetailForm, buyingStatus: e.target.value})}
-                  className="w-full border rounded p-2"
+    return (
+      <div className="space-y-4">
+        {renderControls()}
+        {isAddingNewRow && renderAddNewForm()}
+        
+        {isModalOpen && selectedSubmission && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg p-4 w-full max-w-md max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">
+                  Call Details for {selectedSubmission.name}
+                </h3>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="text-gray-500 hover:text-gray-700 text-2xl"
                 >
-                  <option value="high">High</option>
-                  <option value="mid">Medium</option>
-                  <option value="low">Low</option>
-                </select>
+                  &times;
+                </button>
               </div>
               
-              <div>
-                <label className="block text-sm font-medium mb-1">Follow-up</label>
-                <input
-                  type="datetime-local"
-                  value={callDetailForm.followUpDate}
-                  onChange={(e) => setCallDetailForm({...callDetailForm, followUpDate: e.target.value})}
-                  className="w-full border rounded p-2"
-                />
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Status</label>
+                  <select
+                    value={callDetailForm.buyingStatus}
+                    onChange={(e) => setCallDetailForm({...callDetailForm, buyingStatus: e.target.value})}
+                    className="w-full border rounded p-2"
+                  >
+                    <option value="high">High</option>
+                    <option value="mid">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium mb-1">Follow-up</label>
+                  <input
+                    type="datetime-local"
+                    value={callDetailForm.followUpDate}
+                    onChange={(e) => setCallDetailForm({...callDetailForm, followUpDate: e.target.value})}
+                    className="w-full border rounded p-2"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium mb-1">Notes</label>
+                  <div className="relative">
+                    <textarea
+                      value={callDetailForm.description}
+                      onChange={(e) => setCallDetailForm({...callDetailForm, description: e.target.value})}
+                      className="w-full border rounded p-2 h-24 pr-10"
+                      placeholder="Call notes..."
+                    />
+                    <button
+                      onClick={toggleListening}
+                      className={`absolute right-2 bottom-2 p-1 rounded-full ${
+                        isListening ? 'bg-red-500 text-white' : 'bg-gray-200'
+                      }`}
+                      title={isListening ? "Stop recording" : "Start recording"}
+                    >
+                      {isListening ? <FiMicOff size={16} /> : <FiMic size={16} />}
+                    </button>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={submitCallDetail}
+                  className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Add Call Detail
+                </button>
               </div>
               
-              <div>
-                <label className="block text-sm font-medium mb-1">Notes</label>
-                <textarea
-                  value={callDetailForm.description}
-                  onChange={(e) => setCallDetailForm({...callDetailForm, description: e.target.value})}
-                  className="w-full border rounded p-2 h-24"
-                  placeholder="Call notes..."
-                />
+              <div className="mt-6">
+                <h4 className="font-medium mb-2">Previous Call Details</h4>
+                {callDetails.length === 0 ? (
+                  <p className="text-gray-500 text-center py-4">No call details yet.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {callDetails.map((detail, idx) => (
+                      <div key={idx} className="border rounded p-3 bg-gray-50">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <span className={`font-medium ${
+                              detail.buyingStatus === 'high' ? 'text-green-600' :
+                              detail.buyingStatus === 'mid' ? 'text-yellow-600' : 'text-red-600'
+                            }`}>
+                              Call {idx + 1}: {detail.buyingStatus.toUpperCase()}
+                            </span>
+                            <div className="text-sm">
+                              <span className="font-medium">Follow-up:</span> {new Date(detail.followUpDate).toLocaleString()}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => deleteCallDetail(detail._id)}
+                            className="text-red-500 hover:text-red-700"
+                            title="Delete call detail"
+                          >
+                            <FiTrash2 size={16}/>
+                          </button>
+                        </div>
+                        <div className="mt-2 whitespace-pre-wrap text-sm">
+                          {detail.description}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          Added: {new Date(detail.createdAt).toLocaleString()}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              
-              <button
-                onClick={submitCallDetail}
-                className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Add Call Detail
-              </button>
             </div>
-            
-           
           </div>
-        </div>
-      )}
+        )}
+        
         {sortedSubmissions.map((entry, i) => (
           <div key={i} className={`border ${
             entry.contacted ? "border-green-600" : "border-gray-200"
@@ -663,18 +766,17 @@ const ChatSubmissionsTable = ({
                 {entry.contacted ? "✓ Contacted" : "Mark Contact"}
               </button>
               <div className="flex gap-2">
-            <button
-  onClick={(e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("Opening call details for:", entry._id);
-    handleAddCallDetail(entry);
-  }}
-  className="px-3 py-1.5 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors"
-  title="Add call details"
->
-  <FiEdit className="inline mr-1" /> Add Call
-</button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleAddCallDetail(entry);
+                  }}
+                  className="px-3 py-1.5 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors"
+                  title="Add call details"
+                >
+                  <FiEdit className="inline mr-1" /> Add Call
+                </button>
                 <button
                   onClick={() => deleteSubmission(entry._id)}
                   className="px-3 py-1.5 bg-red-100 text-red-600 rounded text-sm"
@@ -859,7 +961,6 @@ const ChatSubmissionsTable = ({
           </tbody>
         </table>
       </div>
-
  {isModalOpen && selectedSubmission && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
     <div className="bg-white rounded-lg p-4 w-full max-w-4xl max-h-[90vh] overflow-y-auto">

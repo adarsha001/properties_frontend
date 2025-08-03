@@ -246,7 +246,6 @@ if (isMobile) {
             <div><span className="font-medium">ID:</span> {i+1}</div>
             <div className="flex justify-between items-start">
               <span className="font-medium">Name:</span> {entry.name}
-            
             </div>
             <div className="col-span-2 flex items-center">
               <span className="font-medium">Phone:</span> {entry.phone}
@@ -311,13 +310,14 @@ if (isMobile) {
           {/* Action Buttons */}
           <div className="flex justify-between mt-4 pt-3 border-t">
             <button
-                onClick={() => toggleMarked(entry._id, entry.marked)}
-                className={`px-2 py-1 text-xs rounded ${
-                  entry.marked ? "bg-green-600 text-white" : "bg-gray-200"
-                }`}
-              >
-                {entry.marked ? "✓Contacted" : "Mark as Contacted"}
-              </button> <button
+              onClick={() => toggleMarked(entry._id, entry.marked)}
+              className={`px-2 py-1 text-xs rounded ${
+                entry.marked ? "bg-green-600 text-white" : "bg-gray-200"
+              }`}
+            >
+              {entry.marked ? "✓Contacted" : "Mark as Contacted"}
+            </button>
+            <button
               onClick={() => deleteContact(entry._id)}
               className="px-4 py-2 bg-red-100 text-red-600 rounded"
             >
@@ -325,12 +325,69 @@ if (isMobile) {
             </button>
              
             <button
-              onClick={() => handleAddCallDetail(entry)}
+              onClick={() => setExpandedContactId(expandedContactId === entry._id ? null : entry._id)}
               className="px-4 py-2 bg-blue-100 text-blue-600 rounded"
             >
-              <FiEdit className="inline mr-1"/> Add Call
+              <FiEdit className="inline mr-1"/> {expandedContactId === entry._id ? 'Cancel' : 'Add Call'}
             </button>
           </div>
+
+          {/* Add Call Form - shown when expanded */}
+          {expandedContactId === entry._id && (
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-medium mb-3">Add Call Details</h4>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Buying Status</label>
+                  <select
+                    value={callDetailForm.buyingStatus}
+                    onChange={(e) => setCallDetailForm({...callDetailForm, buyingStatus: e.target.value})}
+                    className="w-full border rounded p-2"
+                  >
+                    <option value="high">High</option>
+                    <option value="mid">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Follow-up Date</label>
+                  <input
+                    type="datetime-local"
+                    value={callDetailForm.followUpDate}
+                    onChange={(e) => setCallDetailForm({...callDetailForm, followUpDate: e.target.value})}
+                    className="w-full border rounded p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Description</label>
+                  <textarea
+                    value={callDetailForm.description}
+                    onChange={(e) => setCallDetailForm({...callDetailForm, description: e.target.value})}
+                    className="w-full border rounded p-2 h-24"
+                    placeholder="Enter call notes..."
+                  />
+                </div>
+                <div className="flex justify-end space-x-2">
+                  <button
+                    onClick={() => setExpandedContactId(null)}
+                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedSubmission(entry);
+                      submitCallDetail();
+                      setExpandedContactId(null);
+                    }}
+                    className="px-4 py-2 bg-blue-500 text-white rounded"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
