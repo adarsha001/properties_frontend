@@ -5,25 +5,31 @@ import API from "../api";
 import ChatSubmissionsTable from "./ChatSubmissionsTable";
 import { FiCopy, FiCheckCircle, FiTrash2, FiLogOut, FiPlus, FiEdit } from "react-icons/fi";
 import ContactSubmissionsTable from "./ContactSubmissionsTable";
+import UserManagement from "./UserManagement";
 const AdminPanel = () => {
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   const [submissions, setSubmissions] = useState([]);
   const [contactSubmissions, setContactSubmissions] = useState([]);
   const [leads, setLeads] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    if (!token) {
-      navigate("/admin-login");
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    if (!token || !user) {
+      navigate("/admin/login");
     } else {
+      setCurrentUser(user);
       fetchSubmissions();
       fetchContactSubmissions();
       fetchLeads();
     }
   }, [navigate]);
 
+
   const getAuthHeader = () => ({
-    headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });
 
   const fetchSubmissions = () => {
@@ -86,7 +92,7 @@ const AdminPanel = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
+    localStorage.removeItem("token");
     navigate("/admin/login");
   };
 const isMobile = window.innerWidth < 640;
@@ -101,6 +107,7 @@ const isMobile = window.innerWidth < 640;
           <FiLogOut /> Logout
         </button>
       </div>
+
 
       {/* Chat Submissions Section */}
       <div className="mb-12">
@@ -203,6 +210,15 @@ const isMobile = window.innerWidth < 640;
           </div>
         )}
       </div>
+      {currentUser?.role === 'admin' && (
+        <div className="mb-12">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">User Management</h2>
+          <UserManagement 
+            getAuthHeader={getAuthHeader} 
+            currentUser={currentUser}
+          />
+        </div>
+      )}
     </div>
   );
 };
