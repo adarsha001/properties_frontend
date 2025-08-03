@@ -44,70 +44,43 @@ const ChatSubmissionsTable = ({
   });
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
-  const [speechSupported, setSpeechSupported] = useState(false);
 
-  // Initialize speech recognition with cross-browser support
+  // Initialize speech recognition
   useEffect(() => {
-    const initSpeechRecognition = () => {
-      const SpeechRecognition = window.SpeechRecognition || 
-                               window.webkitSpeechRecognition ||
-                               window.mozSpeechRecognition || 
-                               window.msSpeechRecognition;
-      
-      if (!SpeechRecognition) {
-        console.warn('Speech Recognition API not supported in this browser');
-        setSpeechSupported(false);
-        return;
-      }
-
-      const recognizer = new SpeechRecognition();
-      recognizer.continuous = true;
-      recognizer.interimResults = true;
-      recognizer.lang = 'en-US';
-
-      recognizer.onresult = (event) => {
-        const transcript = Array.from(event.results)
-          .map(result => result[0])
-          .map(result => result.transcript)
-          .join('');
-        
-        setCallDetailForm(prev => ({
-          ...prev,
-          description: prev.description + (prev.description ? ' ' : '') + transcript
-        }));
-      };
-
-      recognizer.onerror = (event) => {
-        console.error('Speech recognition error', event.error);
-        setIsListening(false);
-        
-        if (event.error === 'not-allowed') {
-          alert('Microphone access was denied. Please allow microphone access to use speech recognition.');
-        }
-      };
-
-      recognizer.onend = () => {
-        if (isListening) {
-          recognizer.start();
-        }
-      };
-
-      setRecognition(recognizer);
-      setSpeechSupported(true);
-    };
-
     if (typeof window !== 'undefined') {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-          .then(() => {
-            initSpeechRecognition();
-          })
-          .catch(err => {
-            console.error('Microphone access denied:', err);
-            initSpeechRecognition(); // Still try to initialize without permission
-          });
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognizer = new SpeechRecognition();
+        recognizer.continuous = true;
+        recognizer.interimResults = true;
+        recognizer.lang = 'en-US';
+
+        recognizer.onresult = (event) => {
+          const transcript = Array.from(event.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+          
+          setCallDetailForm(prev => ({
+            ...prev,
+            description: prev.description + ' ' + transcript
+          }));
+        };
+
+        recognizer.onerror = (event) => {
+          console.error('Speech recognition error', event.error);
+          setIsListening(false);
+        };
+
+        recognizer.onend = () => {
+          if (isListening) {
+            recognizer.start();
+          }
+        };
+
+        setRecognition(recognizer);
       } else {
-        initSpeechRecognition();
+        console.warn('Speech Recognition API not supported in this browser');
       }
     }
 
@@ -118,32 +91,19 @@ const ChatSubmissionsTable = ({
     };
   }, []);
 
+  // Handle start/stop listening
   const toggleListening = () => {
-    if (!recognition) {
-      alert('Speech recognition is not available in your browser');
-      return;
-    }
-
     if (isListening) {
       recognition.stop();
       setIsListening(false);
     } else {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-          .then(() => {
-            recognition.start();
-            setIsListening(true);
-          })
-          .catch(err => {
-            console.error('Microphone access denied:', err);
-            alert('Please allow microphone access to use speech recognition');
-          });
-      } else {
-        recognition.start();
-        setIsListening(true);
-      }
+      recognition.start();
+      setIsListening(true);
     }
   };
+
+  // Get unique locations for filter dropdown
+  const uniqueLocations = [...new Set(submissions.map(item => item.location))];
 
   const handleNewRowInputChange = (e) => {
     const { name, value } = e.target;
@@ -254,6 +214,7 @@ const ChatSubmissionsTable = ({
     setExpandedChatId(expandedChatId === chatId ? null : chatId);
   };
 
+  // Search and filter functionality
   const filteredSubmissions = submissions.filter(submission => {
     const matchesSearch = 
       submission.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -272,6 +233,7 @@ const ChatSubmissionsTable = ({
     return matchesSearch && matchesFilters;
   });
 
+  // Sort functionality
   const sortedSubmissions = [...filteredSubmissions].sort((a, b) => {
     if (!sortConfig.key) return 0;
 
@@ -360,21 +322,6 @@ const ChatSubmissionsTable = ({
       alert("Error adding new submission: " + (err.response?.data?.message || err.message));
     }
   };
-
-  const renderMicrophoneButton = () => (
-    <button
-      onClick={toggleListening}
-      className={`p-2 rounded-full ${
-        isListening 
-          ? 'bg-red-500 text-white animate-pulse' 
-          : 'bg-gray-200 hover:bg-gray-300'
-      }`}
-      title={isListening ? "Stop recording" : "Start recording"}
-      type="button"
-    >
-      {isListening ? <FiMicOff size={18} /> : <FiMic size={18} />}
-    </button>
-  );
 
   const renderAddNewForm = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -594,7 +541,7 @@ const ChatSubmissionsTable = ({
             onChange={(e) => handleFilterChange('location', e.target.value)}
           >
             <option value="all">All Locations</option>
-            {[...new Set(submissions.map(item => item.location))].map(location => (
+            {uniqueLocations.map(location => (
               <option key={location} value={location}>{location}</option>
             ))}
           </select>
@@ -611,7 +558,7 @@ const ChatSubmissionsTable = ({
     </div>
   );
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const isMobile = window.innerWidth < 640;
 
   if (isMobile) {
     return (
@@ -667,11 +614,15 @@ const ChatSubmissionsTable = ({
                       className="w-full border rounded p-2 h-24 pr-10"
                       placeholder="Call notes..."
                     />
-                    {speechSupported && (
-                      <div className="absolute right-2 bottom-2">
-                        {renderMicrophoneButton()}
-                      </div>
-                    )}
+                    <button
+                      onClick={toggleListening}
+                      className={`absolute right-2 bottom-2 p-1 rounded-full ${
+                        isListening ? 'bg-red-500 text-white' : 'bg-gray-200'
+                      }`}
+                      title={isListening ? "Stop recording" : "Start recording"}
+                    >
+                      {isListening ? <FiMicOff size={16} /> : <FiMic size={16} />}
+                    </button>
                   </div>
                 </div>
                 
@@ -1010,122 +961,126 @@ const ChatSubmissionsTable = ({
           </tbody>
         </table>
       </div>
+ {isModalOpen && selectedSubmission && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-lg p-4 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4 sticky top-0 bg-white py-2">
+        <h3 className="text-lg md:text-xl font-semibold">
+          Call Details for {selectedSubmission.name} ({selectedSubmission.phone})
+        </h3>
+        <button
+          onClick={() => setIsModalOpen(false)}
+          className="text-gray-500 hover:text-gray-700 text-2xl"
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+      </div>
 
-      {isModalOpen && selectedSubmission && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-4 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-4 sticky top-0 bg-white py-2">
-              <h3 className="text-lg md:text-xl font-semibold">
-                Call Details for {selectedSubmission.name} ({selectedSubmission.phone})
-              </h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
-                aria-label="Close modal"
-              >
-                &times;
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <h4 className="font-medium mb-2 text-base md:text-lg">Add New Call Detail</h4>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                <div className="md:col-span-1">
-                  <label className="block text-sm md:text-base font-medium mb-1">Buying Status</label>
-                  <select
-                    value={callDetailForm.buyingStatus}
-                    onChange={(e) => setCallDetailForm({...callDetailForm, buyingStatus: e.target.value})}
-                    className="w-full border rounded p-2 text-sm md:text-base"
-                  >
-                    <option value="high">High</option>
-                    <option value="mid">Medium</option>
-                    <option value="low">Low</option>
-                  </select>
-                </div>
-                
-                <div className="md:col-span-2">
-                  <label className="block text-sm md:text-base font-medium mb-1">Follow-up Date</label>
-                  <input
-                    type="datetime-local"
-                    value={callDetailForm.followUpDate}
-                    onChange={(e) => setCallDetailForm({...callDetailForm, followUpDate: e.target.value})}
-                    className="w-full border rounded p-2 text-sm md:text-base"
-                  />
-                </div>
-              </div>
-              
-              <div className="mb-4">
-                <label className="block text-sm md:text-base font-medium mb-1">Description</label>
-                <div className="relative">
-                  <textarea
-                    value={callDetailForm.description}
-                    onChange={(e) => setCallDetailForm({...callDetailForm, description: e.target.value})}
-                    className="w-full border rounded p-2 h-32 pr-12"
-                    placeholder="Call notes... (or click the mic to dictate)"
-                  />
-                  {speechSupported && (
-                    <div className="absolute right-2 bottom-2">
-                      {renderMicrophoneButton()}
-                    </div>
-                  )}
-                </div>
-              </div>
-              
-              <button
-                onClick={submitCallDetail}
-                className="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm md:text-base"
-              >
-                Add Call Detail
-              </button>
-            </div>
-
-            <div>
-              <h4 className="font-medium mb-2 text-base md:text-lg">Previous Call Details</h4>
-              
-              {callDetails.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No call details yet.</p>
-              ) : (
-                <div className="space-y-3">
-                  {callDetails.map((detail, i) => (
-                    <div key={i} className="border rounded p-3 md:p-4 bg-gray-50">
-                      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
-                        <div className="flex-1">
-                          <span className={`font-medium text-sm md:text-base ${
-                            detail.buyingStatus === 'high' ? 'text-green-600' :
-                            detail.buyingStatus === 'mid' ? 'text-yellow-600' : 'text-red-600'
-                          }`}>
-                            Call {i + 1}: {detail.buyingStatus.toUpperCase()}
-                          </span>
-                          <div className="text-xs md:text-sm text-gray-600 mt-1">
-                            <span className="font-medium">Follow-up:</span> {new Date(detail.followUpDate).toLocaleString()}
-                          </div>
-                        </div>
-                        
-                        <button
-                          onClick={() => deleteCallDetail(detail._id)}
-                          className="text-red-500 hover:text-red-700 self-end md:self-auto"
-                          title="Delete call detail"
-                        >
-                          <FiTrash2 size={16} />
-                        </button>
-                      </div>
-                      
-                      <p className="mt-2 whitespace-pre-wrap text-xs md:text-sm">
-                        {detail.description}
-                      </p>
-                      
-                      <p className="text-xs text-gray-500 mt-2">
-                        Added on: {new Date(detail.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+      {/* Add New Call Section */}
+      <div className="mb-6">
+        <h4 className="font-medium mb-2 text-base md:text-lg">Add New Call Detail</h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+          {/* Buying Status */}
+          <div className="md:col-span-1">
+            <label className="block text-sm md:text-base font-medium mb-1">Buying Status</label>
+            <select
+              value={callDetailForm.buyingStatus}
+              onChange={(e) => setCallDetailForm({...callDetailForm, buyingStatus: e.target.value})}
+              className="w-full border rounded p-2 text-sm md:text-base"
+            >
+              <option value="high">High</option>
+              <option value="mid">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          
+          {/* Follow-up Date */}
+          <div className="md:col-span-2">
+            <label className="block text-sm md:text-base font-medium mb-1">Follow-up Date</label>
+            <input
+              type="datetime-local"
+              value={callDetailForm.followUpDate}
+              onChange={(e) => setCallDetailForm({...callDetailForm, followUpDate: e.target.value})}
+              className="w-full border rounded p-2 text-sm md:text-base"
+            />
           </div>
         </div>
-      )}
+        
+        {/* Description */}
+        <div className="mb-4">
+          <label className="block text-sm md:text-base font-medium mb-1">Description</label>
+          <textarea
+            value={callDetailForm.description}
+            onChange={(e) => setCallDetailForm({...callDetailForm, description: e.target.value})}
+            className="w-full border rounded p-2 h-24 text-sm md:text-base"
+            placeholder="Enter call notes..."
+          />
+        </div>
+        
+        {/* Submit Button */}
+        <button
+          onClick={submitCallDetail}
+          className="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm md:text-base"
+        >
+          Add Call Detail
+        </button>
+      </div>
+
+      {/* Previous Call Details Section */}
+      <div>
+        <h4 className="font-medium mb-2 text-base md:text-lg">Previous Call Details</h4>
+        
+        {selectedSubmission.callDetails.length === 0 ? (
+          <p className="text-gray-500 text-center py-4">No call details yet.</p>
+        ) : (
+          <div className="space-y-3">
+            {selectedSubmission.callDetails.map((detail, i) => (
+              <div key={i} className="border rounded p-3 md:p-4 bg-gray-50">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
+                  {/* Status and Follow-up */}
+                  <div className="flex-1">
+                    <span className={`font-medium text-sm md:text-base ${
+                      detail.buyingStatus === 'high' ? 'text-green-600' :
+                      detail.buyingStatus === 'mid' ? 'text-yellow-600' : 'text-red-600'
+                    }`}>
+                      Call {i + 1}: {detail.buyingStatus.toUpperCase()}
+                    </span>
+                    <div className="text-xs md:text-sm text-gray-600 mt-1">
+                      <span className="font-medium">Follow-up:</span> {new Date(detail.followUpDate).toLocaleString()}
+                    </div>
+                  </div>
+                  
+                  {/* Delete Button */}
+                  <button
+                    onClick={() => deleteCallDetail(detail._id)}
+                    className="text-red-500 hover:text-red-700 self-end md:self-auto"
+                    title="Delete call detail"
+                  >
+                    <FiTrash2 size={16} />
+                  </button>
+                </div>
+                
+                {/* Description */}
+                <p className="mt-2 whitespace-pre-wrap text-xs md:text-sm">
+                  {detail.description}
+                </p>
+                
+                {/* Timestamp */}
+                <p className="text-xs text-gray-500 mt-2">
+                  Added on: {new Date(detail.createdAt).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+       
     </>
   );
 };
