@@ -117,7 +117,7 @@ const Chatbox = () => {
 
   try {
     console.log('Submitting:', formData);
-    const response = await axios.post(API.chat, formData, {
+    const response = await axios.post(API.chatbot, formData, {
       headers: {
         'Content-Type': 'application/json'
       }

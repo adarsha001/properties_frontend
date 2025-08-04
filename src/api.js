@@ -6,8 +6,9 @@ const API = {
   login: `${BASE_URL}/auth/login`,
 
   // Chat Submissions
-  chat:`${BASE_URL}/chat/bot`,
-  chatSubmissions: `${BASE_URL}/chat`,
+  chat: `${BASE_URL}/chat`,
+  chatBot: `${BASE_URL}/chat/bot`,
+
   chatById: (id) => `${BASE_URL}/chat/${id}`,
   chatCallDetails: (chatId) => `${BASE_URL}/chat/${chatId}/call-details`,
   // Contact Submissions

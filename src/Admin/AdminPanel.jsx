@@ -6,6 +6,7 @@ import ChatSubmissionsTable from "./ChatSubmissionsTable";
 import { FiCopy, FiCheckCircle, FiTrash2, FiLogOut, FiPlus, FiEdit } from "react-icons/fi";
 import ContactSubmissionsTable from "./ContactSubmissionsTable";
 import UserManagement from "./UserManagement";
+import AdminAceess from "./AdminAceess";
 const AdminPanel = () => {
    const navigate = useNavigate();
   const [submissions, setSubmissions] = useState([]);
@@ -34,7 +35,7 @@ const AdminPanel = () => {
 
   const fetchSubmissions = () => {
     axios
-      .get(API.chatSubmissions, getAuthHeader())
+      .get(API.chat, getAuthHeader())
       .then((res) => setSubmissions(res.data))
       .catch(() => {
         alert("Session expired. Please login again.");
@@ -219,6 +220,8 @@ const isMobile = window.innerWidth < 640;
           />
         </div>
       )}
+
+      <AdminAceess/>
     </div>
   );
 };
