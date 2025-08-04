@@ -110,7 +110,7 @@ const MainSite = () => {
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const darkBorder = bgChanged ? "" : "";
   return (
-    <div className={`${darkBg} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
+    <div  style={{ fontFamily: 'Montserrat, sans-serif' }} className={`${darkBg} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
       {/* Theme Toggle */}
       <button
         onClick={() => setBgChanged(!bgChanged)}

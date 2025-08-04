@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, Info, Phone } from 'lucide-react';
 
 const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,62 +11,39 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   const mobileMenuRef = useRef(null);
   const animationRef = useRef(null);
 
-  // Add links to the ref array
   const addToLinksRef = (el) => {
     if (el && !linksRef.current.includes(el)) {
       linksRef.current.push(el);
     }
   };
 
-  // Desktop nav animation
   useEffect(() => {
-    // Only animate if all refs are available
     if (navRef.current && logoRef.current && linksRef.current.length > 0) {
       animationRef.current = gsap.timeline()
-        .fromTo(navRef.current,
-          { y: -20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }
-        )
-        .fromTo(logoRef.current,
-          { x: -20, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.3 },
-          "-=0.1"
-        )
-        .fromTo(linksRef.current,
-          { y: 10, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.15
-          },
-          "-=0.3"
-        );
+        .fromTo(navRef.current, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" })
+        .fromTo(logoRef.current, { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3 }, "-=0.1")
+        .fromTo(linksRef.current, { y: 10, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.15
+        }, "-=0.3");
     }
 
     return () => {
-      if (animationRef.current) {
-        animationRef.current.kill();
-      }
+      if (animationRef.current) animationRef.current.kill();
     };
   }, []);
 
-  // Mobile menu animation
   useEffect(() => {
     if (isOpen && mobileMenuRef.current) {
       gsap.fromTo(mobileMenuRef.current,
         { y: -20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.out"
-        }
+        { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
       );
     }
   }, [isOpen]);
 
-  // Scroll to top for Home
   const scrollToTop = () => {
     gsap.to(window, {
       duration: 1.5,
@@ -80,50 +57,30 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40">
-      <div 
-        ref={navRef} 
-        className="max-w-7xl mx-auto px-4 md:py-12 py-6 mt-5 flex justify-between  items-center h-20"
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40 font-montserrat">
+      <div
+        ref={navRef}
+        className="max-w-7xl mx-auto px-4 md:py-12 py-6 mt-5 flex justify-between items-center h-20"
       >
-        <div className="flex items-center space-x-2">
-          <Link to="/" className="hover:underline" ref={logoRef}>
-            <img 
-              src="../../file_000000000af061f79f4fd1c4d7592afd.png" 
-              alt="SP Properties Logo" 
-              className="w-32 h-20" 
-              onClick={scrollToTop}
-            />
-          </Link>
-        </div>
+        <Link to="/" className="hover:underline" ref={logoRef}>
+          <img
+            src="../../file_000000000af061f79f4fd1c4d7592afd.png"
+            alt="SP Properties Logo"
+            className="w-32 h-20"
+            onClick={scrollToTop}
+          />
+        </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex space-x-6">
-          <button 
-            onClick={scrollToTop} 
-            className="hover:text-teal-400"
-            ref={addToLinksRef}
-          >
-            Home
+        <div className="hidden md:flex space-x-6 text-lg font-semibold text-gray-800">
+          <button onClick={scrollToTop} className="hover:text-teal-400 flex items-center gap-2" ref={addToLinksRef}>
+            <Home size={18} /> Home
           </button>
-          <button 
-            onClick={() => {
-              scrollToAboutUs();
-              setIsOpen(false);
-            }} 
-            className="hover:text-teal-400"
-            ref={addToLinksRef}
-          >
-            About
+          <button onClick={() => { scrollToAboutUs(); setIsOpen(false); }} className="hover:text-teal-400 flex items-center gap-2" ref={addToLinksRef}>
+            <Info size={18} /> About
           </button>
-          <button 
-            onClick={() => {
-              scrollToContact();
-              setIsOpen(false);
-            }} 
-            className="hover:text-teal-400"
-            ref={addToLinksRef}
-          >
-            Contact
+          <button onClick={() => { scrollToContact(); setIsOpen(false); }} className="hover:text-teal-400 flex items-center gap-2" ref={addToLinksRef}>
+            <Phone size={18} /> Contact
           </button>
         </div>
 
@@ -141,29 +98,14 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
           ref={mobileMenuRef}
           className="absolute top-full left-0 w-full bg-white shadow-md md:hidden space-y-2 px-4 py-3"
         >
-          <button 
-            onClick={scrollToTop} 
-            className="block text-gray-700 hover:text-teal-500 w-full text-left"
-          >
-            Home
+          <button onClick={scrollToTop} className="flex items-center gap-2 text-gray-700 hover:text-teal-500 w-full text-left">
+            <Home size={18} /> Home
           </button>
-          <button 
-            onClick={() => {
-              scrollToAboutUs();
-              setIsOpen(false);
-            }} 
-            className="block text-gray-700 hover:text-teal-500 w-full text-left"
-          >
-            About
+          <button onClick={() => { scrollToAboutUs(); setIsOpen(false); }} className="flex items-center gap-2 text-gray-700 hover:text-teal-500 w-full text-left">
+            <Info size={18} /> About
           </button>
-          <button 
-            onClick={() => {
-              scrollToContact();
-              setIsOpen(false);
-            }} 
-            className="block text-gray-700 hover:text-teal-500 w-full text-left"
-          >
-            Contact
+          <button onClick={() => { scrollToContact(); setIsOpen(false); }} className="flex items-center gap-2 text-gray-700 hover:text-teal-500 w-full text-left">
+            <Phone size={18} /> Contact
           </button>
         </div>
       )}

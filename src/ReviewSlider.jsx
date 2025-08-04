@@ -29,7 +29,7 @@ const reviewCards = [
     name: "Deekshith dinu",
     role: "Relocation Client",
     image: "../../WhatsApp Image 2025-07-25 at 3.33.54 PM.jpeg",
-    review: "Impressed by The SS Propertys commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free",
+    review: "Impressed by The Sp Properties commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free",
     rating: 5,
   },
 ];

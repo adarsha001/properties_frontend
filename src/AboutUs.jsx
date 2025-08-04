@@ -51,7 +51,7 @@ const AboutUs = ({ bgChanged }) => {
       opacity: 0,
       y: 30,
       duration: 1,
-      delay: 0.6,
+      delay: 0.1,
       ease: "elastic.out(1, 0.5)",
       scrollTrigger: {
         trigger: raviTejaRef.current,
@@ -64,11 +64,11 @@ const AboutUs = ({ bgChanged }) => {
       scale: 0.5,
       opacity: 0,
       duration: 1,
-      delay: 0.9,
+      delay: 0.2,
       ease: "bounce.out",
       scrollTrigger: {
         trigger: statsRef.current,
-        start: "top 65%",
+        start: "top 70%",
       },
     });
 

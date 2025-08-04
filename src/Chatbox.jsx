@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FiX, FiSend, FiCalendar, FiClock, FiUser, FiPhone } from "react-icons/fi";
+import API from "./api";
 
 const Chatbox = () => {
   const [open, setOpen] = useState(false);
@@ -106,37 +107,44 @@ const Chatbox = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async () => {
-    if (!formData.name || !formData.phone) {
-      setMessages((prev) => [
-        ...prev,
-        { from: "siya", text: "Please provide both your name and phone number." },
-      ]);
-      return;
-    }
+ const handleSubmit = async () => {
+  if (!formData.name || !formData.phone) {
+    setMessages(prev => [...prev, 
+      { from: "siya", text: "❌ Please provide both name and phone number" }
+    ]);
+    return;
+  }
 
-    try {
-      setIsTyping(true);
-      await axios.post("https://properties-backend-ok36.onrender.com/api/chat", formData);
-      
-      simulateTyping(() => {
-        setMessages((prev) => [
-          ...prev,
-          { from: "user", text: `${formData.name} - ${formData.phone}` },
-          {
-            from: "siya",
-            text: "✅ Thank you! Our agent will contact you shortly. We appreciate your interest in SP Properties!",
-          },
-        ]);
-        setStep(questions.length + 2);
-      });
-    } catch (err) {
-      setMessages((prev) => [
-        ...prev,
-        { from: "siya", text: "⚠️ Something went wrong! Please try again later." },
-      ]);
-    }
-  };
+  try {
+    console.log('Submitting:', formData);
+    const response = await axios.post(API.chat, formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Response:', response.data);
+
+    setMessages(prev => [
+      ...prev,
+      { from: "user", text: `${formData.name} - ${formData.phone}` },
+      {
+        from: "siya",
+        text: "✅ Thank you! Our agent will contact you shortly.",
+      },
+    ]);
+    setStep(questions.length + 2);
+    
+  } catch (err) {
+    console.error('API Error:', err.response?.data || err.message);
+    setMessages(prev => [
+      ...prev,
+      { 
+        from: "siya", 
+        text: `⚠️ Error: ${err.response?.data?.message || err.message}` 
+      },
+    ]);
+  }
+};
 
   return (
     <>

@@ -1,15 +1,15 @@
-const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
-// const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 const API = {
   // Authentication
   login: `${BASE_URL}/auth/login`,
 
   // Chat Submissions
+  chat:`${BASE_URL}/chat/bot`,
   chatSubmissions: `${BASE_URL}/chat`,
   chatById: (id) => `${BASE_URL}/chat/${id}`,
   chatCallDetails: (chatId) => `${BASE_URL}/chat/${chatId}/call-details`,
-
   // Contact Submissions
   contactSubmissions: `${BASE_URL}/contact`,
   deleteContactById: (id) => `${BASE_URL}/contact/${id}`,
