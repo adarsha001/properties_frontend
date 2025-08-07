@@ -1,5 +1,5 @@
-const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
-// const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 const API = {
   // Authentication
@@ -18,7 +18,7 @@ const API = {
   getContactCallDetails: (contactId) => `${BASE_URL}/contact/${contactId}/call-details`,
   updateContact: (id) => `${BASE_URL}/contact/${id}`,
   markContact: (id) => `${BASE_URL}/contact/${id}/mark`,
-
+  excelUpload: `${BASE_URL}/excel/upload`,
   // Leads
   leads: `${BASE_URL}/leads`,
   leadById: (id) => `${BASE_URL}/leads/${id}`,

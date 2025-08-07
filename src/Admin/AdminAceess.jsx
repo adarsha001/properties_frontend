@@ -55,47 +55,57 @@ const AdminAccess = () => {
         : [...prev, chatId]
     );
   };
+const assignChatsToManager = async () => {
+  if (selectedChats.length === 0 || !selectedManager) {
+    setError('Please select at least one chat and a manager');
+    return;
+  }
 
-  const assignChatsToManager = async () => {
-    if (selectedChats.length === 0 || !selectedManager) {
-      setError('Please select at least one chat and a manager');
-      return;
-    }
+  console.log('Assigning chats:', {
+    chatIds: selectedChats,
+    managerId: selectedManager,
+  });
 
-    try {
-      const response = await axios.put(
-        `${API.chat}/batch-assign`,
-        {
-          chatIds: selectedChats,
-          managerId: selectedManager
+  try {
+    const response = await axios.put(
+      `${API.chat}/batch-assign`,
+      {
+        chatIds: selectedChats,
+        managerId: selectedManager,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        }
-      );
+      }
+    );
 
-      setChats(chats.map(chat =>
+    console.log('Response from backend:', response.data);
+
+    setChats(
+      chats.map((chat) =>
         selectedChats.includes(chat._id)
           ? {
               ...chat,
               assignedTo: selectedManager,
-              assignedToDetails: users.find(u => u._id === selectedManager)
+              assignedToDetails: users.find((u) => u._id === selectedManager),
             }
           : chat
-      ));
+      )
+    );
 
-      setSelectedChats([]);
-      setSelectedManager('');
-      setError(null);
-    } catch (err) {
-      const errorMessage = err.response?.data?.error ||
-        (err.response?.data?.details || 'Failed to assign chats');
-      setError(errorMessage);
-    }
-  };
-
+    setSelectedChats([]);
+    setSelectedManager('');
+    setError(null);
+  } catch (err) {
+    console.error('Assign error:', err?.response?.data);
+    const errorMessage =
+      err.response?.data?.error ||
+      err.response?.data?.details ||
+      'Failed to assign chats';
+    setError(errorMessage);
+  }
+};
   const filteredUnassignedChats = chats.filter(chat =>
     !chat.assignedTo && (
       chat.name?.toLowerCase().includes(chatSearch.toLowerCase()) ||
