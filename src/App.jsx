@@ -136,10 +136,10 @@ const MainSite = () => {
       <UserPromptModal/>
 <Animatedsliders/>
 
-<ProjectsComponent />
 <RealEstateDetails bgChanged={bgChanged} />
-      <ChatBot />
     <PropertyMap bgChanged={bgChanged} />
+<ProjectsComponent />
+      <ChatBot />
       <GuaranteeSection bgChanged={bgChanged} />
        <div ref={aboutUsRef} id="about"> {/* Update this line */}
         <AboutUs bgChanged={bgChanged} />

@@ -114,7 +114,7 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
           <div className="flex space-x-4">
-            {["#", "#", "#"].map((link, index) => (
+            {["#", "https://www.instagram.com/sp_properties__/?igsh=MXA4cmg2MHVtbHZz#", "#"].map((link, index) => (
               <a
                 key={index}
                 href={link}
