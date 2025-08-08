@@ -10,7 +10,7 @@ const projects = [
     id: 3,
     title: "Sri Sai Dwaraka Kammasandra",
     location: "Kammasandra, Near Old Madras Road",
-    image: "../public/Why-High-Resolution-Photos-Help-You-Sell-Your-Property.jpg",
+    image: "../public/WhatsApp Image 2025-08-08 at 12.53.44 PM.jpeg",
     description: "Premium residential layout with modern infrastructure",
     status: "Completed (2023)",
     details: "A well-planned gated community featuring underground drainage, electrical systems, landscaped parks, wide roads, and 24/7 security.",
