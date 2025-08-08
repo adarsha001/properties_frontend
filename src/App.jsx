@@ -22,7 +22,11 @@ import PropertyMap from "./PropertyMap";
 import RealEstateDetails from "./RealEstateDetails";
 import Footer from "./Footer";
 import UserPromptModal from "./UserPromptModal";
-// import PropertyDetails from "./PropertyDetails";
+// import PropertyDetails from "./pages/ProjectDetail";
+// import { ProjectsListing, ProjectDetails } from "./pages/Projects"; 
+
+import ProjectsComponent from './Projects';
+
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -105,8 +109,8 @@ const MainSite = () => {
   const bgColor = bgChanged ? "bg-black" : "bg-white";
   const darkBg =   bgChanged
             ? 'bg-gradient-to-tr from-black to-gray-900'
-            : 'bg-gradient-to-tr from-blue-50 to-blue-100'
-  const darkText = bgChanged ? "text-gray-100" : "text-black";
+            : 'bg-gradient-to-tr from-black to-gray-900'
+  const darkText = bgChanged ? "text-gray-100" : "text-gray-100";
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const darkBorder = bgChanged ? "" : "";
   return (
@@ -159,6 +163,11 @@ const App = () => {
         <Route path="/admin" element={<AdminPanel />} />
         Optional: <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="*" element={<NotFoundPage />} />
+
+        {/* <Route path="/projects/:id" element={<ProjectDetails />} />
+        <Route path="/projects" element={<ProjectsListing />} /> */}
+
+<Route path="/projects/*" element={<ProjectsComponent />} />
       </Routes>
 
     </BrowserRouter>
