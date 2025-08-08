@@ -6,30 +6,51 @@ import { Link } from "react-router-dom";
 
 const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
   const projects = [
-    {
-      id: 1,
-      title: "Hoskote Meadows",
-      location: "Hoskote",
-      image: "/images/hoskote-project.jpg",
-      description: "Luxury villas with modern amenities near Bangalore",
-      status: "Completed"
-    },
-    {
-      id: 2,
-      title: "Yelanka Greens",
-      location: "Yelanka",
-      image: "/images/yelanka-project.jpg",
-      description: "Premium apartments with smart home features",
-      status: "Ongoing"
-    },
-    {
-      id: 3,
-      title: "Whitefield Heights",
-      location: "Whitefield",
-      image: "/images/whitefield-project.jpg",
-      description: "Commercial complex with retail spaces",
-      status: "Upcoming"
-    }
+   {
+    id: 3,
+    title: "Sri Sai Dwaraka Kammasandra",
+    location: "Kammasandra",
+    image: "/images/sri-sai-dwaraka-kammasandra.jpg",
+    description: "Premium residential layout with modern infrastructure",
+    status: "Completed (2023)",
+    details: "A well-planned gated community featuring underground drainage, electrical systems, landscaped parks, wide roads, and 24/7 security.",
+    features: [
+      "Individual water and power connections",
+      "Well-marked street signage",
+      "Surveillance security system",
+      "Close to international schools and hospitals"
+    ]
+  },
+  {
+    id: 4,
+    title: "Urban Feet Layout",
+    location: "Channasandra",
+    image: "/images/urban-feet.jpg",
+    description: "Sold-out luxury gated community",
+    status: "Completed (Sold Out)",
+    details: "BBMP A-Khata gated layout featuring ready-to-build plots with world-class infrastructure near ITPL.",
+    features: [
+      "TAR roads and underground drainage",
+      "Individual Kaveri and borewell water connections",
+      "Dedicated gas pipelines",
+      "2 KM from ITPL and Metro Station"
+    ]
+  },
+  {
+    id: 5,
+    title: "RKB Enclave",
+    location: "Doddagattinabbe, Hoskote–Whitefield Main Road",
+    image: "/images/rkb-enclave.jpg",
+    description: "STRR-approved villa plot development",
+    status: "Completed",
+    details: "2.06 acre development with 27 plots featuring top-tier infrastructure and lifestyle amenities.",
+    features: [
+      "30 ft and 40 ft wide asphalted roads",
+      "Landscaped park with jogging track",
+      "9 KM from ITPL",
+      "6 KM from Kadugodi Metro"
+    ]
+  }
   ];
 
   return (

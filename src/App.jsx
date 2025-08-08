@@ -109,7 +109,9 @@ const MainSite = () => {
   const bgColor = bgChanged ? "bg-black" : "bg-white";
   const darkBg =   bgChanged
             ? 'bg-gradient-to-tr from-black to-gray-900'
-            : 'bg-gradient-to-tr from-black to-gray-900'
+            : 'bg-gradient-to-tr from-blue-50 to-blue-100';
+
+            const footerbg='bg-gradient-to-tr from-black to-gray-900';
   const darkText = bgChanged ? "text-gray-100" : "text-gray-100";
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const darkBorder = bgChanged ? "" : "";
@@ -133,6 +135,8 @@ const MainSite = () => {
       {/* <div className="h-32"></div> */}
       <UserPromptModal/>
 <Animatedsliders/>
+
+<ProjectsComponent />
 <RealEstateDetails bgChanged={bgChanged} />
       <ChatBot />
     <PropertyMap bgChanged={bgChanged} />
@@ -145,7 +149,7 @@ const MainSite = () => {
   <ContactSection bgChanged={bgChanged} />
 </div>
    <Footer
-        darkBg={darkBg}
+        darkBg={footerbg}
         darkText={darkText}
         darkCardBg={darkCardBg}
         darkBorder={darkBorder}

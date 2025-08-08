@@ -5,7 +5,7 @@ const Marquee = () => {
   const marqueeContainerRef = useRef(null);
 
   const contactInfo = {
-    phones: ["+91 8951706247",  "+91 8971498538"],
+    phones: ["+918951706247", "+918971498538"], // Removed spaces for direct dialing
     email: "spproperties.2021@gmail.com",
   };
 
@@ -29,6 +29,17 @@ const Marquee = () => {
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
+  // Handle contact clicks
+  const handleContactClick = (item) => {
+    if (item.includes("@")) {
+      // Open email client
+      window.location.href = `mailto:${item}`;
+    } else {
+      // Initiate phone call
+      window.location.href = `tel:${item}`;
+    }
+  };
+
   // Repeated items for seamless loop
   const items = [...contactInfo.phones, contactInfo.email];
   const scrollingContent = [...items, ...items]; // duplicate for loop
@@ -43,7 +54,11 @@ const Marquee = () => {
             className="flex gap-10 min-w-max whitespace-nowrap text-sm sm:text-base font-medium"
           >
             {scrollingContent.map((item, i) => (
-              <span key={i} className="flex items-center gap-1 shrink-0">
+              <span 
+                key={i} 
+                className="flex items-center gap-1 shrink-0 cursor-pointer hover:text-blue-400 transition-colors"
+                onClick={() => handleContactClick(item)}
+              >
                 {item.includes("@") ? "📧" : "📞"} {item}
               </span>
             ))}

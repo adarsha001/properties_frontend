@@ -4,37 +4,129 @@ import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiChevronRight } from 'react-icons/fi';
 
 const ProjectsComponent = () => {
-  // Projects data
-  const projects = [
-    {
-      id: 1,
-      title: "Hoskote Meadows",
-      location: "Hoskote",
-      image: "/images/hoskote-project.jpg",
-      description: "Luxury villas with modern amenities near Bangalore",
-      status: "Completed",
-      details: "Spread over 5 acres, Hoskote Meadows offers 2BHK and 3BHK villas with premium finishes, clubhouse, swimming pool, and 24/7 security.",
-      features: [
-        "Gated community with 100% power backup",
-        "Landscaped gardens and jogging track",
-        "Children's play area"
-      ]
-    },
-    {
-      id: 2,
-      title: "Yelanka Greens",
-      location: "Yelanka",
-      image: "/images/yelanka-project.jpg",
-      description: "Premium apartments with smart home features",
-      status: "Ongoing",
-      details: "Modern 1BHK and 2BHK apartments with smart home automation, modular kitchens, and premium flooring.",
-      features: [
-        "Smart home automation system",
-        "Rainwater harvesting",
-        "Solar panels for common areas"
-      ]
-    }
-  ];
+const projects = [
+ 
+  {
+    id: 3,
+    title: "Sri Sai Dwaraka Kammasandra",
+    location: "Kammasandra, Near Old Madras Road",
+    image: "../public/Why-High-Resolution-Photos-Help-You-Sell-Your-Property.jpg",
+    description: "Premium residential layout with modern infrastructure",
+    status: "Completed (2023)",
+    details: "A well-planned gated community featuring underground drainage, electrical systems, landscaped parks, wide roads, and 24/7 security.",
+    features: [
+      "Individual water and power connections",
+      "Well-marked street signage",
+      "Surveillance security system",
+      "Close to international schools and hospitals"
+    ]
+  },
+  {
+    id: 4,
+    title: "Urban Feet Layout",
+    location: "Channasandra, Whitefield",
+    image: "/images/urban-feet.jpg",
+    description: "Sold-out luxury gated community",
+    status: "Completed (Sold Out)",
+    details: "BBMP A-Khata gated layout featuring ready-to-build plots with world-class infrastructure near ITPL.",
+    features: [
+      "TAR roads and underground drainage",
+      "Individual Kaveri and borewell water connections",
+      "Dedicated gas pipelines",
+      "2 KM from ITPL and Metro Station"
+    ]
+  },
+  {
+    id: 5,
+    title: "RKB Enclave",
+    location: "Doddagattinabbe, Hoskote–Whitefield Main Road",
+    image: "/images/rkb-enclave.jpg",
+    description: "STRR-approved villa plot development",
+    status: "Completed",
+    details: "2.06 acre development with 27 plots featuring top-tier infrastructure and lifestyle amenities.",
+    features: [
+      "30 ft and 40 ft wide asphalted roads",
+      "Landscaped park with jogging track",
+      "9 KM from ITPL",
+      "6 KM from Kadugodi Metro"
+    ]
+  },
+  {
+    id: 6,
+    title: "Sunrise Meadows",
+    location: "Hoskote, Near Caldwell Academy School",
+    image: "/images/sunrise-meadows.jpg",
+    description: "Residential plotted development",
+    status: "Completed",
+    details: "2 acre development with 36 DC Converted, E-Katha plots featuring essential infrastructure.",
+    features: [
+      "30 ft wide concrete roads",
+      "Underground sewage system",
+      "Roadside tree plantation",
+      "Excellent connectivity to Whitefield"
+    ]
+  },
+  {
+    id: 7,
+    title: "Sai Samrudhi Layout",
+    location: "Marsandra",
+    image: "/images/sai-samrudhi.jpg",
+    description: "Premium DC Converted residential enclave",
+    status: "Completed",
+    details: "Panchayat approved layout with E-Khata and building approval for G+3 floors.",
+    features: [
+      "Well-laid TAR roads",
+      "Underground drainage",
+      "10 km from Old Madras Road",
+      "15 km from Kempegowda International Airport"
+    ]
+  },
+  {
+    id: 8,
+    title: "Sri Sai Dwaraka Gunduru",
+    location: "Gunduru, Near Budigere Cross",
+    image: "/images/sri-sai-dwaraka-gunduru.jpg",
+    description: "Premium E-Khata gated community",
+    status: "Ongoing",
+    details: "Successor to Sri Sai Dwaraka Kammasandra, offering plots with excellent connectivity near Airport Road.",
+    features: [
+      "CC Roads",
+      "Underground & rainwater drainage",
+      "Building Approval for G+3",
+      "Near Brigade Signature Tower and ORION Mall"
+    ]
+  },
+  {
+    id: 9,
+    title: "Avalahalli Gated Community",
+    location: "Avalahalli",
+    image: "/images/avalahalli-project.jpg",
+    description: "Premier E-Khata gated community",
+    status: "Ongoing",
+    details: "Successor to Urban Feat Layout, positioned close to National Highway-75 and Airport Parallel Road.",
+    features: [
+      "TAR Roads",
+      "Underground & Rainwater Drainage",
+      "G+3 Building Permission",
+      "15 mins from Old Madras Road"
+    ]
+  },
+  {
+    id: 10,
+    title: "Mandur Gated Community",
+    location: "Mandur, Near Budigere Cross",
+    image: "/images/mandur-project.jpg",
+    description: "Premium E-Khata gated community",
+    status: "Ongoing",
+    details: "Positioned in one of the fastest-growing investment corridors near National Highway-75.",
+    features: [
+      "TAR Roads",
+      "Underground & Rainwater Drainage",
+      "Building Approval – G+3",
+      "5 mins from Airport Road"
+    ]
+  }
+];
 
   // State for filter
   const [filter, setFilter] = useState('All');
@@ -49,7 +141,7 @@ const ProjectsComponent = () => {
 
   // Projects Listing View
   const ProjectsListing = () => (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="max-w-6xl  mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Our Projects</h1>
         <div className="flex space-x-2">
