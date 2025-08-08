@@ -86,7 +86,7 @@ image: "../public/rkb.JPG",
     title: "Sri Sai Dwaraka Gunduru",
     location: "Gunduru, Near Budigere Cross",
 
-image: "../public/ssdgundur.JPG",
+image: "./assets/ssdgundur.JPG",
     description: "Premium E-Khata gated community",
     status: "Ongoing",
     details: "Successor to Sri Sai Dwaraka Kammasandra, offering plots with excellent connectivity near Airport Road.",
