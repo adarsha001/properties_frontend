@@ -7,7 +7,7 @@ const API = {
 
   // Chat Submissions
   chat: `${BASE_URL}/chat`,
-  chatBot: `${BASE_URL}/chat/bot`,
+  chatbot: `${BASE_URL}/chat/bot`,
 
   chatById: (id) => `${BASE_URL}/chat/${id}`,
   chatCallDetails: (chatId) => `${BASE_URL}/chat/${chatId}/call-details`,
