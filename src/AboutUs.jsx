@@ -16,7 +16,8 @@ const AboutUs = ({ bgChanged }) => {
   // Dynamic colors based on theme
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
-  const highlightColor = "bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparen"; // Keep orange as accent color
+  const highlightColor =
+    "bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparent";// Keep orange as accent color
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const borderColor = bgChanged ? "border-gray-700" : "border-gray-400";
 
@@ -111,7 +112,7 @@ const AboutUs = ({ bgChanged }) => {
         {/* Stats Animation */}
         <div
           ref={statsRef}
-          className={` text-gray-900 text-center py-6 px-4 rounded-lg max-w-md mx-auto`}
+          className={` ${textColor} text-center py-6 px-4 rounded-lg max-w-md mx-auto`}
         >
           <p className="text-3xl font-bold mb-2">15+</p>
           <p className="text-lg">Projects Successfully Completed</p>

@@ -54,7 +54,7 @@ const InfiniteScroller = ({ bgChanged }) => {
 
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
-  const wrapperBg = bgChanged ? "bg-gradient-to-tr from-black to-gray-900" : "bg-gradient-to-tr from-blue-50 to-blue-100";
+  const wrapperBg = bgChanged ? "bg-gradient-to-tr from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
   const subTextColor = bgChanged ? "text-gray-400" : "text-gray-500";
   const emptyStarColor = bgChanged ? "text-gray-600" : "text-gray-300";
 

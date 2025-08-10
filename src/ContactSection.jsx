@@ -3,7 +3,7 @@ import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import axios from "axios";
 
 const ContactSection = ({ bgChanged }) => {
-  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
+  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-tr from-blue-50 to-blue-100";
   const cardColor = bgChanged ? "bg-gray-800" : "bg-white";
   const titleColor = bgChanged ? "text-white" : "text-gray-800";
   const textColor = bgChanged ? "text-gray-300" : "text-gray-600";

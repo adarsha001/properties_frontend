@@ -26,6 +26,7 @@ import UserPromptModal from "./UserPromptModal";
 // import { ProjectsListing, ProjectDetails } from "./pages/Projects"; 
 
 import ProjectsComponent from './Projects';
+import Vision from "./Vision";
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -144,6 +145,7 @@ const MainSite = () => {
        <div ref={aboutUsRef} id="about"> {/* Update this line */}
         <AboutUs bgChanged={bgChanged} />
       </div>
+      <Vision bgChanged={bgChanged} />
 <InfiniteScroller bgChanged={bgChanged} id="home" />
 <div ref={contactRef} id="contact">
   <ContactSection bgChanged={bgChanged} />
