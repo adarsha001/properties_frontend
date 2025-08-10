@@ -134,7 +134,7 @@ const MainSite = () => {
     
  <Navbar scrollToContact={scrollToContact} scrollToAboutUs={scrollToAboutUs} /> 
       {/* <div className="h-32"></div> */}
-      <UserPromptModal/>
+      {/* <UserPromptModal/> */}
 <Animatedsliders/>
 
 <RealEstateDetails bgChanged={bgChanged} />

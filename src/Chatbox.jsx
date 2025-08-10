@@ -56,6 +56,15 @@ const Chatbox = () => {
     },
   ];
 
+  useEffect(() => {
+  // Auto-open after 5 seconds
+  const timer = setTimeout(() => {
+    setOpen(true);
+  }, 5000);
+
+  // Clean up the timer when component unmounts
+  return () => clearTimeout(timer);
+}, []);
   // Auto-scroll to bottom of messages
   useEffect(() => {
     scrollToBottom();
