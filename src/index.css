@@ -20,16 +20,7 @@ body {
 }
 
 /* Add this to your global CSS */
-.real-estate-map-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0 !important;
-}
 
-.real-estate-map-container > * {
-  margin: 0 !important;
-  padding: 0 !important;
-}
 /* .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
