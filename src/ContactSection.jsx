@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import axios from "axios";
-
+import { FiMessageSquare } from 'react-icons/fi';
 const ContactSection = ({ bgChanged }) => {
   const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-tr from-blue-50 to-blue-100";
   const cardColor = bgChanged ? "bg-gray-800" : "bg-white";
@@ -113,7 +113,7 @@ const ContactSection = ({ bgChanged }) => {
 
         {/* Contact Info Card */}
         <div className={`${cardColor} p-6 rounded-xl shadow-lg space-y-6`}>
-         <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4">
   <FiPhone className="text-blue-500 text-xl" />
   <div>
     <p className={`font-medium ${labelColor}`}>Phone</p>
@@ -129,6 +129,21 @@ const ContactSection = ({ bgChanged }) => {
     <p className={`font-medium ${labelColor}`}>Email</p>
     <a href="mailto:spproperties.2021@gmail.com" className={`${textColor} hover:underline`}>
       spproperties.2021@gmail.com
+    </a>
+  </div>
+</div>
+
+<div className="flex items-center space-x-4">
+  <FiMessageSquare className="text-blue-500 text-xl" />
+  <div>
+    <p className={`font-medium ${labelColor}`}>WhatsApp</p>
+    <a 
+      href="https://wa.me/918971498538" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className={`${textColor} hover:underline`}
+    >
+      Chat with us
     </a>
   </div>
 </div>

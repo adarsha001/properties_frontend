@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaPhoneAlt } from "react-icons/
 import { MdEmail } from "react-icons/md";
 import { FiMapPin, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { FiMessageSquare } from 'react-icons/fi';
 
 const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
   const projects = [
@@ -95,7 +96,7 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
         </div>
 
         {/* Contact Info */}
-       <div>
+     <div>
   <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
   <ul className="space-y-2 text-sm">
     <li className="flex items-center">
@@ -108,6 +109,17 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
       <MdEmail className="mr-2 text-teal-400" />
       <a href="mailto:spproperties.2021@gmail.com" className="hover:underline">
         spproperties.2021@gmail.com
+      </a>
+    </li>
+    <li className="flex items-center">
+      <FiMessageSquare className="mr-2 text-teal-400" />
+      <a 
+        href="https://wa.me/919876543210" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="hover:underline"
+      >
+        Chat on WhatsApp
       </a>
     </li>
     <li className="flex items-center">
