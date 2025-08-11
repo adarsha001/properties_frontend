@@ -95,20 +95,27 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
         </div>
 
         {/* Contact Info */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center">
-              <FaPhoneAlt className="mr-2 text-teal-400" /> +91 98765 43210
-            </li>
-            <li className="flex items-center">
-              <MdEmail className="mr-2 text-teal-400" /> spproperties.2021@gmail.com
-            </li>
-            <li className="flex items-center">
-              <FiMapPin className="mr-2 text-teal-400" /> Bangalore, India
-            </li>
-          </ul>
-        </div>
+       <div>
+  <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
+  <ul className="space-y-2 text-sm">
+    <li className="flex items-center">
+      <FaPhoneAlt className="mr-2 text-teal-400" />
+      <a href="tel:+919876543210" className="hover:underline">
+        +91 98765 43210
+      </a>
+    </li>
+    <li className="flex items-center">
+      <MdEmail className="mr-2 text-teal-400" />
+      <a href="mailto:spproperties.2021@gmail.com" className="hover:underline">
+        spproperties.2021@gmail.com
+      </a>
+    </li>
+    <li className="flex items-center">
+      <FiMapPin className="mr-2 text-teal-400" /> 
+      Bangalore, India
+    </li>
+  </ul>
+</div>
 
         {/* Social Links */}
         <div>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { Menu, X, Home, Info, Phone } from 'lucide-react';
+import { Menu, X, Home, Info, Phone, MessageCircle } from 'lucide-react';
 
 const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +10,10 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
   const linksRef = useRef([]);
   const mobileMenuRef = useRef(null);
   const animationRef = useRef(null);
+
+  // WhatsApp number and message
+  const whatsappNumber = '918951706247'; // Your WhatsApp number without '+' prefix
+  const whatsappMessage = 'Hello, I would like more information about your properties';
 
   const addToLinksRef = (el) => {
     if (el && !linksRef.current.includes(el)) {
@@ -56,6 +60,12 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
     setIsOpen(false);
   };
 
+  const openWhatsApp = () => {
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(url, '_blank');
+    setIsOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40 font-montserrat">
       <div
@@ -82,6 +92,9 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
           <button onClick={() => { scrollToContact(); setIsOpen(false); }} className="hover:text-teal-400 flex items-center gap-2" ref={addToLinksRef}>
             <Phone size={18} /> Contact
           </button>
+          <button onClick={openWhatsApp} className="hover:text-green-500 flex items-center gap-2" ref={addToLinksRef}>
+            <MessageCircle size={18} /> WhatsApp
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -106,6 +119,9 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
           </button>
           <button onClick={() => { scrollToContact(); setIsOpen(false); }} className="flex items-center gap-2 text-gray-700 hover:text-teal-500 w-full text-left">
             <Phone size={18} /> Contact
+          </button>
+          <button onClick={openWhatsApp} className="flex items-center gap-2 text-gray-700 hover:text-green-500 w-full text-left">
+            <MessageCircle size={18} /> WhatsApp
           </button>
         </div>
       )}

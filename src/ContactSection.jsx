@@ -113,22 +113,25 @@ const ContactSection = ({ bgChanged }) => {
 
         {/* Contact Info Card */}
         <div className={`${cardColor} p-6 rounded-xl shadow-lg space-y-6`}>
-          <div className="flex items-center space-x-4">
-            <FiPhone className="text-blue-500 text-xl" />
-            <div>
-              <p className={`font-medium ${labelColor}`}>Phone</p>
-              <p className={`${textColor}`}>+91 8971498538</p>
-            </div>
-          </div>
+         <div className="flex items-center space-x-4">
+  <FiPhone className="text-blue-500 text-xl" />
+  <div>
+    <p className={`font-medium ${labelColor}`}>Phone</p>
+    <a href="tel:+918971498538" className={`${textColor} hover:underline`}>
+      +91 8971498538
+    </a>
+  </div>
+</div>
 
-          <div className="flex items-center space-x-4">
-            <FiMail className="text-blue-500 text-xl" />
-            <div>
-              <p className={`font-medium ${labelColor}`}>Email</p>
-              <p className={`${textColor}`}>spproperties.2021@gmail.com
-</p>
-            </div>
-          </div>
+<div className="flex items-center space-x-4">
+  <FiMail className="text-blue-500 text-xl" />
+  <div>
+    <p className={`font-medium ${labelColor}`}>Email</p>
+    <a href="mailto:spproperties.2021@gmail.com" className={`${textColor} hover:underline`}>
+      spproperties.2021@gmail.com
+    </a>
+  </div>
+</div>
 
           <div className="flex items-center space-x-4">
             <FiMapPin className="text-blue-500 text-xl" />

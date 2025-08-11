@@ -154,6 +154,12 @@ const ProjectsComponent = () => {
     <div className="max-w-6xl mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Our Projects</h1>
+        <button 
+            onClick={() => navigate('/')}
+            className="text-blue-600 hover:underline"
+          >
+            Back to home
+          </button>
         <div className="flex space-x-2">
           {['All', 'Completed', 'Ongoing'].map((status) => (
             <button
@@ -281,9 +287,14 @@ const ProjectsComponent = () => {
                 </ul>
               </div>
 
-              <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                Contact Sales Representative
-              </button>
+            <div className="space-y-4">
+  <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+    Contact Sales Representative
+  </button>
+  <div className="text-center text-gray-600">
+    Call: <a href="tel:+918951706247" className="text-blue-600 hover:underline">+91 99866 99999</a>
+  </div>
+</div>
             </div>
           </div>
         </div>
