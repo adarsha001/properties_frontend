@@ -11,8 +11,8 @@ const PropertyMap = ({ bgChanged }) => {
     : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
 
   return (
-    <div className={`${darkBg} ${darkText} p-12`}>
-      <div className="pt-20 w-full flex justify-center">
+    <div className={`${darkBg} ${darkText}  py-4 px-4 sm:px-6`}>
+      <div className="pt-8 sm:pt-12 w-full flex justify-center">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d658.9128515519533!2d77.72361453769636!3d13.04369393594722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1753883696394!5m2!1sen!2sin"
           width="100%"
@@ -24,7 +24,7 @@ const PropertyMap = ({ bgChanged }) => {
         ></iframe>
       </div>
 
-      <div className="h-8"></div>
+      <div className="h-6"></div>
 
       <div className={`${darkCardBg} p-6 rounded-lg border-l-4 ${darkCardBorder} mx-4 mb-8`}>
         <h2 className={`text-lg font-bold ${darkHighlightText} mb-3`}>Time-to-Place</h2>

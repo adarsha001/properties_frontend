@@ -33,7 +33,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   return (
     <div 
       ref={sectionRef} 
-      className={`${darkBg} min-h-screen py-7 px-4 sm:px-6 lg:px-8`}
+      className={`${darkBg} min-h-screen py-4 px-4 sm:px-6 lg:px-8`}
     >
       <h1 className={`text-3xl sm:text-4xl font-bold bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparent text-center pb-6 drop-shadow-lg`}>
         Presents E-Khata Gated Community Layout
