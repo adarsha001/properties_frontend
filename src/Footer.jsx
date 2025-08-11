@@ -150,10 +150,18 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className={`mt-8 pt-4 text-center text-sm opacity-70 border-t ${darkBorder}`}>
-        © {new Date().getFullYear()} Created by Adarsha. All rights reserved.
-      </div>
+    <div className={`mt-8 pt-4 text-center text-sm opacity-70 border-t ${darkBorder}`}>
+  © {new Date().getFullYear()} Created by{" "}
+  <a
+    href="https://www.linkedin.com/in/adarsha-h-9350182a6/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-teal-400 hover:underline"
+  >
+    Adarsha
+  </a>
+  . All rights reserved.
+</div>
     </footer>
   );
 };
