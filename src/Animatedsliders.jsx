@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 
-// Direct URL imports for slider images
-import image1 from './assets/WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg';
-import image2 from './assets/WhatsApp Image 2025-07-24 at 8.38.50 PM.jpeg';
-import image3 from './assets/WhatsApp Image 2025-07-24 at 9.06.41 PM.jpeg';
-import image4 from './assets/WhatsApp Image 2025-07-24 at 9.14.59 PM.jpeg';
+// // Optimized image imports (convert to WebP if possible)
+// import ssdkammasandra from './assets/images/ssdkammasandra.webp';
+// import urbanFeet from './assets/images/uf.webp';
+// import rkbEnclave from './assets/images/rkb.webp';
+// import sunriseMeadows from './assets/images/sunrise.webp';
+// import saiSamrudhi from './assets/images/saisamrudhi.webp';
+// import ssdGunduru from './assets/images/ssdgundur.webp';
+// import avalahalli from './assets/images/hirandali.webp';
+// import mandur from './assets/images/mandur-community.webp';
 
 // Import all images from assets
 import ssdkammasandra from './assets/images/ssdkammasandra.JPG';
@@ -16,6 +20,8 @@ import saiSamrudhi from './assets/images/saisamrudhi.JPG';
 import ssdGunduru from './assets/images/ssdgundur.JPG';
 import avalahalli from './assets/images/hirandali.JPG';
 import mandur from './assets/images/mandur-community.jpeg'; // Fixed filename
+
+
 
 const DetailView = ({ slide, onClose }) => {
   return (
@@ -33,6 +39,10 @@ const DetailView = ({ slide, onClose }) => {
             <img 
               src={slide.image || slide.url} 
               alt={slide.title} 
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
             />
           </div>
@@ -62,13 +72,13 @@ const DetailView = ({ slide, onClose }) => {
                 ))}
               </ul>
             </div>
-       <div className="space-y-4">
-  <a href="tel:+918951706247" className="block w-full">
-    <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-      Contact Sales Representative
-    </button>
-  </a>
-</div>
+            <div className="space-y-4">
+              <a href="tel:+918951706247" className="block w-full">
+                <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                  Contact Sales Representative
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -78,119 +88,93 @@ const DetailView = ({ slide, onClose }) => {
 
 const AnimatedSlider = () => {
   const projects = [
-     {
-    id: 8,
-    title: "Sri Sai Dwaraka Gunduru",
-    location: "Gunduru, Near Budigere Cross",
-    image: ssdGunduru,
-    description: "Premium E-Khata gated community with excellent connectivity near Airport Road",
-    status: "Ongoing",
-    buttonText: "View Project",
-    features: [
-      "CC Roads with underground drainage",
-      "Building Approval for G+3",
-      "Near Brigade Signature Tower",
-      "5 mins from ORION Mall"
-    ],
-    highlights: [
-      "Prime location in fast-growing corridor",
-      "Excellent investment potential",
-      "Gated community with 24/7 security"
-    ]
-  },
-  {
-    id: 9,
-    title: "Avalahalli Gated Community",
-    location: "Avalahalli, Near NH-75",
-    image: avalahalli,
-    description: "Premier E-Khata community with direct access to Airport Parallel Road",
-    status: "Ongoing",
-    buttonText: "Explore Plots",
-    features: [
-      "Wide TAR Roads",
-      "G+3 Building Permission",
-      "15 mins from Old Madras Road",
-      "Underground utilities"
-    ],
-    highlights: [
-      "Successor to Urban Feat Layout",
-      "Strategic location for appreciation",
-      "Modern infrastructure"
-    ]
-  },
-  {
-    id: 10,
-    title: "Mandur Gated Community",
-    location: "Mandur, Budigere Cross",
-    image: mandur,
-    description: "Premium investment plots in Bangalore's fastest-growing corridor",
-    status: "Ongoing",
-    buttonText: "Invest Now",
-    features: [
-      "30ft & 40ft road frontage",
-      "Rainwater harvesting",
-      "5 mins from Airport Road",
-      "Approved layouts"
-    ],
-    highlights: [
-      "Near National Highway-75",
-      "High ROI potential",
-      "Ready for immediate construction"
-    ]
-  },
-  {
-    id: 3,
-    title: "Sri Sai Dwaraka Kammasandra",
-    location: "Kammasandra, Old Madras Road",
-    image: ssdkammasandra,
-    description: "Award-winning completed project with luxury amenities",
-    status: "Completed",
-    buttonText: "See Success Story",
-    features: [
-      "Landscaped parks",
-      "24/7 surveillance",
-      "International schools nearby",
-      "Wide CC roads"
-    ],
-    highlights: [
-      "Fully sold out community",
-      "Proven appreciation record",
-      "Model for our new projects"
-    ]
-  },
-  {
-    id: 4,
-    title: "Urban Feet Layout",
-    location: "Whitefield, Near ITPL",
-    image: urbanFeet,
-    description: "Luxury sold-out community with world-class infrastructure",
-    status: "Completed",
-    buttonText: "View Legacy",
-    features: [
-      "BBMP A-Khata approved",
-      "2 KM from Metro",
-      "Dedicated gas lines",
-      "Underground cabling"
-    ],
-    highlights: [
-      "Prime Whitefield location",
-      "100% occupancy rate",
-      "Proven investment success"
-    ]
-  }
+    {
+      id: 8,
+      title: "Sri Sai Dwaraka Gunduru",
+      location: "Gunduru, Near Budigere Cross",
+      image: ssdGunduru,
+      description: "Premium E-Khata gated community with excellent connectivity near Airport Road",
+      status: "Ongoing",
+      buttonText: "View Project",
+      features: [
+        "CC Roads with underground drainage",
+        "Building Approval for G+3",
+        "Near Brigade Signature Tower",
+        "5 mins from ORION Mall"
+      ]
+    },
+    {
+      id: 9,
+      title: "Avalahalli Gated Community",
+      location: "Avalahalli, Near NH-75",
+      image: avalahalli,
+      description: "Premier E-Khata community with direct access to Airport Parallel Road",
+      status: "Ongoing",
+      buttonText: "Explore Plots",
+      features: [
+        "Wide TAR Roads",
+        "G+3 Building Permission",
+        "15 mins from Old Madras Road",
+        "Underground utilities"
+      ]
+    },
+    {
+      id: 10,
+      title: "Mandur Gated Community",
+      location: "Mandur, Budigere Cross",
+      image: mandur,
+      description: "Premium investment plots in Bangalore's fastest-growing corridor",
+      status: "Ongoing",
+      buttonText: "Invest Now",
+      features: [
+        "30ft & 40ft road frontage",
+        "Rainwater harvesting",
+        "5 mins from Airport Road",
+        "Approved layouts"
+      ]
+    },
+    {
+      id: 3,
+      title: "Sri Sai Dwaraka Kammasandra",
+      location: "Kammasandra, Old Madras Road",
+      image: ssdkammasandra,
+      description: "Award-winning completed project with luxury amenities",
+      status: "Completed",
+      buttonText: "See Success Story",
+      features: [
+        "Landscaped parks",
+        "24/7 surveillance",
+        "International schools nearby",
+        "Wide CC roads"
+      ]
+    },
+    {
+      id: 4,
+      title: "Urban Feet Layout",
+      location: "Whitefield, Near ITPL",
+      image: urbanFeet,
+      description: "Luxury sold-out community with world-class infrastructure",
+      status: "Completed",
+      buttonText: "View Legacy",
+      features: [
+        "BBMP A-Khata approved",
+        "2 KM from Metro",
+        "Dedicated gas lines",
+        "Underground cabling"
+      ]
+    }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showDetail, setShowDetail] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(null);
 
-  // Auto-advance slides
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev === projects.length - 1 ? 0 : prev + 1));
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [projects.length]);
 
   const handleButtonClick = () => {
     setSelectedSlide(projects[currentIndex]);
@@ -205,8 +189,12 @@ const AnimatedSlider = () => {
           {projects.map((project, index) => (
             <img
               key={index}
-              src={project.image || project.url}
+              src={project.image}
               alt={project.title}
+              width="1920"
+              height="1080"
+              loading={index === currentIndex ? 'eager' : 'lazy'}
+              decoding="async"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
                 currentIndex === index ? 'opacity-100' : 'opacity-0'
               }`}
@@ -253,6 +241,7 @@ const AnimatedSlider = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
               className={`w-3 h-3 rounded-full transition-all ${
                 currentIndex === index ? 'bg-white w-6' : 'bg-white/50'
               }`}
