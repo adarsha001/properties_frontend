@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PropertyMap = ({ bgChanged }) => {
-  // Styling for light/dark themes
   const darkBg = bgChanged ? 'bg-gradient-to-br from-black to-gray-900' : 'bg-gradient-to-br from-blue-50 to-blue-100';
   const darkText = bgChanged ? 'text-gray-100' : 'text-gray-800';
   const darkCardBg = bgChanged ? 'bg-gray-800' : 'bg-purple-50';
@@ -11,8 +10,8 @@ const PropertyMap = ({ bgChanged }) => {
     : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
 
   return (
-    <div className={`${darkBg} ${darkText}  py-4 px-4 sm:px-6`}>
-      <div className="pt-8 sm:pt-12 w-full flex justify-center">
+    <div className={`${darkBg} ${darkText} py-4 px-4 sm:px-6`}>
+      <div className="pt-4 sm:pt-0 w-full flex justify-center">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d658.9128515519533!2d77.72361453769636!3d13.04369393594722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1753883696394!5m2!1sen!2sin"
           width="100%"

@@ -12,12 +12,12 @@ import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 // import mandur from './assets/images/mandur-community.webp';
 
 // Import all images from assets
-import ssdkammasandra from './assets/images/ssdkammasandra.JPG';
+import ssdkammasandra from './assets/images/ssdkammasandra.webp';
 import urbanFeet from './assets/images/uf.JPG';
-import rkbEnclave from './assets/images/rkb.JPG';
+import rkbEnclave from './assets/images/rkb.webp';
 import sunriseMeadows from './assets/images/sunrise.JPG';
-import saiSamrudhi from './assets/images/saisamrudhi.JPG';
-import ssdGunduru from './assets/images/ssdgundur.JPG';
+import saiSamrudhi from './assets/images/saisamrudhi.webp';
+import ssdGunduru from './assets/images/ssdgundur.webp';
 import avalahalli from './assets/images/hirandali.JPG';
 import mandur from './assets/images/mandur-community.jpeg'; // Fixed filename
 
