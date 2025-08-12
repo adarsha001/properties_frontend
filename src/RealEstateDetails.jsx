@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 const RealEstateDetails = ({ bgChanged }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
     gsap.from(sectionRef.current, {
@@ -19,6 +20,13 @@ const RealEstateDetails = ({ bgChanged }) => {
       delay: 0.3,
       ease: "back.out(1)",
     });
+    
+    // Add a subtle zoom-in effect for the image
+    gsap.from(imageRef.current, {
+      scale: 1.1,
+      duration: 1.5,
+      ease: "power2.out",
+    });
   }, []);
 
   // Dark mode classes
@@ -33,7 +41,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   return (
     <div 
       ref={sectionRef} 
-      className={`${darkBg} min-h-screen pt-4 px-4 sm:px-6 lg:px-8 pb-0 `}
+      className={`${darkBg} min-h-screen pt-4 px-4 sm:px-6 lg:px-8 pb-3`}
     >
       <h1 className={`text-3xl sm:text-4xl font-bold bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparent text-center pb-6 drop-shadow-lg`}>
         Presents E-Khata Gated Community Layout
@@ -43,13 +51,15 @@ const RealEstateDetails = ({ bgChanged }) => {
         ref={contentRef}
         className={`max-w-5xl mx-auto ${darkCardBg} shadow-2xl rounded-2xl overflow-hidden`}
       >
-        {/* Compact Header with image */}
-        <div className="relative h-48 sm:h-64 md:h-80 overflow-hidden">
+        {/* Larger Header with image */}
+        <div className="relative h-64 sm:h-80 md:h-96 lg:h-[32rem] overflow-hidden" ref={imageRef}>
           <img
             src="../../WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg"
             alt="E-Khata Layout"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
+          {/* Optional overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
 
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 sm:p-6">
