@@ -138,7 +138,7 @@ const MainSite = () => {
 <Animatedsliders/>
 
 <RealEstateDetails bgChanged={bgChanged} />
-    <PropertyMap bgChanged={bgChanged} />
+    {/* <PropertyMap bgChanged={bgChanged} /> */}
 
       <ChatBot />
       <GuaranteeSection bgChanged={bgChanged} />
