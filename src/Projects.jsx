@@ -289,11 +289,12 @@ const ProjectsComponent = () => {
 
             <div className="space-y-4">
   <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+    <a href="tel:+918951706247" className="text-blue-600 hover:underline">
     Contact Sales Representative
+
+    </a>
   </button>
-  <div className="text-center text-gray-600">
-    Call: <a href="tel:+918951706247" className="text-blue-600 hover:underline">+91 99866 99999</a>
-  </div>
+
 </div>
             </div>
           </div>
