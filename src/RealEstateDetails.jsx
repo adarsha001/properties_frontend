@@ -42,7 +42,7 @@ const RealEstateDetails = ({ bgChanged }) => {
       className={`${darkBg} min-h-screen pb-5 pt-4 px-4 sm:px-6 lg:px-8`}
     >
       <h1
-        className={`text-3xl sm:text-4xl font-bold bg-gradient-to-l from-blue-300 via-blue-300 to-teal-400 bg-clip-text text-transparent text-center pb-6 drop-shadow-lg`}
+        className={`text-3xl sm:text-4xl font-bold bg-gradient-to-l from-gray-800 via-gray-600 to-gray-400 bg-clip-text text-transparent text-center pb-6 drop-shadow-lg`}
       >
         Presents E-Khata Gated Community Layout
       </h1>
