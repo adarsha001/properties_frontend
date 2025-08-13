@@ -57,7 +57,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   ref={imageRef}
 >
   <img
-    src="../../WhatsApp Image 2025-07-24 at 8.48.39 PM.jpeg"
+    src="../../WhatsApp Image 2025-08-13 at 6.15.44 PM.jpeg"
     alt="E-Khata Layout"
     className="w-full h-full object-fit object-center"
   />
