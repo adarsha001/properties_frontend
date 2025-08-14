@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import "./scrollAnimation.css";
 
@@ -24,7 +24,6 @@ const reviewCards = [
     review: "If you're seeking a trusted and results-driven real estate consultant, look no further than . Their expertise and passion for delivering exceptional service make them unparalleled in the industry.",
     rating: 5,
   },
-  
   {
     name: "Deekshith dinu",
     role: "Relocation Client",
@@ -36,6 +35,8 @@ const reviewCards = [
 
 const InfiniteScroller = ({ bgChanged }) => {
   const scrollerRef = useRef(null);
+  const animationRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,14 +44,30 @@ const InfiniteScroller = ({ bgChanged }) => {
     if (!reducedMotion && scrollerRef.current) {
       const inner = scrollerRef.current.querySelector(".scroller__inner");
 
-      gsap.to(inner, {
+      animationRef.current = gsap.to(inner, {
         x: "-=50%",
         duration: 40,
         repeat: -1,
         ease: "none",
+        paused: !isPlaying // Start paused if isPlaying is false
       });
+
+      return () => {
+        animationRef.current.kill();
+      };
     }
-  }, []);
+  }, [isPlaying]);
+
+  const toggleAnimation = () => {
+    if (animationRef.current) {
+      if (isPlaying) {
+        animationRef.current.pause();
+      } else {
+        animationRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
@@ -64,7 +81,13 @@ const InfiniteScroller = ({ bgChanged }) => {
     <div className={`flex flex-col items-center gap-10 py-16 ${wrapperBg}`}>
       <h1 className={`text-3xl font-bold text-center ${textColor}`}>What Our Clients Say</h1>
 
-      <div className="scroller" data-speed="slow" ref={scrollerRef}>
+      <div 
+        className="scroller" 
+        data-speed="slow" 
+        ref={scrollerRef}
+        onClick={toggleAnimation}
+        style={{ cursor: "pointer" }} // Add pointer cursor to indicate it's clickable
+      >
         <div className="scroller__inner flex gap-6 w-max">
           {allReviews.map((review, index) => (
             <div
@@ -103,6 +126,7 @@ const InfiniteScroller = ({ bgChanged }) => {
           ))}
         </div>
       </div>
+   
     </div>
   );
 };

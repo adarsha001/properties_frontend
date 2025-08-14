@@ -140,7 +140,7 @@ const MainSite = () => {
 <RealEstateDetails bgChanged={bgChanged} />
     <PropertyMap bgChanged={bgChanged} />
 
-      <ChatBot />
+      <ChatBot  />
       <GuaranteeSection bgChanged={bgChanged} />
        <div ref={aboutUsRef} id="about"> {/* Update this line */}
         <AboutUs bgChanged={bgChanged} />
