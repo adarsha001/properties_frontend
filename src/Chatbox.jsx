@@ -183,46 +183,51 @@ useEffect(() => {
 
 return (<>
   <button
-    className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden h-12"
+    className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden h-12 sm:h-14 md:h-16"
     onClick={() => setOpen(!open)}
     style={{
-      paddingLeft: '0.80rem',  // Increased from 0.75rem
-      paddingRight: '1rem', // Increased from 0.75rem
+      paddingLeft: 'clamp(0.75rem, 2vw, 1rem)',
+      paddingRight: 'clamp(0.75rem, 2vw, 1rem)',
       width: isRolling 
-        ? '3.5rem'  // Slightly larger to accommodate padding (was 3rem)
-        : `calc(3.5rem + ${textWidth}px + 0.75rem)`, // Adjusted for new padding
+        ? 'clamp(3.25rem, 8vw, 3.75rem)'
+        : `calc(clamp(3.25rem, 8vw, 3.75rem) + ${textWidth}px + clamp(0.5rem, 1.5vw, 0.75rem))`,
     }}
   >
     <div className="relative flex items-center w-full">
-      {/* Image container with adjusted spacing */}
+      {/* Image container - responsive sizing */}
       <div 
-        className="absolute h-8 w-8 z-10"
+        className="absolute z-10"
         style={{
-          left: isRolling ? '0.7rem' : '0', // Increased from 0.5rem
+          height: 'clamp(2rem, 5vw, 2.5rem)',
+          width: 'clamp(2rem, 5vw, 2.5rem)',
+          left: isRolling ? 'clamp(0.5rem, 1.5vw, 0.75rem)' : '0',
           transition: 'all 500ms cubic-bezier(0.4,0,0.2,1)'
         }}
       >
         <img 
           src="/istockphoto-2074604864-612x612.jpg" 
           alt="siya" 
-          className="w-8 h-8 rounded-full object-cover transition-transform duration-500"
+          className="w-full h-full rounded-full object-cover transition-transform duration-500"
           style={{
             transform: isRolling ? 'rotate(360deg)' : 'rotate(0deg)',
           }}
         />
       </div>
       
-      {/* Text with more spacing */}
+      {/* Text container - responsive adjustments */}
       <div 
-        className="relative ml-12 h-6 flex-shrink-0 transition-all duration-500" // Increased from ml-10
+        className="relative h-6 flex-shrink-0 transition-all duration-500"
         style={{
+          marginLeft: `clamp(2.5rem, 6vw, 3rem)`,
           opacity: isRolling ? 0 : 1,
           width: isRolling ? 0 : `${textWidth}px`,
-          marginLeft: isRolling ? 0 : '1rem' // Increased from 0.5rem
         }}
       >
-        <span ref={textRef} className="whitespace-nowrap block">
-         hi Chat with SParsha
+        <span 
+          ref={textRef} 
+          className="whitespace-nowrap block text-sm sm:text-base md:text-lg"
+        >
+          Chat with SParsha
         </span>
       </div>
     </div>
