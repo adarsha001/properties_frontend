@@ -1,34 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import "./scrollAnimation.css";
 
 const reviewCards = [
   {
-    name: "deena prabha",
+    name: "Deena Prabha",
     role: "Home Buyer",
     image: "../../WhatsApp Image 2025-07-25 at 3.17.43 PM.jpeg",
-    review: "SP properties was absolutely wonderful at finding property that met all of our requirements. They took the time to thoroughly explain the property details before we decided to move forward with it I wouldnt hesitate to recommend SP properties .",
+    review: "SP properties was absolutely wonderful at finding property that met all of our requirements. They took the time to thoroughly explain the property details before we decided to move forward with it I wouldnt hesitate to recommend SP properties.",
     rating: 5,
   },
   {
     name: "Navya Nagappa",
     role: "Investor",
     image: "../../WhatsApp Image 2025-07-25 at 3.35.24 PM.jpeg",
-    review: "Outstanding communication,Had a great experience with SP Properties,I have to say that I am thoroughly  happy with the speed, reliability,  and about dedication of the team to provide an excellent service and to get our  properties  fully tenanted  in a very short time...I wish you all the best SP Properties,,Keep it up...good luck",
+    review: "Outstanding communication. Had a great experience with SP Properties. I have to say that I am thoroughly happy with the speed, reliability, and dedication of the team to provide an excellent service and to get our properties fully tenanted in a very short time.",
     rating: 5,
   },
   {
-    name: "Mohith m",
-    role: "Sellers",
+    name: "Mohith M",
+    role: "Seller",
     image: "../../WhatsApp Image 2025-07-25 at 3.41.05 PM.jpeg",
-    review: "If you're seeking a trusted and results-driven real estate consultant, look no further than . Their expertise and passion for delivering exceptional service make them unparalleled in the industry.",
+    review: "If you're seeking a trusted and results-driven real estate consultant, look no further. Their expertise and passion for delivering exceptional service make them unparalleled in the industry.",
     rating: 5,
   },
   {
-    name: "Deekshith dinu",
+    name: "Deekshith Dinu",
     role: "Relocation Client",
     image: "../../WhatsApp Image 2025-07-25 at 3.33.54 PM.jpeg",
-    review: "Impressed by The Sp Properties commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free",
+    review: "Impressed by The SP Properties commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free.",
     rating: 5,
   },
 ];
@@ -37,62 +36,90 @@ const InfiniteScroller = ({ bgChanged }) => {
   const scrollerRef = useRef(null);
   const animationRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const wrapperRef = useRef(null);
 
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!reducedMotion && scrollerRef.current) {
-      const inner = scrollerRef.current.querySelector(".scroller__inner");
-
-      animationRef.current = gsap.to(inner, {
-        x: "-=50%",
-        duration: 40,
-        repeat: -1,
-        ease: "none",
-        paused: !isPlaying // Start paused if isPlaying is false
-      });
-
-      return () => {
-        animationRef.current.kill();
-      };
-    }
-  }, [isPlaying]);
-
-  const toggleAnimation = () => {
-    if (animationRef.current) {
-      if (isPlaying) {
-        animationRef.current.pause();
-      } else {
-        animationRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
+  // Style variables
   const textColor = bgChanged ? "text-white" : "text-gray-800";
   const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
   const wrapperBg = bgChanged ? "bg-gradient-to-tr from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
   const subTextColor = bgChanged ? "text-gray-400" : "text-gray-500";
   const emptyStarColor = bgChanged ? "text-gray-600" : "text-gray-300";
 
-  const allReviews = [...reviewCards, ...reviewCards]; // Duplicate reviews
+  useEffect(() => {
+    const setupAnimation = () => {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      
+      if (!reducedMotion && scrollerRef.current) {
+        const inner = scrollerRef.current.querySelector(".scroller__inner");
+        const items = inner.querySelectorAll(".review-card");
+        
+        if (items.length === 0) return;
+
+        const itemWidth = items[0].offsetWidth;
+        const gap = 24; // gap-6 = 1.5rem = 24px
+        const totalWidth = (itemWidth + gap) * items.length;
+
+        // Kill existing animation if any
+        if (animationRef.current) animationRef.current.kill();
+
+        // Set initial position
+        gsap.set(inner, { x: 0 });
+
+        // Create seamless loop animation
+        animationRef.current = gsap.to(inner, {
+          x: -totalWidth / 2, // Only move half way since we duplicated items
+          duration: items.length * 3, // Dynamic duration based on item count
+          ease: "none",
+          repeat: -1,
+          onRepeat: () => {
+            // Jump back to start position seamlessly
+            gsap.set(inner, { x: 0 });
+            animationRef.current.progress(0);
+          },
+          paused: !isPlaying
+        });
+      }
+    };
+
+    setupAnimation();
+
+    // Handle window resize
+    const handleResize = () => {
+      setupAnimation();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) animationRef.current.kill();
+    };
+  }, [isPlaying, reviewCards]);
+
+  const toggleAnimation = () => {
+    if (animationRef.current) {
+      isPlaying ? animationRef.current.pause() : animationRef.current.play();
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Duplicate reviews for seamless looping
+  const duplicatedReviews = [...reviewCards, ...reviewCards];
 
   return (
-    <div className={`flex flex-col items-center gap-10 py-16 ${wrapperBg}`}>
+    <div className={`flex flex-col items-center gap-10 py-16 ${wrapperBg}`} ref={wrapperRef}>
       <h1 className={`text-3xl font-bold text-center ${textColor}`}>What Our Clients Say</h1>
 
       <div 
-        className="scroller" 
-        data-speed="slow" 
+        className="scroller w-full overflow-hidden relative"
         ref={scrollerRef}
         onClick={toggleAnimation}
-        style={{ cursor: "pointer" }} // Add pointer cursor to indicate it's clickable
+        style={{ cursor: "pointer" }}
       >
-        <div className="scroller__inner flex gap-6 w-max">
-          {allReviews.map((review, index) => (
+        <div className="scroller__inner flex gap-6 w-max px-4 py-2">
+          {duplicatedReviews.map((review, index) => (
             <div
-              key={index}
-              className={`w-72 flex-shrink-0 rounded-xl shadow-md p-4 transition ${cardBg}`}
+              key={`${review.name}-${index}`}
+              className={`review-card w-72 flex-shrink-0 rounded-xl shadow-md p-6 transition-all hover:scale-[1.02] ${cardBg}`}
             >
               <div className="flex items-center mb-4">
                 <img
@@ -106,7 +133,7 @@ const InfiniteScroller = ({ bgChanged }) => {
                 </div>
               </div>
 
-              <div className="flex mb-2">
+              <div className="flex mb-3">
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
@@ -121,12 +148,16 @@ const InfiniteScroller = ({ bgChanged }) => {
                 ))}
               </div>
 
-              <p className={`text-sm ${textColor}`}>{review.review}</p>
+              <p className={`text-sm leading-relaxed ${textColor}`}>{review.review}</p>
             </div>
           ))}
         </div>
+
+        {/* Pause/Play Indicator */}
+        <div className={`absolute right-4 top-4 text-xs px-2 py-1 rounded-full ${bgChanged ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-700'}`}>
+          {isPlaying ? 'Pause' : 'Play'}
+        </div>
       </div>
-   
     </div>
   );
 };
