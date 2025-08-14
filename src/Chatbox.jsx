@@ -154,51 +154,79 @@ const Chatbox = () => {
     ]);
   }
 };
-const [isAnimating, setIsAnimating] = useState(false);
-const [showLogo, setShowLogo] = useState(true);
-useEffect(() => {
-  if (!open) { // Only animate when chatbox is closed
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setShowLogo(prev => !prev);
-      
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 500); // Matches the transition duration
-    }, 3000); // Change every 3 seconds
-    
-    return () => clearInterval(interval);
-  }
-}, [open]);
-  return (
-    <>
-<button
-  className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white px-6 py-3 rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-300 overflow-hidden"
-  onClick={() => setOpen(!open)}
-  style={{ minWidth: "200px" }}
->
-  <div className="relative h-8 w-8 mr-2">
-    {/* Logo Image */}
-    <img 
-      src="/istockphoto-2074604864-612x612.jpg" 
-      alt="siya" 
-      className={`absolute w-8 h-8 rounded-full transition-all duration-500 transform ${
-        isAnimating ? (showLogo ? 'opacity-0 rotate-y-90' : 'opacity-100 rotate-y-0') : 'opacity-100 rotate-y-0'
-      }`}
-    />
-    
-    {/* Text Alternative */}
-    <div 
-      className={`absolute w-8 h-8 rounded-full bg-white flex items-center justify-center transition-all duration-500 transform ${
-        isAnimating ? (showLogo ? 'opacity-100 rotate-y-0' : 'opacity-0 -rotate-y-90') : 'opacity-0 -rotate-y-90'
-      }`}
-    >
-      <span className="text-black text-xs font-bold">SP</span>
-    </div>
-  </div>
-  <span>Chat with SParsha</span>
-</button>
+const [isRolling, setIsRolling] = useState(false);
+const textRef = useRef(null);
+const [textWidth, setTextWidth] = useState(0);
 
+useEffect(() => {
+  if (textRef.current) {
+    setTextWidth(textRef.current.offsetWidth);
+  }
+}, []);
+
+useEffect(() => {
+  if (!open) {
+    const animate = () => {
+      setIsRolling(true);
+      setTimeout(() => setIsRolling(false), 1000);
+    };
+    
+    const timeout = setTimeout(animate, 1000);
+    const interval = setInterval(animate, 4000);
+    
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }
+}, [open, textWidth]);
+
+return (<>
+  <button
+    className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden h-12"
+    onClick={() => setOpen(!open)}
+    style={{
+      paddingLeft: '0.80rem',  // Increased from 0.75rem
+      paddingRight: '1rem', // Increased from 0.75rem
+      width: isRolling 
+        ? '3.5rem'  // Slightly larger to accommodate padding (was 3rem)
+        : `calc(3.5rem + ${textWidth}px + 0.75rem)`, // Adjusted for new padding
+    }}
+  >
+    <div className="relative flex items-center w-full">
+      {/* Image container with adjusted spacing */}
+      <div 
+        className="absolute h-8 w-8 z-10"
+        style={{
+          left: isRolling ? '0.7rem' : '0', // Increased from 0.5rem
+          transition: 'all 500ms cubic-bezier(0.4,0,0.2,1)'
+        }}
+      >
+        <img 
+          src="/istockphoto-2074604864-612x612.jpg" 
+          alt="siya" 
+          className="w-8 h-8 rounded-full object-cover transition-transform duration-500"
+          style={{
+            transform: isRolling ? 'rotate(360deg)' : 'rotate(0deg)',
+          }}
+        />
+      </div>
+      
+      {/* Text with more spacing */}
+      <div 
+        className="relative ml-12 h-6 flex-shrink-0 transition-all duration-500" // Increased from ml-10
+        style={{
+          opacity: isRolling ? 0 : 1,
+          width: isRolling ? 0 : `${textWidth}px`,
+          marginLeft: isRolling ? 0 : '1rem' // Increased from 0.5rem
+        }}
+      >
+        <span ref={textRef} className="whitespace-nowrap block">
+         hi Chat with SParsha
+        </span>
+      </div>
+    </div>
+  </button>
       {open && (
         <div className="fixed bottom-20 right-5 bg-white rounded-lg shadow-xl w-full max-w-md h-[80vh] flex flex-col overflow-hidden z-50 border border-gray-200">
           {/* Header */}
