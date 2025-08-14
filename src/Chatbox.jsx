@@ -154,84 +154,37 @@ const Chatbox = () => {
     ]);
   }
 };
-const [isRolling, setIsRolling] = useState(false);
-const textRef = useRef(null);
-const [textWidth, setTextWidth] = useState(0);
 
-useEffect(() => {
-  if (textRef.current) {
-    setTextWidth(textRef.current.offsetWidth);
-  }
-}, []);
-
-useEffect(() => {
-  if (!open) {
-    const animate = () => {
-      setIsRolling(true);
-      setTimeout(() => setIsRolling(false), 1000);
-    };
-    
-    const timeout = setTimeout(animate, 1000);
-    const interval = setInterval(animate, 4000);
-    
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }
-}, [open, textWidth]);
-
-return (<>
-  <button
-    className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden h-12 sm:h-14 md:h-16"
-    onClick={() => setOpen(!open)}
-    style={{
-      paddingLeft: 'clamp(0.75rem, 2vw, 1rem)',
-      paddingRight: 'clamp(0.75rem, 2vw, 1rem)',
-      width: isRolling 
-        ? 'clamp(3.25rem, 8vw, 3.75rem)'
-        : `calc(clamp(3.25rem, 8vw, 3.75rem) + ${textWidth}px + clamp(0.5rem, 1.5vw, 0.75rem))`,
-    }}
-  >
-    <div className="relative flex items-center w-full">
-      {/* Image container - responsive sizing */}
-      <div 
-        className="absolute z-10"
-        style={{
-          height: 'clamp(2rem, 5vw, 2.5rem)',
-          width: 'clamp(2rem, 5vw, 2.5rem)',
-          left: isRolling ? 'clamp(0.5rem, 1.5vw, 0.75rem)' : '0',
-          transition: 'all 500ms cubic-bezier(0.4,0,0.2,1)'
-        }}
-      >
-        <img 
-          src="/istockphoto-2074604864-612x612.jpg" 
-          alt="siya" 
-          className="w-full h-full rounded-full object-cover transition-transform duration-500"
-          style={{
-            transform: isRolling ? 'rotate(360deg)' : 'rotate(0deg)',
-          }}
-        />
-      </div>
-      
-      {/* Text container - responsive adjustments */}
-      <div 
-        className="relative h-6 flex-shrink-0 transition-all duration-500"
-        style={{
-          marginLeft: `clamp(2.5rem, 6vw, 3rem)`,
-          opacity: isRolling ? 0 : 1,
-          width: isRolling ? 0 : `${textWidth}px`,
-        }}
-      >
-        <span 
-          ref={textRef} 
-          className="whitespace-nowrap block text-sm sm:text-base md:text-lg"
-        >
-          Chat with SParsha
-        </span>
-      </div>
+  return (
+    <>
+ <button
+  className="fixed bottom-5 right-5 bg-gradient-to-r from-gray-600 to-black text-white px-6 py-3 rounded-full shadow-xl z-50 flex items-center hover:shadow-2xl transition-all duration-300 overflow-hidden"
+  onClick={() => setOpen(!open)}
+  style={{ minWidth: "200px" }} // Ensure consistent width during animation
+>
+  <div className="relative h-8 w-8 mr-2">
+    <img 
+      src="/istockphoto-2074604864-612x612.jpg" 
+      alt="siya" 
+      className="absolute w-8 h-8 rounded-full transition-all duration-500 transform"
+      style={{
+        opacity: 1,
+        transform: 'rotateY(0deg)'
+      }}
+    />
+    <div 
+      className="absolute w-8 h-8 rounded-full bg-white flex items-center justify-center transition-all duration-500 transform"
+      style={{
+        opacity: 0,
+        transform: 'rotateY(90deg)'
+      }}
+    >
+      <span className="text-black text-xs font-bold">SP</span>
     </div>
-  </button>
+  </div>
+  <span>Chat with SParsha</span>
+</button>
+
       {open && (
         <div className="fixed bottom-20 right-5 bg-white rounded-lg shadow-xl w-full max-w-md h-[80vh] flex flex-col overflow-hidden z-50 border border-gray-200">
           {/* Header */}
