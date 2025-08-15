@@ -237,7 +237,7 @@ const ProjectsComponent = () => {
     }
 const logClick = async (type, value, component) => {
   try {
-    await fetch("https://properties-backend-ok36.onrender.com/api/clicks", {
+    await fetch("https://properties-backend-ok36.onrender.com/api/click", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type, value, sourceComponent: component })
