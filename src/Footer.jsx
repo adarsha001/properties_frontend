@@ -57,12 +57,22 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
     },
   ];
 
-  // Track click function
-const trackClick = async (type, value) => {
+const trackClick = async (value) => {
+  let type;
+  
+  if (value.includes("@")) {
+    type = "email";
+  } else if (value.startsWith("whatsapp:")) {
+    type = "whatsapp";
+    value = value.replace("whatsapp:", ""); // remove prefix
+  } else {
+    type = "phone";
+  }
+
   try {
     await axios.post("https://properties-backend-ok36.onrender.com/api/click", {
-      type,              // e.g. "phone", "gmail", "whatsapp"
-      value,             // e.g. phone number or email
+      type,
+      value,
       sourceComponent: "Footer"
     });
   } catch (error) {
@@ -120,32 +130,32 @@ const trackClick = async (type, value) => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center">
               <FaPhoneAlt className="mr-2 text-teal-400" />
-         <a
+  <a
   href="tel:+919876543210"
   className="hover:underline"
-  onClick={() => trackClick("phone", "+919876543210")}
+  onClick={() => trackClick("+919876543210")}
 >
   +91 98765 43210
 </a>
             </li>
             <li className="flex items-center">
               <MdEmail className="mr-2 text-teal-400" />
-          <a
+    <a
   href="mailto:spproperties.2021@gmail.com"
   className="hover:underline"
-  onClick={() => trackClick("gmail", "spproperties.2021@gmail.com")}
+  onClick={() => trackClick("spproperties.2021@gmail.com")}
 >
   spproperties.2021@gmail.com
 </a>
             </li>
             <li className="flex items-center">
               <FiMessageSquare className="mr-2 text-teal-400" />
-        <a
+    <a
   href="https://wa.me/918951706247"
   target="_blank"
   rel="noopener noreferrer"
   className="hover:underline"
-  onClick={() => trackClick("whatsapp", "918951706247")}
+  onClick={() => trackClick("whatsapp:918951706247")}
 >
   Chat on WhatsApp
 </a>

@@ -24,6 +24,25 @@ import mandur from './assets/images/mandur-community.jpeg'; // Fixed filename
 
 
 const DetailView = ({ slide, onClose }) => {
+  const handleContactClick = async (phoneNumber) => {
+    try {
+      await fetch("https://properties-backend-ok36.onrender.com/api/click", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "phone",
+          value: phoneNumber,
+          sourceComponent: "DetailView"
+        }),
+      });
+    } catch (err) {
+      console.error("Error recording click:", err);
+    }
+
+    // Then open phone dialer
+    window.location.href = `tel:${phoneNumber}`;
+  };
+
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
       <div className="relative bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
@@ -73,11 +92,12 @@ const DetailView = ({ slide, onClose }) => {
               </ul>
             </div>
             <div className="space-y-4">
-              <a href="tel:+918951706247" className="block w-full">
-                <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                  Contact Sales Representative
-                </button>
-              </a>
+              <button 
+                onClick={() => handleContactClick("+918951706247")}
+                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+              >
+                Contact Sales Representative
+              </button>
             </div>
           </div>
         </div>

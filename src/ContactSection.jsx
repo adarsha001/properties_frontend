@@ -34,16 +34,25 @@ const ContactSection = ({ bgChanged }) => {
     }
   };
 
-  // Function to track clicks
-  const trackClick = async (componentName) => {
-    try {
-      await axios.post("https://properties-backend-ok36.onrender.com/api/click", {
-        component: componentName,
-      });
-    } catch (error) {
-      console.error("Error tracking click:", error);
-    }
-  };
+// Track clicks with consistent structure
+const handleContactClick = async (value) => {
+  const type = value.includes("@") ? "email" : "phone";
+
+  try {
+    await fetch("https://properties-backend-ok36.onrender.com/api/click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type,
+        value,
+        sourceComponent: "ContactSection", // Component identifier
+      }),
+    });
+  } catch (err) {
+    console.error("Error recording click:", err);
+  }
+};
+
 
   return (
     <section
@@ -134,10 +143,10 @@ const ContactSection = ({ bgChanged }) => {
             <FiPhone className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Phone</p>
-         <a
+      <a
   href="tel:+918971498538"
   className={`${textColor} hover:underline`}
-  onClick={() => trackClick("ContactSection", "contact")}
+  onClick={() => handleContactClick("+918971498538")}
 >
   +91 8971498538
 </a>
@@ -148,10 +157,10 @@ const ContactSection = ({ bgChanged }) => {
             <FiMail className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Email</p>
-         <a
+  <a
   href="mailto:spproperties.2021@gmail.com"
   className={`${textColor} hover:underline`}
-  onClick={() => trackClick("ContactSection", "gmail")}
+  onClick={() => handleContactClick("spproperties.2021@gmail.com")}
 >
   spproperties.2021@gmail.com
 </a>
@@ -162,12 +171,14 @@ const ContactSection = ({ bgChanged }) => {
             <FiMessageSquare className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>WhatsApp</p>
-            <a
+      <a
   href="https://wa.me/918971498538"
   target="_blank"
   rel="noopener noreferrer"
   className={`${textColor} hover:underline`}
-  onClick={() => trackClick("ContactSection", "whatsapp")}
+  onClick={() =>
+    handleContactClick("+918971498538") // still a phone click, just via WhatsApp
+  }
 >
   Chat with us
 </a>
