@@ -35,6 +35,27 @@ const RealEstateDetails = ({ bgChanged }) => {
     ? "bg-gradient-to-r from-gray-500 via-gray-400 to-gray-200 bg-clip-text text-transparent"
     : "bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent";
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
+const handleContactClick = async (type, value) => {
+  try {
+    await fetch("http://localhost:5000/api/click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type,
+        value,
+        sourceComponent: "RealEstateDetails" // component identifier
+      }),
+    });
+  } catch (err) {
+    console.error("Error recording click:", err);
+  }
+
+  if (type === "phone") {
+    window.location.href = `tel:${value}`;
+  } else if (type === "whatsapp") {
+    window.open(`https://wa.me/${value}`, "_blank");
+  }
+};
 
   return (
     <div
@@ -194,20 +215,22 @@ const RealEstateDetails = ({ bgChanged }) => {
               <div className="text-base sm:text-lg font-bold text-white mb-3">
                 Interested in this property?
               </div>
-              <div className="flex flex-col sm:flex-row justify-center gap-3">
-                <a
-                  href="tel:8951706247"
-                  className="inline-block bg-white text-gray-800 font-bold py-2 px-6 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300"
-                >
-                  📞 Call Now
-                </a>
-                <a
-                  href="https://wa.me/918951706247"
-                  className="inline-block bg-green-500 text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-green-600 transition-colors duration-300"
-                >
-                  💬 WhatsApp
-                </a>
-              </div>
+             <div className="flex flex-col sm:flex-row justify-center gap-3">
+  <button
+    onClick={() => handleContactClick("phone", "8951706247")}
+    className="inline-block bg-white text-gray-800 font-bold py-2 px-6 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300"
+  >
+    📞 Call Now
+  </button>
+
+  <button
+    onClick={() => handleContactClick("whatsapp", "918951706247")}
+    className="inline-block bg-green-500 text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-green-600 transition-colors duration-300"
+  >
+    💬 WhatsApp
+  </button>
+</div>
+
             </div>
           </div>
         </div>

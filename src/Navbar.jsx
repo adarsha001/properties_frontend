@@ -60,11 +60,27 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
     setIsOpen(false);
   };
 
-  const openWhatsApp = () => {
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(url, '_blank');
-    setIsOpen(false);
-  };
+ const openWhatsApp = async () => {
+  try {
+    await fetch("http://localhost:5000/api/clicks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "whatsapp",
+        value: whatsappNumber,
+        sourceComponent: "Navbar"
+      }),
+    });
+  } catch (error) {
+    console.error("Error logging WhatsApp click:", error);
+  }
+
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  window.open(url, '_blank');
+  setIsOpen(false);
+};
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40 font-montserrat">

@@ -29,16 +29,29 @@ const Marquee = () => {
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
-  // Handle contact clicks
-  const handleContactClick = (item) => {
-    if (item.includes("@")) {
-      // Open email client
-      window.location.href = `mailto:${item}`;
-    } else {
-      // Initiate phone call
-      window.location.href = `tel:${item}`;
-    }
-  };
+ const handleContactClick = async (item) => {
+  const type = item.includes("@") ? "email" : "phone";
+
+  try {
+    await fetch("http://localhost:5000/api/click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type,
+        value: item,
+        sourceComponent: "Marquee" // Component identifier
+      }),
+    });
+  } catch (err) {
+    console.error("Error recording click:", err);
+  }
+
+  if (type === "email") {
+    window.location.href = `mailto:${item}`;
+  } else {
+    window.location.href = `tel:${item}`;
+  }
+};
 
   // Repeated items for seamless loop
   const items = [...contactInfo.phones, contactInfo.email];

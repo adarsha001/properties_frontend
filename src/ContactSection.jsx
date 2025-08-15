@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiMessageSquare } from "react-icons/fi";
 import axios from "axios";
-import { FiMessageSquare } from 'react-icons/fi';
+
 const ContactSection = ({ bgChanged }) => {
-  const bgColor = bgChanged ? "bg-gradient-to-br from-black to-gray-900" : "bg-gradient-to-tr from-blue-50 to-blue-100";
+  const bgColor = bgChanged
+    ? "bg-gradient-to-br from-black to-gray-900"
+    : "bg-gradient-to-tr from-blue-50 to-blue-100";
   const cardColor = bgChanged ? "bg-gray-800" : "bg-white";
   const titleColor = bgChanged ? "text-white" : "text-gray-800";
   const textColor = bgChanged ? "text-gray-300" : "text-gray-600";
@@ -17,7 +19,7 @@ const ContactSection = ({ bgChanged }) => {
   });
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -32,14 +34,29 @@ const ContactSection = ({ bgChanged }) => {
     }
   };
 
+  // Function to track clicks
+  const trackClick = async (componentName) => {
+    try {
+      await axios.post("https://properties-backend-ok36.onrender.com/api/click", {
+        component: componentName,
+      });
+    } catch (error) {
+      console.error("Error tracking click:", error);
+    }
+  };
+
   return (
-    <section className={`${bgColor} py-16 px-4 transition-colors duration-500`} id="contact">
+    <section
+      className={`${bgColor} py-16 px-4 transition-colors duration-500`}
+      id="contact"
+    >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Contact Form */}
         <div>
           <h2 className={`text-3xl font-bold mb-4 ${titleColor}`}>Get In Touch</h2>
           <p className={`mb-8 text-lg ${textColor}`}>
-            We'd love to hear from you. Whether you're buying, selling, or just exploring — our team is here to help!
+            We'd love to hear from you. Whether you're buying, selling, or just
+            exploring — our team is here to help!
           </p>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -113,50 +130,61 @@ const ContactSection = ({ bgChanged }) => {
 
         {/* Contact Info Card */}
         <div className={`${cardColor} p-6 rounded-xl shadow-lg space-y-6`}>
-      <div className="flex items-center space-x-4">
-  <FiPhone className="text-blue-500 text-xl" />
-  <div>
-    <p className={`font-medium ${labelColor}`}>Phone</p>
-    <a href="tel:+918971498538" className={`${textColor} hover:underline`}>
-      +91 8971498538
-    </a>
-  </div>
-</div>
+          <div className="flex items-center space-x-4">
+            <FiPhone className="text-blue-500 text-xl" />
+            <div>
+              <p className={`font-medium ${labelColor}`}>Phone</p>
+         <a
+  href="tel:+918971498538"
+  className={`${textColor} hover:underline`}
+  onClick={() => trackClick("ContactSection", "contact")}
+>
+  +91 8971498538
+</a>
+            </div>
+          </div>
 
-<div className="flex items-center space-x-4">
-  <FiMail className="text-blue-500 text-xl" />
-  <div>
-    <p className={`font-medium ${labelColor}`}>Email</p>
-    <a href="mailto:spproperties.2021@gmail.com" className={`${textColor} hover:underline`}>
-      spproperties.2021@gmail.com
-    </a>
-  </div>
-</div>
+          <div className="flex items-center space-x-4">
+            <FiMail className="text-blue-500 text-xl" />
+            <div>
+              <p className={`font-medium ${labelColor}`}>Email</p>
+         <a
+  href="mailto:spproperties.2021@gmail.com"
+  className={`${textColor} hover:underline`}
+  onClick={() => trackClick("ContactSection", "gmail")}
+>
+  spproperties.2021@gmail.com
+</a>
+            </div>
+          </div>
 
-<div className="flex items-center space-x-4">
-  <FiMessageSquare className="text-blue-500 text-xl" />
-  <div>
-    <p className={`font-medium ${labelColor}`}>WhatsApp</p>
-    <a 
-      href="https://wa.me/918971498538" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className={`${textColor} hover:underline`}
-    >
-      Chat with us
-    </a>
-  </div>
-</div>
+          <div className="flex items-center space-x-4">
+            <FiMessageSquare className="text-blue-500 text-xl" />
+            <div>
+              <p className={`font-medium ${labelColor}`}>WhatsApp</p>
+            <a
+  href="https://wa.me/918971498538"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={`${textColor} hover:underline`}
+  onClick={() => trackClick("ContactSection", "whatsapp")}
+>
+  Chat with us
+</a>
+            </div>
+          </div>
 
           <div className="flex items-center space-x-4">
             <FiMapPin className="text-blue-500 text-xl" />
             <div>
               <p className={`font-medium ${labelColor}`}>Address</p>
-              <p className={`${textColor}`}>sy no 37/5, SP Properties, behind Northern Academy, Cheemasandra, Bidarahalli, Bengaluru, Karnataka 560049</p>
+              <p className={`${textColor}`}>
+                sy no 37/5, SP Properties, behind Northern Academy, Cheemasandra,
+                Bidarahalli, Bengaluru, Karnataka 560049
+              </p>
             </div>
           </div>
 
-          {/* Optional Map */}
           <div className="rounded-lg overflow-hidden">
             <iframe
               title="location-map"
