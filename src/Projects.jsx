@@ -235,13 +235,12 @@ const ProjectsComponent = () => {
         </div>
       );
     }
-// Add this function near the top of ProjectsComponent
-const logClick = async (type, component) => {
+const logClick = async (type, value, component) => {
   try {
     await fetch("http://localhost:5000/api/clicks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, component })
+      body: JSON.stringify({ type, value, sourceComponent: component })
     });
   } catch (error) {
     console.error("Failed to log click:", error);
@@ -301,39 +300,35 @@ const logClick = async (type, component) => {
 
           <div className="space-y-4">
   {/* Contact Button */}
-  <button
-    onClick={() => logClick("contact", "ProjectsDetailPage")}
-    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-  >
-    <a href="tel:+918951706247" className="block w-full h-full">
-      Contact Sales Representative
-    </a>
-  </button>
+<button
+  onClick={() => logClick("phone", "+918951706247", "ProjectsDetailPage")}
+  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+>
+  <a href="tel:+918951706247" className="block w-full h-full">
+    Contact Sales Representative
+  </a>
+</button>
 
-  {/* WhatsApp Button */}
-  <button
-    onClick={() => logClick("whatsapp", "ProjectsDetailPage")}
-    className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg"
-  >
-    <a
-      href="https://wa.me/918951706247"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full h-full"
-    >
-      Chat on WhatsApp
-    </a>
-  </button>
 
+ {/* WhatsApp Button */}
+<button
+  onClick={() => logClick("whatsapp", "+918951706247", "ProjectsDetailPage")}
+  className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg"
+>
+  <a href="https://wa.me/918951706247" target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+    Chat on WhatsApp
+  </a>
+</button>
   {/* Gmail Button */}
-  <button
-    onClick={() => logClick("gmail", "ProjectsDetailPage")}
-    className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg"
-  >
-    <a href="mailto:sales@example.com" className="block w-full h-full">
-      Send Email
-    </a>
-  </button>
+ {/* Gmail Button */}
+<button
+  onClick={() => logClick("email", "sales@example.com", "ProjectsDetailPage")}
+  className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+>
+  <a href="mailto:sales@example.com" className="block w-full h-full">
+    Send Email
+  </a>
+</button>
 </div>
 
             </div>
