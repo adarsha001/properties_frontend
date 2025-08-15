@@ -40,7 +40,7 @@ const handleContactClick = async (value) => {
       body: JSON.stringify({
         type,
         value,
-        sourceComponent: "ContactSection", // Component identifier
+        sourceComponent: "marquee", // Component identifier
       }),
     });
   } catch (err) {
