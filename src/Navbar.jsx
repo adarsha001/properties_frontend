@@ -62,7 +62,7 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
 
  const openWhatsApp = async () => {
   try {
-    await fetch("http://localhost:5000/api/clicks", {
+    await fetch("https://properties-backend-ok36.onrender.com/api/clicks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

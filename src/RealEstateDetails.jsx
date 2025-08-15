@@ -37,7 +37,7 @@ const RealEstateDetails = ({ bgChanged }) => {
   const darkCardBg = bgChanged ? "bg-gray-800" : "bg-white";
 const handleContactClick = async (type, value) => {
   try {
-    await fetch("http://localhost:5000/api/click", {
+    await fetch("https://properties-backend-ok36.onrender.com/api/click", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
