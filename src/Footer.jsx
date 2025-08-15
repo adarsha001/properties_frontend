@@ -58,15 +58,18 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
   ];
 
   // Track click function
-  const trackClick = async (componentName) => {
-    try {
-      await axios.post("https://properties-backend-ok36.onrender.com/api/click", {
-        component: componentName,
-      });
-    } catch (error) {
-      console.error("Error tracking click:", error);
-    }
-  };
+const trackClick = async (type, value) => {
+  try {
+    await axios.post("https://properties-backend-ok36.onrender.com/api/click", {
+      type,              // e.g. "phone", "gmail", "whatsapp"
+      value,             // e.g. phone number or email
+      sourceComponent: "Footer"
+    });
+  } catch (error) {
+    console.error("Error tracking click:", error);
+  }
+};
+
 
   return (
     <footer className={`${darkBg} ${darkText} py-8`}>
@@ -117,35 +120,35 @@ const Footer = ({ darkBg, darkText, darkCardBg, darkBorder }) => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center">
               <FaPhoneAlt className="mr-2 text-teal-400" />
-              <a
-                href="tel:+919876543210"
-                className="hover:underline"
-                onClick={() => trackClick("Phone")}
-              >
-                +91 98765 43210
-              </a>
+         <a
+  href="tel:+919876543210"
+  className="hover:underline"
+  onClick={() => trackClick("phone", "+919876543210")}
+>
+  +91 98765 43210
+</a>
             </li>
             <li className="flex items-center">
               <MdEmail className="mr-2 text-teal-400" />
-              <a
-                href="mailto:spproperties.2021@gmail.com"
-                className="hover:underline"
-                onClick={() => trackClick("Gmail")}
-              >
-                spproperties.2021@gmail.com
-              </a>
+          <a
+  href="mailto:spproperties.2021@gmail.com"
+  className="hover:underline"
+  onClick={() => trackClick("gmail", "spproperties.2021@gmail.com")}
+>
+  spproperties.2021@gmail.com
+</a>
             </li>
             <li className="flex items-center">
               <FiMessageSquare className="mr-2 text-teal-400" />
-              <a
-                href="https://wa.me/918951706247"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-                onClick={() => trackClick("WhatsApp")}
-              >
-                Chat on WhatsApp
-              </a>
+        <a
+  href="https://wa.me/918951706247"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hover:underline"
+  onClick={() => trackClick("whatsapp", "918951706247")}
+>
+  Chat on WhatsApp
+</a>
             </li>
             <li className="flex items-center">
               <FiMapPin className="mr-2 text-teal-400" /> Bangalore, India
