@@ -237,7 +237,7 @@ const ProjectsComponent = () => {
     }
 const logClick = async (type, value, component) => {
   try {
-    await fetch("http://localhost:5000/api/clicks", {
+    await fetch("https://properties-backend-ok36.onrender.com/api/clicks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type, value, sourceComponent: component })
@@ -319,7 +319,7 @@ const logClick = async (type, value, component) => {
     Chat on WhatsApp
   </a>
 </button>
-  {/* Gmail Button */}
+
  {/* Gmail Button */}
 <button
   onClick={() => logClick("email", "sales@example.com", "ProjectsDetailPage")}
