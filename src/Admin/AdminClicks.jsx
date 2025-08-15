@@ -8,7 +8,7 @@ const AdminClicks = () => {
     const fetchClicks = async () => {
       try {
         const token = localStorage.getItem("token"); // from login
-        const res = await fetch("https://properties-backend-ok36.onrender.com/api/clicks/admin", {
+        const res = await fetch("https://properties-backend-ok36.onrender.com/api/admin/click", {
           headers: {
             Authorization: `Bearer ${token}`
           }
