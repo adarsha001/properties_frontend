@@ -322,10 +322,10 @@ const logClick = async (type, value, component) => {
 
  {/* Gmail Button */}
 <button
-  onClick={() => logClick("email", "sales@example.com", "ProjectsDetailPage")}
+  onClick={() => logClick("email", "spproperties.2021@gmail.com", "ProjectsDetailPage")}
   className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg"
 >
-  <a href="mailto:sales@example.com" className="block w-full h-full">
+  <a href="mailto:spproperties.2021@gmail.com" className="block w-full h-full">
     Send Email
   </a>
 </button>
