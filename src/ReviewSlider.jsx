@@ -2,6 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 const reviewCards = [
+  // ... (keep your existing reviewCards array)
+];
+
+const InfiniteScroller = ({ bgChanged }) => {
+  const scrollerRef = useRef(null);
+  const innerRef = useRef(null);
+  const animationRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const wrapperRef = useRef(null);
+  const [clickedIndex, setClickedIndex] = useState(null);
+
+  // Style variables
+  const textColor = bgChanged ? "text-white" : "text-gray-800";
+  const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
+  const wrapperBg = bgChanged ? "bg-gradient-to-tr from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
+  const subTextColor = bgChanged ? "text-gray-400" : "text-gray-500";
+  const emptyStarColor = bgChanged ? "text-gray-600" : "text-gray-300";
+  const reviewCards = [
   {
     name: "Deena Prabha",
     role: "Home Buyer",
@@ -32,26 +50,12 @@ const reviewCards = [
   },
 ];
 
-const InfiniteScroller = ({ bgChanged }) => {
-  const scrollerRef = useRef(null);
-  const animationRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const wrapperRef = useRef(null);
-
-  // Style variables
-  const textColor = bgChanged ? "text-white" : "text-gray-800";
-  const cardBg = bgChanged ? "bg-gray-800" : "bg-white";
-  const wrapperBg = bgChanged ? "bg-gradient-to-tr from-black to-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100";
-  const subTextColor = bgChanged ? "text-gray-400" : "text-gray-500";
-  const emptyStarColor = bgChanged ? "text-gray-600" : "text-gray-300";
-
   useEffect(() => {
     const setupAnimation = () => {
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       
-      if (!reducedMotion && scrollerRef.current) {
-        const inner = scrollerRef.current.querySelector(".scroller__inner");
-        const items = inner.querySelectorAll(".review-card");
+      if (!reducedMotion && scrollerRef.current && innerRef.current) {
+        const items = innerRef.current.querySelectorAll(".review-card");
         
         if (items.length === 0) return;
 
@@ -63,17 +67,17 @@ const InfiniteScroller = ({ bgChanged }) => {
         if (animationRef.current) animationRef.current.kill();
 
         // Set initial position
-        gsap.set(inner, { x: 0 });
+        gsap.set(innerRef.current, { x: 0 });
 
         // Create seamless loop animation
-        animationRef.current = gsap.to(inner, {
+        animationRef.current = gsap.to(innerRef.current, {
           x: -totalWidth / 2, // Only move half way since we duplicated items
           duration: items.length * 3, // Dynamic duration based on item count
           ease: "none",
           repeat: -1,
           onRepeat: () => {
             // Jump back to start position seamlessly
-            gsap.set(inner, { x: 0 });
+            gsap.set(innerRef.current, { x: 0 });
             animationRef.current.progress(0);
           },
           paused: !isPlaying
@@ -83,7 +87,6 @@ const InfiniteScroller = ({ bgChanged }) => {
 
     setupAnimation();
 
-    // Handle window resize
     const handleResize = () => {
       setupAnimation();
     };
@@ -93,12 +96,48 @@ const InfiniteScroller = ({ bgChanged }) => {
       window.removeEventListener('resize', handleResize);
       if (animationRef.current) animationRef.current.kill();
     };
-  }, [isPlaying, reviewCards]);
+  }, [isPlaying]);
+
+  const handleCardClick = (index, e) => {
+    e.stopPropagation(); // Prevent triggering the container click
+    
+    if (!innerRef.current || !animationRef.current) return;
+
+    const items = innerRef.current.querySelectorAll(".review-card");
+    if (items.length === 0) return;
+
+    const itemWidth = items[0].offsetWidth;
+    const gap = 24;
+    
+    // Calculate the target position to center the clicked card
+    const targetX = -(index * (itemWidth + gap)) + (scrollerRef.current.offsetWidth / 2 - itemWidth / 2);
+    
+    // Pause the animation
+    animationRef.current.pause();
+    setIsPlaying(false);
+    
+    // Animate to the target position
+    gsap.to(innerRef.current, {
+      x: targetX,
+      duration: 0.5,
+      ease: "power2.out",
+      onComplete: () => {
+        setClickedIndex(index % reviewCards.length); // Store the original index (not duplicated)
+      }
+    });
+  };
 
   const toggleAnimation = () => {
-    if (animationRef.current) {
-      isPlaying ? animationRef.current.pause() : animationRef.current.play();
-      setIsPlaying(!isPlaying);
+    if (!animationRef.current) return;
+    
+    if (isPlaying) {
+      animationRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      // When resuming, reset to loop animation
+      setClickedIndex(null);
+      animationRef.current.play();
+      setIsPlaying(true);
     }
   };
 
@@ -115,11 +154,14 @@ const InfiniteScroller = ({ bgChanged }) => {
         onClick={toggleAnimation}
         style={{ cursor: "pointer" }}
       >
-        <div className="scroller__inner flex gap-6 w-max px-4 py-2">
+        <div className="scroller__inner flex gap-6 w-max px-4 py-2" ref={innerRef}>
           {duplicatedReviews.map((review, index) => (
             <div
               key={`${review.name}-${index}`}
-              className={`review-card w-72 flex-shrink-0 rounded-xl shadow-md p-6 transition-all hover:scale-[1.02] ${cardBg}`}
+              className={`review-card w-72 flex-shrink-0 rounded-xl shadow-md p-6 transition-all hover:scale-[1.02] ${cardBg} ${
+                clickedIndex === index % reviewCards.length ? 'ring-2 ring-blue-500 scale-[1.02]' : ''
+              }`}
+              onClick={(e) => handleCardClick(index, e)}
             >
               <div className="flex items-center mb-4">
                 <img
@@ -163,3 +205,8 @@ const InfiniteScroller = ({ bgChanged }) => {
 };
 
 export default InfiniteScroller;
+
+
+
+
+

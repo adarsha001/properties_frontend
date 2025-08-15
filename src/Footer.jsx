@@ -160,9 +160,17 @@ const trackClick = async (value) => {
   Chat on WhatsApp
 </a>
             </li>
-            <li className="flex items-center">
-              <FiMapPin className="mr-2 text-teal-400" /> Bangalore, India
-            </li>
+          <li className="flex items-center">
+  <a 
+    href="https://maps.app.goo.gl/BEitFH6y7BgejNPL7" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="flex items-center hover:text-teal-400 transition-colors"
+  >
+    <FiMapPin className="mr-2 text-teal-400" /> 
+    Bangalore, India
+  </a>
+</li>
           </ul>
         </div>
 
