@@ -29,9 +29,8 @@ const Marquee = () => {
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
-// Track clicks with consistent structure
-const handleContactClick = async (value) => {
-  const type = value.includes("@") ? "email" : "phone";
+ const handleContactClick = async (item) => {
+  const type = item.includes("@") ? "email" : "phone";
 
   try {
     await fetch("https://properties-backend-ok36.onrender.com/api/click", {
@@ -39,15 +38,20 @@ const handleContactClick = async (value) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         type,
-        value,
-        sourceComponent: "marquee", // Component identifier
+        value: item,
+        sourceComponent: "Marquee" // Component identifier
       }),
     });
   } catch (err) {
     console.error("Error recording click:", err);
   }
-};
 
+  if (type === "email") {
+    window.location.href = `mailto:${item}`;
+  } else {
+    window.location.href = `tel:${item}`;
+  }
+};
 
   // Repeated items for seamless loop
   const items = [...contactInfo.phones, contactInfo.email];
