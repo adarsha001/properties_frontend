@@ -7,6 +7,7 @@ import { FiCopy, FiCheckCircle, FiTrash2, FiLogOut, FiPlus, FiEdit } from "react
 import ContactSubmissionsTable from "./ContactSubmissionsTable";
 import UserManagement from "./UserManagement";
 import AdminAceess from "./AdminAceess";
+import AdminClicks from "./AdminClicks";
 // import ExcelDataDisplay from "./ExcelUpload";
 const AdminPanel = () => {
    const navigate = useNavigate();
@@ -223,6 +224,7 @@ const isMobile = window.innerWidth < 640;
       )}
 
       <AdminAceess/>
+      <AdminClicks/>
 
       {/* <ExcelDataDisplay/> */}
     </div>
