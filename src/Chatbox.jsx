@@ -138,7 +138,7 @@ const Chatbox = () => {
       { from: "user", text: `${formData.name} - ${formData.phone}` },
       {
         from: "siya",
-        text: "✅ Thank you! Our agent will contact you shortly.",
+        text: "✅ Thank you! Our team will contact you shortly.",
       },
     ]);
     setStep(questions.length + 2);
