@@ -1,5 +1,5 @@
-const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
-// const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 const API = {
   // Authentication
@@ -8,9 +8,13 @@ const API = {
   // Chat Submissions
   chat: `${BASE_URL}/chat`,
   chatbot: `${BASE_URL}/chat/bot`,
-
   chatById: (id) => `${BASE_URL}/chat/${id}`,
   chatCallDetails: (chatId) => `${BASE_URL}/chat/${chatId}/call-details`,
+  deleteChat: (id) => `${BASE_URL}/chat/${id}`,
+  deleteChatCallDetail: (chatId, detailId) => `${BASE_URL}/chat/${chatId}/call-details/${detailId}`,
+  batchAssignChats: `${BASE_URL}/chat/batch-assign`,
+  assignChat: (id) => `${BASE_URL}/chat/${id}/assign`,
+
   // Contact Submissions
   contactSubmissions: `${BASE_URL}/contact`,
   deleteContactById: (id) => `${BASE_URL}/contact/${id}`,
@@ -18,7 +22,10 @@ const API = {
   getContactCallDetails: (contactId) => `${BASE_URL}/contact/${contactId}/call-details`,
   updateContact: (id) => `${BASE_URL}/contact/${id}`,
   markContact: (id) => `${BASE_URL}/contact/${id}/mark`,
+
+  // Excel Import
   excelUpload: `${BASE_URL}/excel/upload`,
+
   // Leads
   leads: `${BASE_URL}/leads`,
   leadById: (id) => `${BASE_URL}/leads/${id}`,
@@ -27,7 +34,7 @@ const API = {
   callDetails: `${BASE_URL}/callDetails`,
   callDetailById: (id) => `${BASE_URL}/callDetails/${id}`,
 
-  // User Management - Fixed the URLs to match your backend routes
+  // User Management
   users: `${BASE_URL}/admin/users`,
   createUser: `${BASE_URL}/admin/users`, // POST
   getAllUsers: `${BASE_URL}/admin/users`, // GET
