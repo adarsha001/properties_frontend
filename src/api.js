@@ -1,5 +1,5 @@
-const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
-// const BASE_URL = "http://localhost:5000/api";
+// const BASE_URL = "https://properties-backend-ok36.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 const API = {
   // Authentication

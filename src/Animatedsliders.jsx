@@ -13,7 +13,7 @@ import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 
 // Import all images from assets
 import ssdkammasandra from './assets/images/ssdkammasandra.webp';
-import urbanFeet from './assets/images/uf.JPG';
+import urbanFeet from './assets/images/uf2.jpeg';
 import rkbEnclave from './assets/images/rkb.webp';
 import sunriseMeadows from './assets/images/sunrise.JPG';
 import saiSamrudhi from './assets/images/saisamrudhi.webp';

@@ -47,6 +47,18 @@ const InfiniteScroller = ({ bgChanged }) => {
     image: "../../WhatsApp Image 2025-07-25 at 3.33.54 PM.jpeg",
     review: "Impressed by The SP Properties commitment to customer satisfaction! The team went above and beyond to address every question, making the process seamless and stress-free.",
     rating: 5,
+  },  {
+    name: "Satyajit",
+    role: "Relocation Client",
+    image: "../../WhatsApp Image 2025-08-16 at 12.56.52 PM.jpeg",
+    review: "Superb Work! Really impressed with the quick and smooth process of providing land to my friends within just 2–3 days. The registration process was seamless, and the overall deal was handled very efficiently.Special thanks to Praveen & Subhash for their outstanding support and dedication throughout the entire process. 🙌👏",
+    rating: 5,
+  },  {
+    name: "Rajasmitha",
+    role: "Relocation Client",
+    image: "../../WhatsApp Image 2025-08-16 at 1.00.00 PM.jpeg",
+    review: "SP properties is the right place for searching plots in East Bengaluru. Excellent team, Good service",
+    rating: 5,
   },
 ];
 
