@@ -6,8 +6,8 @@ import API from '../api';
 const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: 'subhash',
-    password: 'subhash@123'
+    username: '',
+    password: ''
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
