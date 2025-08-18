@@ -94,7 +94,7 @@ const DetailView = ({ slide, onClose }) => {
             <div className="space-y-4">
               <button 
                 onClick={() => handleContactClick("+918951706247")}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="w-full py-7 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
               >
                 Contact Sales Representative
               </button>
