@@ -83,10 +83,10 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
 };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-40 font-montserrat">
+    <nav className="fixed top-2 left-0 w-full bg-white shadow-md z-40 font-montserrat">
       <div
         ref={navRef}
-        className="max-w-7xl mx-auto px-4 md:py-12 py-6 mt-5 flex justify-between items-center h-20"
+        className="max-w-7xl mx-auto px-4 md:py-11 py-5 mt-5 flex justify-between items-center h-20"
       >
         <Link to="/" className="hover:underline" ref={logoRef}>
           <img

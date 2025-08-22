@@ -203,7 +203,7 @@ const AnimatedSlider = () => {
 
   return (
     <>
-      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
+      <div className="relative w-full h-[400px] md:h-[500px] top-4 lg:h-[600px] overflow-hidden">
         {/* MAIN IMAGE CONTAINER */}
         <div className="relative w-full h-full">
           {projects.map((project, index) => (
@@ -225,7 +225,7 @@ const AnimatedSlider = () => {
         {/* OVERLAY CONTENT */}
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-3xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
               {projects[currentIndex].title}
             </h2>
             {projects[currentIndex].location && (
