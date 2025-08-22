@@ -90,7 +90,7 @@ const Navbar = ({ scrollToContact, scrollToAboutUs }) => {
       >
         <Link to="/" className="hover:underline" ref={logoRef}>
           <img
-            src="../../file_000000000af061f79f4fd1c4d7592afd.png"
+            src="../../WhatsApp Image 2025-08-16 at 16.14.50.jpeg"
             alt="SP Properties Logo"
             className="w-32 h-20"
             onClick={scrollToTop}
