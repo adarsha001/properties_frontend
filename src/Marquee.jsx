@@ -5,7 +5,7 @@ const Marquee = () => {
   const marqueeContainerRef = useRef(null);
 
   const contactInfo = {
-    phones: ["+918951706247", "+918971498538"], // Removed spaces for direct dialing
+    phones: ["+918951706247", "+918971498538"], 
     email: "spproperties.2021@gmail.com",
   };
 
