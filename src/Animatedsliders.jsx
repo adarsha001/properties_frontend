@@ -203,7 +203,7 @@ const AnimatedSlider = () => {
 
   return (
     <>
-      <div className="relative w-full h-[400px] md:h-[500px] top-6 lg:h-[600px] overflow-hidden">
+      <div className="relative w-full h-[450px] md:h-[550px] top-6 lg:h-[650px] overflow-hidden">
         {/* MAIN IMAGE CONTAINER */}
         <div className="relative w-full h-full">
           {projects.map((project, index) => (
