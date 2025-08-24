@@ -10,7 +10,7 @@ const PropertyMap = ({ bgChanged }) => {
     : 'bg-gradient-to-l from-gray-100 via-gray-600 to-gray-700 bg-clip-text text-transparent';
 
   const locations = [
-    { icon: '🚘', text: 'Udigere - 5.8km (15 min)' },
+    { icon: '🚘', text: 'Budigere - 5.8km (15 min)' },
     { icon: '🚘', text: 'Avalahalli - 6km (15 min)' },
     { icon: '🚘', text: 'Rammurthy Nagar - 18km (35 min)' },
     { icon: '🚘', text: 'Ayapanagar - 17km (30 min)' },
