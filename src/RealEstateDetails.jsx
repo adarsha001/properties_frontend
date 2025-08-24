@@ -78,7 +78,7 @@ const handleContactClick = async (type, value) => {
   ref={imageRef}
 >
   <img
-    src="../../WhatsApp Image 2025-08-14 at 3.09.14 PM.jpeg"
+    src="../../WhatsApp Image 2025-08-24 at 14.21.31.jpeg"
     alt="E-Khata Layout"
     className="w-full h-full object-fit object-center"
   />
