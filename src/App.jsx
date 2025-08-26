@@ -27,6 +27,7 @@ import UserPromptModal from "./UserPromptModal";
 
 import ProjectsComponent from './Projects';
 import Vision from "./Vision";
+import SPPropertiesLoader from "./Loader";
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -118,6 +119,9 @@ const MainSite = () => {
   const darkBorder = bgChanged ? "" : "";
   return (
     <div  style={{ fontFamily: 'Montserrat, sans-serif' }} className={`${darkBg} overflow-x-hidden transition-colors duration-700 ease-in-out`}>
+
+
+      <SPPropertiesLoader/>
       {/* Theme Toggle */}
       <button
         onClick={() => setBgChanged(!bgChanged)}
