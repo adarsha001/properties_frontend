@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 
- */
+
 export default function SPPropertiesLoader({
   brand = "sppropperties",
   accentClass = "text-emerald-500",
