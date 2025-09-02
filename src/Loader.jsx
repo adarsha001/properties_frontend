@@ -1,20 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
-/**
- * SPPropertiesLoader – a full-screen brand loader for real estate apps
- * - Uses GSAP for smooth timeline-based animation
- * - TailwindCSS for styling
- * - SVG house outline draws in, brand text reveals, dots pulse, progress fills
- *
- * Props
- * - brand?: string          // default: "sppropperties"
- * - accentClass?: string    // tailwind text/bg color utility (e.g., "text-emerald-500")
- * - onDone?: () => void     // callback when exit animation completes
- * - minDurationMs?: number  // ensure loader shows at least this long (default 1600)
- *
- * Usage
- * <SPPropertiesLoader onDone={() => setShow(false)} />
+
  */
 export default function SPPropertiesLoader({
   brand = "sppropperties",
