@@ -8,6 +8,7 @@ import ContactSubmissionsTable from "./ContactSubmissionsTable";
 import UserManagement from "./UserManagement";
 import AdminAceess from "./AdminAceess";
 import AdminClicks from "./AdminClicks";
+import ExcelUpload from "./ExcelUpload";
 // import ExcelDataDisplay from "./ExcelUpload";
 const AdminPanel = () => {
    const navigate = useNavigate();
@@ -148,7 +149,7 @@ const isMobile = window.innerWidth < 640;
 
       <AdminAceess/>
       <AdminClicks/>
-
+<ExcelUpload/>
       {/* <ExcelDataDisplay/> */}
     </div>
   );
